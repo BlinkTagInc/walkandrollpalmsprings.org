@@ -1,0 +1,40 @@
+.btn {
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 50px;
+  padding: 11px 20px;
+
+  .number {
+    float: left;
+  }
+
+  &.disabled {
+    background-color: #9891a7;
+    color: #6c657c;
+  }
+}
+
+.btn-up,
+.btn-down {
+  border-radius: 7px;
+  float: left;
+  font-size: 9px;
+  height: 18px;
+  text-align: center;
+  width: 25px;
+}
+
+.btn-up {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 5px 0 2px;
+}
+
+.btn-down {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  clear: both;
+  margin-top: 2px;
+  padding: 2px 0 5px;
+}

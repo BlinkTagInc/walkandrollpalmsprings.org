@@ -1,0 +1,61 @@
+{
+  "name": "walk-and-roll-palm-springs",
+  "description": "Walk and Roll Palm Springs",
+  "version": "0.1.0",
+  "author": {
+    "name": "Brendan Nee",
+    "email": "brendan@blinktag.com"
+  },
+  "dependencies": {
+    "async": "1.4.0",
+    "body-parser": "1.13.3",
+    "bootstrap-sass": "3.3.5",
+    "browserify": "11.0.1",
+    "classnames": "2.1.3",
+    "connect-redis": "2.4.1",
+    "debug": "2.2.0",
+    "express": "4.13.3",
+    "express-session": "1.11.3",
+    "gulp": "3.9.0",
+    "gulp-load-plugins": "0.10.0",
+    "gulp-minify-css": "1.2.0",
+    "gulp-sass": "2.0.4",
+    "gulp-sourcemaps": "1.5.2",
+    "gulp-streamify": "1.0.0",
+    "gulp-uglify": "1.2.0",
+    "gulp-util": "3.0.6",
+    "jade": "1.11.0",
+    "jquery": "2.1.4",
+    "mapbox.js": "2.2.1",
+    "moment-timezone": "0.4.0",
+    "monk": "1.0.1",
+    "morgan": "1.6.1",
+    "nconf": "0.7.1",
+    "polyline": "0.1.0",
+    "react": "0.13.3",
+    "react-router": "^0.13.3",
+    "reactify": "1.1.1",
+    "request": "2.60.0",
+    "serve-favicon": "2.3.0",
+    "typeahead.js": "0.11.1",
+    "underscore": "1.8.3",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "watchify": "3.3.1"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node bin/www",
+    "postinstall": "node ./node_modules/.bin/gulp build"
+  },
+  "devDependencies": {
+    "connect-livereload": "0.5.3",
+    "gulp-jshint": "1.11.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-scss-lint": "0.2.2",
+    "nodemon": "^1.4.0"
+  }
+}

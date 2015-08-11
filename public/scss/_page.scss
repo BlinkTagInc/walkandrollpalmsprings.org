@@ -1,0 +1,49 @@
+.section-header {
+  color: $white;
+  overflow: hidden;
+  padding: 10px 15px;
+  text-align: center;
+
+  &.section-green {
+    background-color: $green;
+  }
+
+  &.section-red {
+    background-color: $red;
+  }
+
+  &.section-orange {
+    background-color: $orange;
+  }
+
+  &.section-teal {
+    background-color: $teal;
+  }
+
+  h1, h2 {
+    line-height: 30px;
+    margin: 0;
+  }
+}
+
+.section-link {
+  cursor: pointer;
+}
+
+.section-content {
+  padding: 25px 15px;
+}
+
+.section-links {
+  bottom: 0;
+  color: $dark-green;
+  padding: 10px 0 15px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+
+  a {
+    color: $dark-green;
+    padding: 0 6px;
+  }
+}

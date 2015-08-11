@@ -1,0 +1,17 @@
+// scss-lint:disable QualifyingElement
+
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
+  color: $placeholder;
+}
+
+input[type="text"] {
+  border: 0;
+  color: #6c657c;
+
+  &:focus {
+    border: 0;
+  }
+}

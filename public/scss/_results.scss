@@ -1,0 +1,41 @@
+.results-title {
+  text-align: left;
+}
+
+.selected-places {
+  text-align: left;
+}
+
+.selected-mode {
+  height: 56px;
+  float: right;
+  width: 86px;
+
+  &.walk {
+    background: url('../images/icon-walk.png') center center no-repeat;
+  }
+
+  &.bike {
+    background: url('../images/icon-bike.png') center center no-repeat;
+  }
+
+  &.transit {
+    background: url('../images/icon-transir.png') center center no-repeat;
+  }
+}
+
+.results-map {
+  min-height: 300px;
+}
+
+.footer-bar {
+  color: $white;
+  display: block;
+  font-family: CocktailShaker;
+  font-size: 32px;
+  text-align: center;
+
+  &.red {
+    background-color: $red;
+  }
+}

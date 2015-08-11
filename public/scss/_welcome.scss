@@ -1,0 +1,59 @@
+.welcome-title {
+  background: $red url('../images/header-trees.png') center top no-repeat;
+  color: $white;
+  font-size: 53px;
+  height: 200px;
+  line-height: 55px;
+  margin: 0;
+  padding-top: 54px;
+  text-align: center;
+}
+
+.welcome-description {
+  background: $teal;
+  border-radius: 150px;
+  color: $white;
+  font-size: 20px;
+  height: 300px;
+  line-height: 31px;
+  margin: 10px auto;
+  padding-top: 35px;
+  text-align: center;
+  width: 300px;
+}
+
+.get-started {
+  background: $green;
+  color: $white;
+  font-family: CocktailShaker;
+  font-size: 48px;
+  height: 100px;
+  line-height: 100px;
+  position: absolute;
+  text-align: center;
+  top: 380px;
+  width: 100%;
+
+  &:hover {
+    color: #eee;
+  }
+}
+
+.welcome-links {
+  padding-bottom: 15px;
+
+  a {
+    color: $dark-green;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .welcome-title {
+    background-image: url('../images/header-trees@2x.png');
+    background-size: 320px 200px;
+  }
+}
