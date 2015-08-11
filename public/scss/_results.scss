@@ -6,21 +6,34 @@
   text-align: left;
 }
 
-.selected-mode {
-  height: 56px;
-  float: right;
-  width: 86px;
+.mode-menu {
+  background-color: $teal;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 126px;
+  z-index: 11;
 
-  &.walk {
-    background: url('../images/icon-walk.png') center center no-repeat;
+  &.open .mode.selected {
+    background-color: $green;
   }
 
-  &.bike {
-    background: url('../images/icon-bike.png') center center no-repeat;
-  }
+  .mode {
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 69px;
 
-  &.transit {
-    background: url('../images/icon-transir.png') center center no-repeat;
+    &.walk {
+      background-image: url('../images/icon-walk.png');
+    }
+
+    &.bike {
+      background-image: url('../images/icon-bike.png');
+    }
+
+    &.transit {
+      background-image: url('../images/icon-transit.png');
+    }
   }
 }
 
