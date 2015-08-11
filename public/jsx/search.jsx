@@ -121,7 +121,7 @@ module.exports = React.createClass({
   renderModeMenu: function() {
     return ['walk', 'bike', 'transit'].map(function(mode, idx) {
       return (
-          <li value={mode} key={idx} className={classNames('mode-menu', {selected: this.state.selectedMode === mode})} onClick={this.selectMode.bind(null, mode)}>{mode}</li>
+          <li value={mode} key={idx} className={classNames('mode', {selected: this.state.selectedMode === mode})} onClick={this.selectMode.bind(null, mode)}>{mode}</li>
       );
     }.bind(this));
   },
