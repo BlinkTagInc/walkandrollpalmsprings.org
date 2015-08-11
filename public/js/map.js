@@ -9,7 +9,7 @@ L.mapbox.accessToken = config.mapboxToken;
 
 
 exports.drawMap = function(center, centerAddress) {
-  var map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {center: center, zoom: 13});
+  map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {center: center, zoom: 13});
   var startIcon = L.icon({
     iconSize: [50, 50],
     iconAnchor: [25, 25],
@@ -20,4 +20,9 @@ exports.drawMap = function(center, centerAddress) {
   L.marker(center, {title: 'Start Location', icon: startIcon})
     .bindPopup(centerAddress)
     .addTo(map);
+};
+
+
+exports.resizeMap = function() {
+  map.invalidateSize();
 };

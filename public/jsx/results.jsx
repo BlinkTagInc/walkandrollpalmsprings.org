@@ -44,6 +44,10 @@ module.exports = React.createClass({
     map.drawMap([this.props.query.startLat, this.props.query.startLon], this.props.query.startAddress);
   },
 
+  componentDidUpdate: function() {
+    map.resizeMap();
+  },
+
   componentWillUnmount: function() {
     window.removeEventListener('resize', this.handleResize);
   },
