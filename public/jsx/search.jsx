@@ -127,55 +127,59 @@ module.exports = React.createClass({
     this.setState({selectedMode: mode});
   },
 
-  setAddress: function(data) {
-    if(data && data.features && data.features.length) {
-      if(data.features[0].address) {
-        this.setState({startAddress: data.features[0].address + ' ' + data.features[0].text});
-      }
-    }
-  },
+  validateSearch: function(cb) {
+    var errors = [];
 
-  validateSearch: function() {
-    var isValid = true;
-
-    if (!this.state.startAddress) {
-      alert('Please enter a start address.');
-      isValid = false;
+    if (!this.refs.startAddress.getDOMNode().value) {
+      errors.push('Please enter a start address.');
     }
 
     if (!this.state.selectedPlaces.length) {
-      alert('Please selct at least one type of destination.');
-      isValid = false;
+      errors.push('Please selct at least one type of destination.');
     }
 
-    return isValid;
+    $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + this.refs.startAddress.getDOMNode().value + '.json', {
+      access_token: config.mapboxToken
+    }, function(data) {
+      if (data && data.features && data.features.length) {
+        this.setState({startLocation: [data.features[0].center[1], data.features[0].center[0]]});
+      } else {
+        errors.push('The address you entered was not found.');
+      }
+
+      cb(errors.length ? errors : null);
+
+    }.bind(this));
   },
 
   doSearch: function() {
-    if(!this.validateSearch()) {
-      return;
-    }
+    this.validateSearch(function(e) {
+      if (e) {
+        return alert('Errors');
+      }
 
-    var query = {
-      places: this.state.selectedPlaces,
-      mode: this.state.selectedMode,
-      startLat: this.state.startLat,
-      startLon: this.state.startLon,
-      startAddress: this.state.startAddress
-    };
-    this.transitionTo('results', null, query);
+      var query = {
+        places: this.state.selectedPlaces,
+        mode: this.state.selectedMode,
+        startLocation: this.state.startLocation,
+        startAddress: this.refs.startAddress.getDOMNode().value
+      };
+      this.transitionTo('results', null, query);
+    }.bind(this));
   },
 
   componentDidMount: function() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        this.setState({
-          startLat: position.coords.latitude,
-          startLon: position.coords.longitude
-        });
         $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
           access_token: config.mapboxToken
-        }, this.setAddress);
+        }, function(data) {
+          if(data && data.features && data.features.length) {
+            if(data.features[0].address) {
+              this.refs.startAddress.getDOMNode().value = data.features[0].address + ' ' + data.features[0].text;
+            }
+          }
+        }.bind(this));
       }.bind(this));
     }
   },
@@ -193,7 +197,9 @@ module.exports = React.createClass({
           <li className="section-header section-orange">
             <h1>Start Location</h1>
           </li>
-          <li className="start-address">{this.state.startAddress || ' '}</li>
+          <li className="start-address">
+            <input ref="startAddress" type="text" />
+          </li>
           <li className="section-header section-red">
             <h1>Travel by:</h1>
           </li>

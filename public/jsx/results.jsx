@@ -75,7 +75,7 @@ module.exports = React.createClass({
   componentDidMount: function() {
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
-    map.drawMap([this.props.query.startLat, this.props.query.startLon], this.props.query.startAddress);
+    map.drawMap(this.props.query.startLocation, this.props.query.startAddress);
   },
 
   componentDidUpdate: function() {

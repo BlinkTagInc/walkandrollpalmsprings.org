@@ -59,7 +59,10 @@
     }
 
     &.start-address {
-      padding: 12px 8px 12px 32px;
+      input {
+        padding: 12px;
+        width: 100%;
+      }
     }
 
     .mode-select {
