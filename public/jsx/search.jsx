@@ -7,27 +7,16 @@ var _ = require('underscore');
 
 
 var MenuItem = React.createClass({
-  getInitialState: function() {
-    return {
-      selected: false
-    };
-  },
-
-  toggleSelected: function() {
-    this.setState({selected: !this.state.selected});
-
-    this.props.toggleSelected(this.props.item, this.state.selected);
-  },
-
   render: function() {
-    return <li onClick={this.toggleSelected.bind(null, this.props.item)} className={classNames({selected: this.state.selected})}>{this.props.item}</li>;
+    return <li onClick={this.props.toggleSelected.bind(null, this.props.item)} className={classNames({selected: this.props.selected})}>{this.props.item}</li>;
   }
 });
+
 
 var MenuSection = React.createClass({
   getInitialState: function() {
     return {
-      open: false
+      open: _.intersection(this.props.items, this.props.selectedPlaces).length
     };
   },
 
@@ -37,7 +26,7 @@ var MenuSection = React.createClass({
 
   renderItems: function() {
     return this.props.items.map(function(item, key) {
-      return <MenuItem key={key} item={item} toggleSelected={this.props.toggleSelected} />;
+      return <MenuItem key={key} item={item} selected={_.contains(this.props.selectedPlaces, item)} toggleSelected={this.props.toggleSelected} />;
     }.bind(this));
   },
 
@@ -58,7 +47,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      selectedPlaces: [],
+      selectedPlaces: ['Fresh Groceries'],
       selectedMode: 'walk',
       menus: [
         {
@@ -114,7 +103,7 @@ module.exports = React.createClass({
 
   renderPlaceMenu: function() {
     return this.state.menus.map(function(menu, idx) {
-      return <MenuSection name={menu.name} items={menu.items} key={idx} toggleSelected={this.toggleSelected} />;
+      return <MenuSection name={menu.name} items={menu.items} key={idx} toggleSelected={this.toggleSelected} selectedPlaces={this.state.selectedPlaces} />;
     }.bind(this));
   },
 
