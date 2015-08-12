@@ -1,33 +1,9 @@
 .search-menu {
-  border-top: 1px $grey solid;
   font-size: 16px;
   list-style-type: none;
   padding: 0;
 
-  .menu-section {
-    padding: 12px 15px;
-  }
-
   li {
-    border-top: 1px $grey solid;
-
-    &.place-menu {
-      background: url('../images/down-chevron.png') right 15px top 12px no-repeat;
-      cursor: pointer;
-
-      ul {
-        display: none;
-      }
-
-      &.open {
-        background-image: url('../images/up-chevron.png');
-
-        ul {
-          display: block;
-        }
-      }
-    }
-
     &.selected {
       background: url('../images/check.png') right 15px center no-repeat;
     }
@@ -45,8 +21,57 @@
       }
     }
 
+    .place-select {
+      li {
+        border-top: 1px $grey solid;
+
+        &.place-menu {
+          background: url('../images/down-chevron.png') right 15px top 12px no-repeat;
+          border-top: 1px $grey solid;
+          cursor: pointer;
+
+          &:first-child {
+            border-top: none;
+          }
+
+          ul {
+            display: none;
+          }
+
+          &.open {
+            background-image: url('../images/up-chevron.png');
+            padding: 0;
+
+            .place-title {
+              padding: 12px 8px 12px 32px;
+            }
+
+            ul {
+              display: block;
+
+              li {
+                padding-left: 52px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.start-address {
+      padding: 12px 8px 12px 32px;
+    }
+
     .mode-select {
       text-transform: capitalize;
+
+      li {
+        border-top: 1px $grey solid;
+
+        &:first-child {
+          border-top: none;
+        }
+      }
     }
   }
 }

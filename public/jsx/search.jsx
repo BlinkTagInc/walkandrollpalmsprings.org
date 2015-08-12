@@ -44,7 +44,7 @@ var MenuSection = React.createClass({
   render: function() {
     return (
       <li className={classNames({open: this.state.open}, 'place-menu')}>
-        <div onClick={this.toggleMenu} className="menu-section">{this.props.name}</div>
+        <div className="place-title" onClick={this.toggleMenu}>{this.props.name}</div>
         <ul>
           {this.renderItems()}
         </ul>
@@ -121,7 +121,7 @@ module.exports = React.createClass({
   renderModeMenu: function() {
     return ['walk', 'bike', 'transit'].map(function(mode, idx) {
       return (
-          <li value={mode} key={idx} className={classNames('mode', {selected: this.state.selectedMode === mode})} onClick={this.selectMode.bind(null, mode)}>{mode}</li>
+        <li value={mode} key={idx} className={classNames('mode', {selected: this.state.selectedMode === mode})} onClick={this.selectMode.bind(null, mode)}>{mode}</li>
       );
     }.bind(this));
   },
@@ -198,11 +198,13 @@ module.exports = React.createClass({
           <li className="section-header section-teal">
             <h1>Select One or More</h1>
           </li>
-          {this.renderPlaceMenu()}
+          <li>
+            <ul className="place-select">{this.renderPlaceMenu()}</ul>
+          </li>
           <li className="section-header section-orange">
             <h1>Start Location</h1>
           </li>
-          <li className="start-address menu-section">{this.state.startAddress || ' '}</li>
+          <li className="start-address">{this.state.startAddress || ' '}</li>
           <li className="section-header section-red">
             <h1>Travel by:</h1>
           </li>
