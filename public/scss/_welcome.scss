@@ -1,53 +1,49 @@
 .welcome-title {
-  background: $red url('../images/header-trees.png') center top no-repeat;
+  background: $orange url('../images/header-trees.png') center top no-repeat;
   color: $white;
-  font-size: 53px;
+  font-size: 60px;
   height: 200px;
-  line-height: 55px;
+  line-height: 75px;
   margin: 0;
-  padding-top: 54px;
+  padding-top: 24px;
   text-align: center;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.50);
 }
 
 .welcome-description {
   background: $teal;
   border-radius: 150px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
   color: $white;
   font-size: 20px;
   height: 300px;
   line-height: 31px;
   margin: 10px auto;
   padding-top: 35px;
+  position: relative;
   text-align: center;
   width: 300px;
+  z-index: 2;
 }
 
 .get-started {
   background: $green;
+  border-radius: 12px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
   color: $white;
+  display: block;
   font-family: CocktailShaker;
-  font-size: 48px;
-  height: 100px;
-  line-height: 100px;
-  position: absolute;
+  font-size: 30px;
+  height: 50px;
+  line-height: 50px;
+  margin: -120px auto 35px;
+  position: relative;
   text-align: center;
-  top: 380px;
-  width: 100%;
+  width:  200px;
+  z-index: 3;
 
   &:hover {
     color: #eee;
-  }
-}
-
-.welcome-links {
-  padding-bottom: 15px;
-
-  a {
-    color: $dark-green;
-    display: block;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
   }
 }
 

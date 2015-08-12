@@ -1,0 +1,23 @@
+.navigation {
+  background: $orange url('../images/footer-tree.png') bottom left no-repeat;;
+  padding: 15px 20px;
+
+  a {
+    color: $black;
+    display: block;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: right;
+
+    &.selected {
+      color: $white;
+    }
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .navigation {
+    background-image: url('../images/footer-tree@2x.png');
+    background-size: 150px 150px;
+  }
+}
