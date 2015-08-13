@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
+var Navigation = require('./navigation.jsx');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -19,10 +20,7 @@ module.exports = React.createClass({
 
           <p>Questions? Contact: <a href="mailto:info@walkandrollpalmsprings.org">info@walkandrollpalmsprings.org</a></p>
         </div>
-        <div className="section-links">
-          <Link to="neighborhoods">Neighborhoods</Link>|
-          <Link to="leaderboard">Leaderboard</Link>
-        </div>
+        <Navigation selected="about" color="green" />
       </div>
     );
   }

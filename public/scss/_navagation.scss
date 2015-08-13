@@ -1,6 +1,18 @@
 .navigation {
-  background: $orange url('../images/footer-tree.png') bottom left no-repeat;;
+  background: url('../images/footer-tree.png') bottom left 15px no-repeat;;
   padding: 15px 20px;
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.red {
+    background-color: $red;
+  }
+
+  &.green {
+    background-color: $green;
+  }
 
   a {
     color: $black;
