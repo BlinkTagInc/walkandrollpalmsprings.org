@@ -3,6 +3,7 @@ var classNames = require('classnames');
 var Router = require('react-router');
 var { Link } = Router;
 var map = require('../js/map.js');
+var places = require('../js/places.js');
 var _ = require('underscore');
 
 module.exports = React.createClass({
@@ -12,7 +13,8 @@ module.exports = React.createClass({
       windowHeight: window.innerHeight,
       mapHeight: 400,
       menuOpen: false,
-      selectedMode: this.props.query.mode
+      selectedMode: this.props.query.mode,
+      places: []
     };
   },
 
@@ -76,10 +78,19 @@ module.exports = React.createClass({
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
     map.drawMap(this.props.query.startLocation, this.props.query.startAddress);
+
+    places.getPlaces(this.props.query.places, function(e, data) {
+      if (e) {
+        console.error(e);
+      }
+      console.log(data);
+      this.setState({places: data});
+    }.bind(this));
   },
 
   componentDidUpdate: function() {
     map.resizeMap();
+    map.updateMap(this.state.places);
   },
 
   componentWillUnmount: function() {
