@@ -63,8 +63,6 @@ exports.resizeMap = function() {
 
 
 exports.updateMap = function(locations) {
-  places.clearLayers();
-
   locations.forEach(function(location, idx) {
     var marker = L.marker([location.lat, location.lng], {
       title: location.title,
