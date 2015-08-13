@@ -2,6 +2,7 @@ var React = require('react');
 var classNames = require('classnames');
 var config = require('../js/config.js');
 var Navigation = require('react-router').Navigation;
+var map = require('../js/map.js');
 var $ = require('jquery');
 var _ = require('underscore');
 
@@ -129,41 +130,50 @@ module.exports = React.createClass({
 
   validateSearch: function(cb) {
     var errors = [];
-
-    if (!this.refs.startAddress.getDOMNode().value) {
-      errors.push('Please enter a start address.');
-    }
+    var start = {
+      startAddress: this.refs.startAddress.getDOMNode().value
+    };
 
     if (!this.state.selectedPlaces.length) {
       errors.push('Please selct at least one type of destination.');
     }
 
-    $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + this.refs.startAddress.getDOMNode().value + '.json', {
-      access_token: config.mapboxToken
-    }, function(data) {
-      if (data && data.features && data.features.length) {
-        this.setState({startLocation: [data.features[0].center[1], data.features[0].center[0]]});
-      } else {
-        errors.push('The address you entered was not found.');
-      }
-
-      cb(errors.length ? errors : null);
-
-    }.bind(this));
+    if (start.startAddress) {
+      $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + start.startAddress + '.json', {
+        access_token: config.mapboxToken
+      }, function(data) {
+        if (data && data.features && data.features.length) {
+          var latlng = [data.features[0].center[1], data.features[0].center[0]];
+          if (map.isNearPalmSprings(latlng)) {
+            start.startLocation = latlng;
+          } else {
+            errors.push('The address you entered was not in Palm Springs.');
+          }
+        } else {
+          errors.push('The address you entered was not found.');
+        }
+        cb(errors.length ? errors : null, start);
+      }.bind(this));
+    } else {
+      start.startAddress = '3200 E Tahquitz Canyon Way';
+      start.startLocation = [33.8303,-116.5453];
+      cb(null, start);
+    }
   },
 
   doSearch: function() {
-    this.validateSearch(function(e) {
+    this.validateSearch(function(e, start) {
       if (e) {
-        return alert('Errors');
+        return alert('Error: ' + e.join(', '));
       }
 
       var query = {
         places: this.state.selectedPlaces,
         mode: this.state.selectedMode,
-        startLocation: this.state.startLocation,
-        startAddress: this.refs.startAddress.getDOMNode().value
+        startLocation: start.startLocation,
+        startAddress: start.startAddress
       };
+
       this.transitionTo('results', null, query);
     }.bind(this));
   },
