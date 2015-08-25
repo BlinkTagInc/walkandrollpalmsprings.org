@@ -129,6 +129,13 @@ module.exports = React.createClass({
     this.setState({selectedMode: mode});
   },
 
+  clearStart: function() {
+    this.setState({
+      startLocation: undefined,
+      startAddress: undefined
+    });
+  },
+
   validateStart: function(cb) {
     var error = null;
     var startAddress = this.refs.startAddress.getDOMNode().value;
@@ -221,8 +228,8 @@ module.exports = React.createClass({
           <li>
             <div className="instructions">Start Location</div>
           </li>
-          <li className="start-address">
-            <input ref="startAddress" type="text" onBlur={this.validateStart.bind(this, this.handleValidationError)} />
+          <li className={classNames('start-address', {selected: !!this.state.startLocation})}>
+            <input ref="startAddress" type="text" onBlur={this.validateStart.bind(this, this.handleValidationError)} onChange={this.clearStart} />
           </li>
           <li>
             <div className="instructions">Travel by:</div>

@@ -6,7 +6,7 @@
   .instructions {
     font-weight: bold;
     text-align: center;
-    padding-bottom: 5px;
+    padding: 5px 0;
   }
 
   li {
@@ -71,6 +71,8 @@
 
     &.start-address {
       input {
+        background: none;
+        color: $black;
         padding: 12px;
         width: 100%;
       }
