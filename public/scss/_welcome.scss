@@ -1,7 +1,7 @@
 .welcome-title {
   background: $red-light url("../images/header-trees.png") center top no-repeat;
   color: $white;
-  font-size: 60px;
+  font-size: 50px;
   height: 200px;
   line-height: 75px;
   margin: 0;
@@ -35,6 +35,12 @@
   text-align: center;
   width: 200px;
   z-index: 3;
+}
+
+@media only screen and (min-width: 330px)  {
+  .welcome-title {
+    font-size: 60px;
+  }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
