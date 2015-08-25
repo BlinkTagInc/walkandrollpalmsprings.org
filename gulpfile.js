@@ -87,8 +87,10 @@ gulp.task('scss:develop', ['scss:lint', 'scss:compileDev']);
 
 
 gulp.task('fonts:copy', function() {
-  gulp.src(['./node_modules/bootstrap-sass/assets/fonts/bootstrap/*'])
-    .pipe(gulp.dest('./public/dest/fonts'));
+  gulp.src([
+    './node_modules/bootstrap-sass/assets/fonts/bootstrap/*',
+    './public/fonts/*'
+  ]).pipe(gulp.dest('./public/dest/fonts'));
 });
 
 
