@@ -3,6 +3,7 @@ var classNames = require('classnames');
 var Router = require('react-router');
 var { Link } = Router;
 var SiteMenu = require('./site_menu.jsx');
+var he = require('he');
 var map = require('../js/map.js');
 var places = require('../js/places.js');
 var _ = require('underscore');
@@ -16,7 +17,7 @@ var Place = React.createClass({
 
   renderDetails: function() {
     if (this.state.selected) {
-      return <div className="place-details">{this.props.place.street}<br />{this.props.place.content} <a href="#" className="place-link">Map & Directons &raquo;</a></div>
+      return <div className="place-details">{this.props.place.street}<br />{he.decode(this.props.place.content)} <a href="#" className="place-link">Map & Directons &raquo;</a></div>
     }
   },
 

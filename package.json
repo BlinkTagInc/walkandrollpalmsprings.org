@@ -24,6 +24,7 @@
     "gulp-streamify": "1.0.0",
     "gulp-uglify": "1.2.0",
     "gulp-util": "3.0.6",
+    "he": "^0.5.0",
     "jade": "1.11.0",
     "jquery": "2.1.4",
     "mapbox.js": "2.2.1",
