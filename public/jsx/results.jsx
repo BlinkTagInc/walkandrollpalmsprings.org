@@ -16,7 +16,7 @@ var Place = React.createClass({
 
   renderDetails: function() {
     if (this.state.selected) {
-      return <div className="place-details">{this.props.place.content} <a href="#" className="place-link">Map & Directons &raquo;</a></div>
+      return <div className="place-details">{this.props.place.street}<br />{this.props.place.content} <a href="#" className="place-link">Map & Directons &raquo;</a></div>
     }
   },
 
