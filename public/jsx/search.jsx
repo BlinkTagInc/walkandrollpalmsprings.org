@@ -128,50 +128,58 @@ module.exports = React.createClass({
     this.setState({selectedMode: mode});
   },
 
-  validateSearch: function(cb) {
-    var errors = [];
-    var start = {
-      startAddress: this.refs.startAddress.getDOMNode().value
-    };
-
-    if (!this.state.selectedPlaces.length) {
-      errors.push('Please selct at least one type of destination.');
+  validateStart: function(cb) {
+    var error = null;
+    var startAddress = this.refs.startAddress.getDOMNode().value;
+    if (!startAddress) {
+      return cb();
     }
 
-    if (start.startAddress) {
-      $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + start.startAddress + '.json', {
-        access_token: config.mapboxToken
-      }, function(data) {
-        if (data && data.features && data.features.length) {
-          var latlng = [data.features[0].center[1], data.features[0].center[0]];
-          if (map.isNearPalmSprings(latlng)) {
-            start.startLocation = latlng;
-          } else {
-            errors.push('The address you entered was not in Palm Springs.');
-          }
+    $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
+      access_token: config.mapboxToken
+    }, function(data) {
+      if (data && data.features && data.features.length) {
+        var latlng = [data.features[0].center[1], data.features[0].center[0]];
+        if (map.isNearPalmSprings(latlng)) {
+          this.setState({
+            startLocation: latlng,
+            startAddress: startAddress
+          });
         } else {
-          errors.push('The address you entered was not found.');
+          error = 'The address you entered was not in Palm Springs.';
         }
-        cb(errors.length ? errors : null, start);
-      }.bind(this));
-    } else {
-      start.startAddress = '3200 E Tahquitz Canyon Way';
-      start.startLocation = [33.8303,-116.5453];
-      cb(null, start);
+      } else {
+        error = 'The address you entered was not found.';
+      }
+      cb(error);
+    }.bind(this));
+  },
+
+  validateSearch: function(cb) {
+    if (!this.state.selectedPlaces.length) {
+      return cb('Please selct at least one type of destination.');
+    }
+
+    this.validateStart(cb);
+  },
+
+  handleValidationError: function(e) {
+    if (e) {
+      alert('Error: ' + e);
     }
   },
 
   doSearch: function() {
-    this.validateSearch(function(e, start) {
+    this.validateSearch(function(e) {
       if (e) {
-        return alert('Error: ' + e.join(', '));
+        return this.handleValidationError(e);
       }
 
       var query = {
         places: this.state.selectedPlaces,
         mode: this.state.selectedMode,
-        startLocation: start.startLocation,
-        startAddress: start.startAddress
+        startLocation: this.state.startLocation || [33.8303,-116.5453],
+        startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way'
       };
 
       this.transitionTo('results', null, query);
@@ -208,7 +216,7 @@ module.exports = React.createClass({
             <h1>Start Location</h1>
           </li>
           <li className="start-address">
-            <input ref="startAddress" type="text" />
+            <input ref="startAddress" type="text" onBlur={this.validateStart.bind(this, this.handleValidationError)} />
           </li>
           <li className="section-header section-red">
             <h1>Travel by:</h1>
