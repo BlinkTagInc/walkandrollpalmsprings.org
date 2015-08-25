@@ -6,24 +6,42 @@ var map = require('../js/map.js');
 var places = require('../js/places.js');
 var _ = require('underscore');
 
+var Place = React.createClass({
+  getInitialState: function() {
+    return {
+      selected: false
+    };
+  },
+
+  renderDetails: function() {
+    if (this.state.selected) {
+      return <div className="place-details">{this.props.place.content} <a href="#" className="place-link">Map & Directons &raquo;</a></div>
+    }
+  },
+
+  render: function() {
+    return (
+      <div className={classNames('place', {selected: !!this.state.selected})} onClick={this.toggleSelected}>
+        <div className="place-title">{this.props.number}. {this.props.place.title}</div>
+        {this.renderDetails()}
+      </div>
+    );
+  },
+
+  toggleSelected: function() {
+    this.setState({
+      selected: !this.state.selected
+    });
+  }
+});
+
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight,
-      mapHeight: 400,
       menuOpen: false,
       selectedMode: this.props.query.mode,
       places: []
     };
-  },
-
-  handleResize: function() {
-    this.setState({
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight,
-      mapHeight: window.innerHeight - this.refs.sectionHeader.getDOMNode().clientHeight - this.refs.sectionFooter.getDOMNode().clientHeight
-    });
   },
 
   toggleModeMenu: function() {
@@ -58,6 +76,12 @@ module.exports = React.createClass({
     );
   },
 
+  renderPlaceList: function() {
+    return this.state.places.map(function(place, key) {
+      return <Place className="place" key={key} number={key+1} place={place} />
+    });
+  },
+
   render: function() {
     return (
       <div>
@@ -66,7 +90,10 @@ module.exports = React.createClass({
           <h2 className="results-title">Showing:</h2>
           <div className="selected-places">{this.props.query.places.join(', ')}</div>
         </div>
-        <div className="results-map" id="map" style={{height: this.state.mapHeight + 'px'}}></div>
+
+        <div className="place-list">
+          {this.renderPlaceList()}
+        </div>
 
         <div className="section-footer" ref="sectionFooter">
           <Link to="search" className="footer-bar red">Back to Search</Link>
@@ -76,10 +103,6 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
-    this.handleResize();
-    map.drawMap(this.props.query.startLocation, this.props.query.startAddress);
-
     places.getPlaces(this.props.query.places, function(e, data) {
       if (e) {
         console.error(e);
@@ -87,14 +110,5 @@ module.exports = React.createClass({
       console.log(data);
       this.setState({places: data});
     }.bind(this));
-  },
-
-  componentDidUpdate: function() {
-    map.resizeMap();
-    map.updateMap(this.state.places);
-  },
-
-  componentWillUnmount: function() {
-    window.removeEventListener('resize', this.handleResize);
-  },
+  }
 });

@@ -18,7 +18,7 @@
   .mode {
     background-position: center center;
     background-repeat: no-repeat;
-    height: 69px;
+    height: 77px;
 
     &.selected {
       background-color: $dark-green;
@@ -38,8 +38,38 @@
   }
 }
 
-.results-map {
-  min-height: 300px;
+.place-list {
+  .place {
+    border-top: 1px $grey solid;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    .place-title {
+      background: url('../images/right-chevron.png') right 12px center no-repeat;
+      cursor: pointer;
+      font-size: 17px;
+      padding: 12px 8px;
+    }
+
+    &.selected {
+      .place-title {
+        background: $teal url('../images/up-chevron-white.png') right 12px center no-repeat;
+      }
+    }
+
+    .place-details {
+      padding: 12px 8px;
+
+      .place-link {
+        color: $black;
+        display: block;
+        padding-top: 6px;
+        text-align: center;
+      }
+    }
+  }
 }
 
 .footer-bar {
@@ -51,5 +81,23 @@
 
   &.red {
     background-color: $red;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .place-list {
+    .place {
+      .place-title {
+        background-image: url('../images/right-chevron@2x.png');
+        background-size: 8px 13px;
+      }
+
+      &.selected {
+        .place-title {
+          background-image: url('../images/up-chevron-white@2x.png');
+          background-size: 14px 9px;
+        }
+      }
+    }
   }
 }

@@ -26,7 +26,7 @@
         border-top: 1px $grey solid;
 
         &.place-menu {
-          background: url('../images/down-chevron.png') right 15px top 12px no-repeat;
+          background: url('../images/down-chevron-orange.png') right 15px top 12px no-repeat;
           border-top: 1px $grey solid;
           cursor: pointer;
 
@@ -39,7 +39,7 @@
           }
 
           &.open {
-            background-image: url('../images/up-chevron.png');
+            background-image: url('../images/up-chevron-orange.png');
             padding: 0;
 
             .place-title {
@@ -82,11 +82,11 @@
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .search-menu li {
     &.place-menu {
-      background-image: url('../images/down-chevron@2x.png');
+      background-image: url('../images/down-chevron-orange@2x.png');
       background-size: 23px 22px;
 
       &.open {
-        background-image: url('../images/up-chevron@2x.png');
+        background-image: url('../images/up-chevron-orange@2x.png');
       }
     }
 
