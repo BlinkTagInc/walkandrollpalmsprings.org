@@ -96,8 +96,8 @@ module.exports = React.createClass({
           {this.renderPlaceList()}
         </div>
 
-        <div className="section-footer" ref="sectionFooter">
-          <Link to="search" className="footer-bar red">Back to Search</Link>
+        <div className="section-footer section-teal">
+          <Link to="search">Return to Search</Link>
         </div>
         <SiteMenu selected="search" color="teal" />
       </div>

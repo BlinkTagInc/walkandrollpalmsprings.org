@@ -206,27 +206,31 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
+        <div className="section-header section-teal">
+          <h2>Walk and Roll: Palm Springs</h2>
+        </div>
         <ul className="search-menu">
-          <li className="section-header section-teal">
-            <h1>Select One or More</h1>
+          <li>
+            <h1 className="page-title teal">Search</h1>
+            <div className="instructions">Select One or More Destination Type</div>
           </li>
           <li>
             <ul className="place-select">{this.renderPlaceMenu()}</ul>
           </li>
-          <li className="section-header section-orange">
-            <h1>Start Location</h1>
+          <li>
+            <div className="instructions">Start Location</div>
           </li>
           <li className="start-address">
             <input ref="startAddress" type="text" onBlur={this.validateStart.bind(this, this.handleValidationError)} />
           </li>
-          <li className="section-header section-red">
-            <h1>Travel by:</h1>
+          <li>
+            <div className="instructions">Travel by:</div>
           </li>
           <li>
             <ul className="mode-select">{this.renderModeMenu()}</ul>
           </li>
 
-          <li onClick={this.doSearch} className="section-header section-green section-link"><h1>Search</h1></li>
+          <li onClick={this.doSearch} className="btn-search btn btn-teal btn-center">Search</li>
         </ul>
 
         <SiteMenu selected="search" color="teal" />

@@ -13,10 +13,10 @@ module.exports = React.createClass({
       <div>
         <div className="section-header section-orange">
           <h2>Walk and Roll: Palm Springs</h2>
-          <h1>Neighborhoods</h1>
         </div>
         <div className="section-content">
-
+          <h1 className="page-title orange">Neighborhoods</h1>
+          <p>Tap any neighborhood for more information.</p>
         </div>
 
         <div className="section-header section-orange">

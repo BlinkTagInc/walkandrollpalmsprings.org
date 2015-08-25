@@ -13,10 +13,10 @@ module.exports = React.createClass({
       <div>
         <div className="section-header section-red">
           <h2>Walk and Roll: Palm Springs</h2>
-          <h1>Leaderboard</h1>
         </div>
         <div className="section-content">
 
+          <h1 className="page-title red">Leaderboard</h1>
         </div>
         <SiteMenu selected="leaderboard" color="red" />
       </div>

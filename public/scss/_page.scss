@@ -28,24 +28,55 @@
   }
 }
 
-.section-link {
-  cursor: pointer;
-}
-
 .section-content {
-  padding: 25px 15px;
+  padding: 15px;
 }
 
-.section-links {
-  bottom: 0;
-  color: $dark-green;
-  padding: 10px 0 15px;
-  position: absolute;
-  text-align: center;
-  width: 100%;
+.section-footer {
+  font-size: 18px;
+  line-height: 56px;
+  padding: 5px 15px;
 
-  a {
-    color: $dark-green;
-    padding: 0 6px;
+  &.section-green {
+    background-color: $green;
+  }
+
+  &.section-red {
+    background-color: $red;
+  }
+
+  &.section-orange {
+    background-color: $orange;
+  }
+
+  &.section-teal {
+    background-color: $teal;
+    color: $white;
+
+    a {
+      color: $white;
+    }
+  }
+}
+
+.page-title {
+  font-size: 30px;
+  margin-top: 0;
+  text-align: center;
+
+  &.orange {
+    color: $orange;
+  }
+
+  &.red {
+    color: $red;
+  }
+
+  &.teal {
+    color: $teal;
+  }
+
+  &.green {
+    color: $green;
   }
 }

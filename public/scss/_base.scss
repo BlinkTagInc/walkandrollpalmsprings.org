@@ -18,6 +18,10 @@ body {
 
 .content {
   position: relative;
+
+  &.background-tan {
+    background-color: $tan;
+  }
 }
 
 input {
@@ -62,7 +66,7 @@ h5 {
 }
 
 a {
-  color: $dark-green;
+  color: $green-dark;
 }
 
 a:hover {
