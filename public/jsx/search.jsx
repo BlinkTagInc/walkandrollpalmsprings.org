@@ -137,7 +137,8 @@ module.exports = React.createClass({
     }
 
     $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
-      access_token: config.mapboxToken
+      access_token: config.mapboxToken,
+      proximity: '-116.5453,33.8303'
     }, function(data) {
       if (data && data.features && data.features.length) {
         var latlng = [data.features[0].center[1], data.features[0].center[0]];
