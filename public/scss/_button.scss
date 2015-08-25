@@ -1,9 +1,10 @@
 .btn {
   border-radius: 25px;
-  font-size: 18px;
+  font-family: 'CocktailShaker', 'Muli', 'Helvetica', 'Arial', Sans-Serif;
+  font-size: 30px;
   font-weight: bold;
   height: 50px;
-  padding: 11px 20px;
+  padding: 4px 20px;
 
   .number {
     float: left;
@@ -12,6 +13,21 @@
   &.disabled {
     background-color: #9891a7;
     color: #6c657c;
+  }
+
+  &.btn-center {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &.btn-teal {
+    background-color: $teal;
+    color: $white;
+  }
+
+  &.btn-green {
+    background-color: $green;
+    color: $white;
   }
 }
 
