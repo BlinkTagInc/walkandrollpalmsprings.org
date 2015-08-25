@@ -3,6 +3,7 @@
 }
 
 .selected-places {
+  margin-right: 122px;
   text-align: left;
 }
 
@@ -14,14 +15,14 @@
   width: 126px;
   z-index: 11;
 
-  &.open .mode.selected {
-    background-color: $green;
-  }
-
   .mode {
     background-position: center center;
     background-repeat: no-repeat;
     height: 69px;
+
+    &.selected {
+      background-color: $dark-green;
+    }
 
     &.walk {
       background-image: url('../images/icon-walk.png');

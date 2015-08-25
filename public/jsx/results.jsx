@@ -27,7 +27,7 @@ module.exports = React.createClass({
   },
 
   toggleModeMenu: function() {
-    this.setState({menuOpen: true});
+    this.setState({menuOpen: !this.state.menuOpen});
   },
 
   selectMode: function(mode) {
@@ -38,12 +38,14 @@ module.exports = React.createClass({
   },
 
   renderModeMenu: function() {
-    var menuItems;
+    var menuItems = [
+      <div className={classNames('mode', 'selected', this.state.selectedMode)} onClick={this.toggleModeMenu}></div>
+    ];
     var modes = ['walk', 'bike', 'transit'];
 
     if (this.state.menuOpen) {
-      menuItems = _.without(modes, this.state.selectedMode).map(function(mode, idx) {
-        return (
+      _.without(modes, this.state.selectedMode).forEach(function(mode, idx) {
+        menuItems.push(
           <div className={classNames('mode', mode)} key={idx} onClick={this.selectMode.bind(null, mode)}></div>
         );
       }.bind(this));
@@ -51,7 +53,6 @@ module.exports = React.createClass({
 
     return (
       <div className={classNames('mode-menu', {open: this.state.menuOpen})}>
-        <div className={classNames('mode', 'selected', this.state.selectedMode)} onClick={this.toggleModeMenu}></div>
         {menuItems}
       </div>
     );
