@@ -55,7 +55,7 @@
 
     &.selected {
       .place-title {
-        background: $teal url('../images/up-chevron.png') right 12px center no-repeat;
+        background: $teal url('../images/up-chevron-white.png') right 12px center no-repeat;
       }
     }
 
@@ -82,7 +82,7 @@
 
       &.selected {
         .place-title {
-          background-image: url('../images/up-chevron@2x.png');
+          background-image: url('../images/up-chevron-white@2x.png');
           background-size: 14px 9px;
         }
       }
