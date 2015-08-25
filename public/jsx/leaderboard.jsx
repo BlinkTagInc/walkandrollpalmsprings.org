@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
-var Navigation = require('./navigation.jsx');
+var SiteMenu = require('./site_menu.jsx');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -18,7 +18,7 @@ module.exports = React.createClass({
         <div className="section-content">
 
         </div>
-        <Navigation selected="leaderboard" color="red" />
+        <SiteMenu selected="leaderboard" color="red" />
       </div>
     );
   }

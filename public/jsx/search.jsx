@@ -2,6 +2,7 @@ var React = require('react');
 var classNames = require('classnames');
 var config = require('../js/config.js');
 var Navigation = require('react-router').Navigation;
+var SiteMenu = require('./site_menu.jsx');
 var map = require('../js/map.js');
 var $ = require('jquery');
 var _ = require('underscore');
@@ -227,6 +228,8 @@ module.exports = React.createClass({
 
           <li onClick={this.doSearch} className="section-header section-green section-link"><h1>Search</h1></li>
         </ul>
+
+        <SiteMenu selected="search" color="teal" />
       </div>
     );
   }

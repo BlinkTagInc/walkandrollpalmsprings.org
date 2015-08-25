@@ -2,6 +2,7 @@ var React = require('react');
 var classNames = require('classnames');
 var Router = require('react-router');
 var { Link } = Router;
+var SiteMenu = require('./site_menu.jsx');
 var map = require('../js/map.js');
 var places = require('../js/places.js');
 var _ = require('underscore');
@@ -98,6 +99,7 @@ module.exports = React.createClass({
         <div className="section-footer" ref="sectionFooter">
           <Link to="search" className="footer-bar red">Back to Search</Link>
         </div>
+        <SiteMenu selected="search" color="teal" />
       </div>
     );
   },

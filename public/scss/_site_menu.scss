@@ -1,0 +1,59 @@
+.site-menu {
+  background-position: bottom left 15px;
+  background-repeat: no-repeat;
+  padding: 15px 20px;
+
+  &.orange {
+    background-color: $orange-light;
+    background-image: url("../images/footer-tree-orange.png");
+  }
+
+  &.red {
+    background-color: $red-light;
+    background-image: url("../images/footer-tree-red.png");
+  }
+
+  &.green {
+    background-color: $green-light;
+    background-image: url("../images/footer-tree-green.png");
+  }
+
+  &.teal {
+    background-color: $teal-light;
+    background-image: url("../images/footer-tree-teal.png");
+  }
+
+  a {
+    color: $black;
+    display: block;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: right;
+
+    &.selected {
+      color: $white;
+    }
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .site-menu {
+    background-size: 150px 150px;
+
+    &.orange {
+      background-image: url("../images/footer-tree-orange@2x.png");
+    }
+
+    &.red {
+      background-image: url("../images/footer-tree-red@2x.png");
+    }
+
+    &.green {
+      background-image: url("../images/footer-tree-green@2x.png");
+    }
+
+    &.teal {
+      background-image: url("../images/footer-tree-teal@2x.png");
+    }
+  }
+}
