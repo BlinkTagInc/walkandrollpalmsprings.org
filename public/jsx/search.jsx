@@ -238,7 +238,12 @@ module.exports = React.createClass({
             <div className="instructions">Start Location</div>
           </li>
           <li className={classNames('start-address', {selected: !!this.state.startLocation})}>
-            <input ref="startAddress" type="text" onBlur={this.validateStart.bind(this, this.handleValidationError)} onChange={this.clearStart} />
+            <input
+              ref="startAddress"
+              type="text"
+              placeholder="Enter a Palm Springs address"
+              onBlur={this.validateStart.bind(this, this.handleValidationError)}
+              onChange={this.clearStart} />
           </li>
           <li>
             <div className="instructions">Travel by:</div>
