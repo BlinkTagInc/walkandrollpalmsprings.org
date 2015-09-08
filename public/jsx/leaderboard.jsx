@@ -12,7 +12,7 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="section-header section-red">
-          <h2>Walk and Roll: Palm Springs</h2>
+          <h2>Walk and Roll:<br />Palm Springs</h2>
         </div>
         <div className="section-content">
 
