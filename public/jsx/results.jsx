@@ -59,7 +59,7 @@ module.exports = React.createClass({
 
   renderModeMenu: function() {
     var menuItems = [
-      <div className={classNames('mode', 'selected', this.state.selectedMode)} onClick={this.toggleModeMenu}></div>
+      <div className={classNames('mode', 'selected', this.state.selectedMode)} onClick={this.toggleModeMenu} ket="selected"></div>
     ];
     var modes = ['walk', 'bike', 'transit'];
 

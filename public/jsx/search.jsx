@@ -222,11 +222,13 @@ module.exports = React.createClass({
     return (
       <div>
         <div className="section-header section-teal">
-          <h2>Walk and Roll: Palm Springs</h2>
+          <h2>Walk and Roll:<br />Palm Springs</h2>
+        </div>
+        <div className="section-content">
+          <h1 className="page-title teal">Search</h1>
         </div>
         <ul className="search-menu">
           <li>
-            <h1 className="page-title teal">Search</h1>
             <div className="instructions">Select One or More Destination Type</div>
           </li>
           <li>
@@ -244,9 +246,8 @@ module.exports = React.createClass({
           <li>
             <ul className="mode-select">{this.renderModeMenu()}</ul>
           </li>
-
-          <li onClick={this.doSearch} className="btn-search btn btn-teal btn-center">Search</li>
         </ul>
+        <div onClick={this.doSearch} className="btn-search btn btn-teal btn-center">Search</div>
 
         <SiteMenu selected="search" color="teal" />
       </div>
