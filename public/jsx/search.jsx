@@ -132,7 +132,8 @@ module.exports = React.createClass({
   clearStart: function() {
     this.setState({
       startLocation: undefined,
-      startAddress: undefined
+      startAddress: undefined,
+      skipValidation: false
     });
   },
 
@@ -141,6 +142,12 @@ module.exports = React.createClass({
     var startAddress = this.refs.startAddress.getDOMNode().value;
     if (!startAddress) {
       return cb();
+    }
+
+    if(this.state.skipValidation) {
+      return cb();
+    } else {
+      this.setState({skipValidation: true});
     }
 
     $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
