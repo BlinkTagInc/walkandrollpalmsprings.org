@@ -16,6 +16,8 @@ module.exports = React.createClass({
         </div>
         <div className="section-content">
           <h1 className="page-title orange">Neighborhoods</h1>
+        </div>
+        <div className="section-content">
           <p>Tap any neighborhood for more information.</p>
         </div>
 
