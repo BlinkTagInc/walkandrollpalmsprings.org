@@ -229,7 +229,7 @@ module.exports = React.createClass({
         </div>
         <ul className="search-menu">
           <li>
-            <div className="instructions">Select One or More Destination Type</div>
+            <div className="instructions">Select One or More Destination</div>
           </li>
           <li>
             <ul className="place-select">{this.renderPlaceMenu()}</ul>
