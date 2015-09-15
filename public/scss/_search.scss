@@ -13,6 +13,7 @@
 
   li {
     border-top: 1px $grey solid;
+    font-size: 17px;
 
     &.selected {
       background: $teal-light url('../images/check.png') right 60px center no-repeat;
@@ -41,7 +42,6 @@
     .place-select {
       li {
         border-top: 1px $grey solid;
-        font-size: 17px;
 
         &.place-menu {
           border-top: 1px $grey solid;
