@@ -3,6 +3,7 @@ var classNames = require('classnames');
 var config = require('../js/config.js');
 var Navigation = require('react-router').Navigation;
 var SiteMenu = require('./site_menu.jsx');
+var cache = require('../js/cache.js');
 var map = require('../js/map.js');
 var $ = require('jquery');
 var _ = require('underscore');
@@ -48,9 +49,13 @@ module.exports = React.createClass({
   mixins: [Navigation],
 
   getInitialState: function() {
+    var query = cache.fetchQuery();
+
     return {
-      selectedPlaces: ['Fresh Groceries'],
-      selectedMode: 'walk',
+      selectedPlaces: query.places || ['Fresh Groceries'],
+      selectedMode: query.mode || 'walk',
+      startLocation: query.startLocation,
+      startAddress: query.startAddress,
       menus: [
         {
           name: 'Eat',
@@ -198,12 +203,14 @@ module.exports = React.createClass({
         startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way'
       };
 
+      cache.saveQuery(query);
+
       this.transitionTo('results', null, query);
     }.bind(this));
   },
 
   componentDidMount: function() {
-    if (navigator.geolocation) {
+    if (navigator.geolocation && !this.state.startAddress) {
       navigator.geolocation.getCurrentPosition(function(position) {
         $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
           access_token: config.mapboxToken
@@ -241,6 +248,7 @@ module.exports = React.createClass({
             <input
               ref="startAddress"
               type="text"
+              defaultValue={this.state.startAddress}
               placeholder="Enter a Palm Springs address"
               onBlur={this.validateStart.bind(this, this.handleValidationError)}
               onChange={this.clearStart} />
