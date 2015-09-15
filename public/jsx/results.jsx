@@ -17,7 +17,13 @@ var Place = React.createClass({
 
   renderDetails: function() {
     if (this.state.selected) {
-      return <div className="place-details">{this.props.place.street}<br />{he.decode(this.props.place.content)} <a href="#" className="place-link">Map & Directons &raquo;</a></div>
+      return (
+        <div className="place-details">
+          <img src={'http://visitpalmsprings.com' + this.props.place.thumbnail} className="place-thumbnail" />
+          {this.props.place.street}<br />
+          {he.decode(this.props.place.content)} <a href="#" className="place-link">Map & Directons &raquo;</a>
+        </div>
+      );
     }
   },
 
