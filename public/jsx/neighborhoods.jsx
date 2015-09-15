@@ -18,9 +18,7 @@ module.exports = React.createClass({
         <div className="section-content">
           <h1 className="page-title orange">Neighborhoods</h1>
         </div>
-        <div className="section-content">
-          <p>Tap any neighborhood for more information.</p>
-        </div>
+        <div className="section-instructions">Tap any neighborhood for more information.</div>
 
         <div id="map" className="neighborhood-map"></div>
 
