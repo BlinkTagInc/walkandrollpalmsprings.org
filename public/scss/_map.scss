@@ -10,3 +10,12 @@
     width: inherit;
   }
 }
+
+.neighborhood-map {
+  height: 360px;
+
+  .map-label {
+    color: $black;
+    text-align: center;
+  }
+}

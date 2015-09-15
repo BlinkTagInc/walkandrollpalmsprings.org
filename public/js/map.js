@@ -1,5 +1,6 @@
 var config = require('./config.js');
 var _ = require('underscore');
+var $ = require('jquery');
 require('mapbox.js');
 
 var map;
@@ -54,6 +55,48 @@ exports.drawMap = function(center, centerAddress) {
     .addTo(map);
 
   bounds = L.latLngBounds(center, center);
+};
+
+
+exports.drawNeighborhoodsMap = function() {
+  map = L.mapbox.map('map', 'mapbox.streets')
+    .setView([33.8163, -116.5453], 12);
+
+  var colors = ['#91D4BF', '#EE7458', '#F89A2C', '#FCF8CE'];
+  var labels = L.mapbox.featureLayer();
+
+  $.getJSON('/data/neighborhoods.geojson', function(data) {
+    var neighborhoods = L.geoJson(data, {
+      pointToLayer: L.mapbox.marker.style,
+      style: function() {
+        return {
+          fillColor: _.sample(colors),
+          fillOpacity: 0.9,
+          weight: 0
+        };
+      },
+      onEachFeature: function(feature, layer) {
+        var label = L.marker(layer.getBounds().getCenter(), {
+          icon: L.divIcon({
+            className: 'map-label',
+            html: feature.properties.NAME,
+            iconSize: [100, 40]
+          })
+        }).addTo(labels);
+      }
+
+    }).addTo(map);
+  });
+
+  map.on('zoomend', function() {
+    if (map.getZoom() > 13) {
+      map.addLayer(labels);
+    } else {
+      if(map.hasLayer(labels)) {
+        map.removeLayer(labels);
+      }
+    }
+  });
 };
 
 
