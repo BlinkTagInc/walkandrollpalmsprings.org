@@ -1,14 +1,6 @@
-.map-wrapper {
+.map {
   height: 230px;
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-
-  .map {
-    height: inherit;
-    width: inherit;
-  }
+  width: inherit;
 }
 
 .neighborhood-map {

@@ -1,6 +1,7 @@
 var config = require('./config.js');
 var _ = require('underscore');
 var $ = require('jquery');
+var polyline = require('polyline');
 require('mapbox.js');
 
 var map;
@@ -39,27 +40,78 @@ function formatPopup(location) {
 }
 
 
-exports.drawMap = function(center, centerAddress) {
-  map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {center: center, zoom: 13});
-  places.addTo(map);
+function getMode(mode) {
+  if(mode === 'walk') {
+    return google.maps.TravelMode.WALKING;
+  } else if(mode === 'bike') {
+    return google.maps.TravelMode.BICYCLING;
+  } else if(mode === 'transit') {
+    return google.maps.TravelMode.TRANSIT;
+  }
+}
+
+
+function getDirections(startLocation, endLocation, mode, cb) {
+  var directionsService = new google.maps.DirectionsService();
+
+  var request = {
+    origin: startLocation[0] + ',' + startLocation[1],
+    destination: endLocation[0] + ',' + endLocation[1],
+    travelMode: getMode(mode)
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      L.polyline(polyline.decode(result.routes[0].overview_polyline), {
+        color: '#18A071',
+        opacity: '0.9',
+        weight: 3
+      }).addTo(map);
+
+      cb(result);
+    }
+  });
+}
+
+
+exports.drawMap = function(startLocation, startAddress, endLocation, endAddress, mode, cb) {
+  bounds = L.latLngBounds(startLocation, endLocation);
+  map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {center: bounds.getCenter(), zoom: 14});
+
+  map.fitBounds(bounds, {padding: [10, 10]});
+
+  getDirections(startLocation, endLocation, mode, cb);
 
   var startIcon = L.icon({
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
-    popupAnchor: [0,-25],
+    iconSize: [30, 47],
+    iconAnchor: [15, 47],
+    popupAnchor: [0, -47],
     iconUrl: '/images/icon-start.png'
   });
 
-  L.marker(center, {title: 'Start Location', icon: startIcon})
-    .bindPopup(centerAddress)
+  var endIcon = L.icon({
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
+    popupAnchor: [0, -25],
+    iconUrl: '/images/icon-end.png'
+  });
+
+  L.marker(startLocation, {title: 'Start Location', icon: startIcon})
+    .bindPopup(startAddress)
     .addTo(map);
 
-  bounds = L.latLngBounds(center, center);
+  L.marker(endLocation, {title: 'End Location', icon: endIcon})
+    .bindPopup(endAddress)
+    .addTo(map);
+};
+
+
+exports.clearMap = function() {
+  map.remove();
 };
 
 
 exports.drawNeighborhoodsMap = function() {
-  map = L.mapbox.map('map', 'mapbox.streets')
+  map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6')
     .setView([33.8163, -116.5453], 12);
 
   var colors = ['#91D4BF', '#EE7458', '#F89A2C', '#FCF8CE'];
