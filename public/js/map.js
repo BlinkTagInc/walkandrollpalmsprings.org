@@ -77,7 +77,7 @@ exports.drawMap = function(startLocation, startAddress, endLocation, endAddress,
   bounds = L.latLngBounds(startLocation, endLocation);
   map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {center: bounds.getCenter(), zoom: 14});
 
-  map.fitBounds(bounds, {padding: [10, 10]});
+  map.fitBounds(bounds, {padding: [20, 20]});
 
   getDirections(startLocation, endLocation, mode, cb);
 
