@@ -48,7 +48,7 @@ exports.calculateCo2Saved = function(meters, mode) {
   var lbsCodePerMileDriving = lbsCo2PerGallon / mpg;
   var lbsCo2PerMileWalking = 0.039;
   var lbsCo2PerMileBiking = 0.017;
-  var lbsCo2PerMileTransit = 0.7;
+  var lbsCo2PerMileTransit = 0.18;
 
   var miles = exports.metersToMiles(meters);
 
