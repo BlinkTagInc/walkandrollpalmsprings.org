@@ -1,6 +1,6 @@
-var $ = require('jquery'),
-    _ = require('underscore'),
-    moment = require('moment-timezone');
+var $ = require('jquery');
+var _ = require('underscore');
+var moment = require('moment-timezone');
 
 
 exports.substringMatcher = function(strs) {

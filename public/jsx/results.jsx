@@ -1,8 +1,11 @@
 var React = require('react');
 var classNames = require('classnames');
+var _ = require('underscore');
 var ResultsList = require('./results_list.jsx');
 var SingleResult = require('./single_result.jsx');
-var places = require('../js/places.js');
+var map = require('../js/map');
+var places = require('../js/places');
+
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -11,6 +14,14 @@ module.exports = React.createClass({
       places: [],
       selectedPlace: null
     };
+  },
+
+  sortByDistance: function(places) {
+    var startLat = this.props.query.startLocation[0];
+    var startLon = this.props.query.startLocation[1];
+    return _.sortBy(places, function(place) {
+      return map.calculateDistanceMi(place.lat, place.lng, startLat, startLon);
+    });
   },
 
   selectMode: function(mode) {
@@ -47,7 +58,7 @@ module.exports = React.createClass({
       if (e) {
         console.error(e);
       }
-      this.setState({places: data});
+      this.setState({places: this.sortByDistance(data)});
     }.bind(this));
   }
 });

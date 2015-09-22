@@ -13,7 +13,7 @@ var bounds;
 L.mapbox.accessToken = config.mapboxToken;
 
 
-function calculateDistanceMi(lat1, lon1, lat2, lon2) {
+exports.calculateDistanceMi = function(lat1, lon1, lat2, lon2) {
   function toRadians(degree) {
     return (degree * (Math.PI / 180));
   }
@@ -182,7 +182,7 @@ exports.updateMap = function(locations) {
 exports.isNearPalmSprings = function(latlng) {
   var palmSprings = [33.8303, -116.5453];
   var maximumDistanceMi = 30;
-  return (calculateDistanceMi(latlng[0], latlng[1], palmSprings[0], palmSprings[1]) <= maximumDistanceMi);
+  return (exports.calculateDistanceMi(latlng[0], latlng[1], palmSprings[0], palmSprings[1]) <= maximumDistanceMi);
 };
 
 
