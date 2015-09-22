@@ -110,11 +110,11 @@ exports.clearMap = function() {
 };
 
 
-exports.drawNeighborhoodsMap = function() {
+exports.drawNeighborhoodsMap = function(selectNeighborhood) {
   map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6')
     .setView([33.8163, -116.5453], 12);
 
-  var colors = ['#91D4BF', '#EE7458', '#F89A2C', '#FCF8CE'];
+  var colors = ['#EE7458', '#F89A2C', '#FCF8CE'];
   var labels = L.mapbox.featureLayer();
 
   $.getJSON('/data/neighborhoods.geojson', function(data) {
@@ -124,7 +124,8 @@ exports.drawNeighborhoodsMap = function() {
         return {
           fillColor: _.sample(colors),
           fillOpacity: 0.9,
-          weight: 0
+          weight: 1,
+          color: '#000000'
         };
       },
       onEachFeature: function(feature, layer) {
@@ -135,6 +136,10 @@ exports.drawNeighborhoodsMap = function() {
             iconSize: [100, 40]
           })
         }).addTo(labels);
+
+        layer.on({click: function(e) {
+          selectNeighborhood(e.target);
+        }});
       }
 
     }).addTo(map);

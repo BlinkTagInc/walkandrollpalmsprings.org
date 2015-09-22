@@ -1,0 +1,14 @@
+.neighborhood-details {
+  background-color: $red;
+  color: $white;
+  padding: 10px 15px;
+  line-height: 24px;
+
+  label {
+    width: 75px;
+  }
+
+  a {
+    color: $white;
+  }
+}

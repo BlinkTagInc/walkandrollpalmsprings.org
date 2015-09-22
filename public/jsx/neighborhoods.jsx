@@ -9,6 +9,29 @@ module.exports = React.createClass({
     return {
     };
   },
+  getNeighborhoodDetail: function() {
+    if(this.state.selectedNeighborhood) {
+      var neighborhoodWebsite;
+      if(this.state.selectedNeighborhood.website) {
+        neighborhoodWebsite = (
+          <div className="neighborhood-detail">
+            <label>Website:</label>
+            <a href={this.state.selectedNeighborhood.website}>{this.state.selectedNeighborhood.website}</a>
+          </div>
+        );
+      }
+
+      return (
+        <div className="neighborhood-details">
+          <div className="neighborhood-detail">
+            <label>Name:</label>
+            <span>{this.state.selectedNeighborhood.name}</span>
+          </div>
+          {neighborhoodWebsite}
+        </div>
+      );
+    }
+  },
   render: function() {
     return (
       <div>
@@ -22,6 +45,8 @@ module.exports = React.createClass({
 
         <div id="map" className="neighborhood-map"></div>
 
+        {this.getNeighborhoodDetail()}
+
         <div className="section-header section-orange">
           <h3>About the Organized Neighborhoods of Palm Springs (ONE-PS)</h3>
         </div>
@@ -33,8 +58,15 @@ module.exports = React.createClass({
       </div>
     );
   },
+  selectNeighborhood: function(neighborhoodLayer) {
+    this.setState({
+      selectedNeighborhood: {
+        name: neighborhoodLayer.feature.properties.NAME,
+        website: neighborhoodLayer.feature.properties.WEBSITE
+      }
+    });
+  },
   componentDidMount: function() {
-    map.drawNeighborhoodsMap();
+    map.drawNeighborhoodsMap(this.selectNeighborhood);
   }
-
 });
