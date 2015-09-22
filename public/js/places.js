@@ -3,6 +3,7 @@ var $ = require('jquery');
 
 exports.getPlaces = function(category, cb) {
   var categoryIds = [];
+  var places = [];
 
   if (_.contains(category, 'Fresh Groceries')) {
     categoryIds.push(5073, 5084);
@@ -32,6 +33,36 @@ exports.getPlaces = function(category, cb) {
     categoryIds.push(5035, 190678, 190680, 190681, 5044, 190682, 5011, 185453, 96115, 13019, 5065, 5069, 12699, 5068, 12853, 12594, 5081, 5086);
   } else if(_.contains(category, 'For Kids')) {
     categoryIds.push(5033, 5046, 5048);
+  } else if(_.contains(category, 'Outdoor Markets')) {
+    places.push(
+      {
+        city: 'La Quinta',
+        content: 'On Sundays in Old Town La Quinta, from 8:00 am to 12:30 pm, at 78100 Main Street, just a few blocks west of La Quinta City Hall off Calle Tampico. For more information, visit http://certifiedfarmersmarket.org.',
+        lat: 33.677924,
+        lng: -116.302392,
+        street: '78100 Main Street',
+        title: 'La Quinta Farmer\'s Market',
+        websiteUrl: 'http://certifiedfarmersmarket.org'
+      },
+      {
+        city: 'Palm Desert',
+        content: 'On Wednesdays in Palm Desert, from 4:00pm to 8pm, at the Palm Desert Chamber of Commerce, 72-559 Highway 111. For more information, visit http://certifiedfarmersmarket.org.',
+        lat: 33.729862,
+        lng: -116.403492,
+        street: '72-559 Highway 111',
+        title: 'Palm Desert Farmer\'s Market',
+        websiteUrl: 'http://certifiedfarmersmarket.org'
+      },
+      {
+        city: 'Palm Springs',
+        content: 'On Saturdays in Palm Springs, from 8:00 am to 12:30 pm, adjacent to the Camelot Theatres in the Palm Springs Mall parking lot at 2300 E. Baristo Road at Farrell. For more information, visit http://certifiedfarmersmarket.org.',
+        lat: 33.819706,
+        lng: -116.521460,
+        street: '2300 E. Baristo Road',
+        title: 'Palm Springs Farmer\'s Market',
+        websiteUrl: 'http://certifiedfarmersmarket.org'
+      }
+    );
   }
 
 
@@ -41,7 +72,11 @@ exports.getPlaces = function(category, cb) {
     features: '(' + categoryIds.join(',') + ')'
   }).done(function(data) {
     if (data && data.d && data.d.items && data.d.items.length) {
-      cb(null, data.d.items);
+      var results = data.d.items.concat(places);
+
+      cb(null, results);
+    } else if(places) {
+      cb(null, places);
     } else {
       cb(new Error('Invalid Response'));
     }

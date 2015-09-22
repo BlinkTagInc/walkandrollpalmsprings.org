@@ -45,6 +45,14 @@ module.exports = React.createClass({
     });
   },
 
+  renderThumbnail: function() {
+    if(this.props.place.thumbnail) {
+      return (
+        <img src={'http://visitpalmsprings.com' + this.props.place.thumbnail} className="place-thumbnail" />
+      );
+    }
+  },
+
   render: function() {
     return (
       <div>
@@ -55,7 +63,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="place-details">
-          <img src={'http://visitpalmsprings.com' + this.props.place.thumbnail} className="place-thumbnail" />
+          {this.renderThumbnail()}
           <div className="place-description">
             {he.decode(this.props.place.content)}
           </div>
