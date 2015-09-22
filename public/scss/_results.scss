@@ -81,9 +81,23 @@
   color: $white;
   padding: 10px 15px;
   line-height: 24px;
+  position: relative;
 
   label {
     width: 75px;
+  }
+
+  .btn-use {
+    font-family:  'Cabin', 'Helvetica', sans-serif;
+    background: $green-dark;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+    color: $white;
+    line-height: 25px;
+    font-size: 18px;
+    height: 70px;
+    position: absolute;
+    top: -30px;
+    right: 30px;
   }
 }
 

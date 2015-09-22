@@ -40,7 +40,8 @@ module.exports = React.createClass({
       distance: helper.metersToMiles(leg.distance.value) + ' miles',
       time: helper.secondsToMinutes(leg.duration.value) + ' minutes',
       co2: helper.calculateCo2Saved(leg.distance.value, this.props.mode) + ' lbs. saved',
-      health: helper.calculateCalories(leg.distance.value, leg.duration.value, this.props.mode) + ' calories burned'
+      health: helper.calculateCalories(leg.distance.value, leg.duration.value, this.props.mode) + ' calories burned',
+      directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
     });
   },
 
@@ -78,6 +79,7 @@ module.exports = React.createClass({
             <label>Health:</label>
             <span>{this.state.health}</span>
           </div>
+          <a href={this.state.directionsUrl} className="btn btn-use">I will use<br /> this route!</a>
         </div>
       </div>
     );

@@ -78,3 +78,21 @@ exports.calculateCalories = function(meters, seconds, mode) {
     return Math.round(exports.secondsToMinutes(seconds) * 1);
   }
 };
+
+
+exports.formatDirectionsUrl = function(startAddress, endAddress, mode) {
+  var url = 'http://www.google.com/maps?ie=UTF8&f=d';
+
+  url += '&saddr=' + encodeURIComponent(startAddress);
+  url += '&daddr=' + encodeURIComponent(endAddress + ' near Palm Springs');
+
+  if(mode === 'transit') {
+    url += '&ttype=dep&dirflg=r';
+  } else if (mode === 'walk') {
+    url += '&dirflg=w';
+  } else if (mode === 'bike') {
+    url += '&dirflg=b';
+  }
+
+  return url;
+};
