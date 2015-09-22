@@ -113,14 +113,6 @@ module.exports = React.createClass({
     }.bind(this));
   },
 
-  renderModeMenu: function() {
-    return ['walk', 'bike', 'transit'].map(function(mode, idx) {
-      return (
-        <li value={mode} key={idx} className={classNames('mode', {selected: this.state.selectedMode === mode})} onClick={this.selectMode.bind(null, mode)}>{mode}</li>
-      );
-    }.bind(this));
-  },
-
   renderNeighborhoodName: function() {
     if(this.state.startNeighborhood) {
       return (
@@ -275,7 +267,17 @@ module.exports = React.createClass({
             <div className="instructions">Travel by:</div>
           </li>
           <li>
-            <ul className="mode-select">{this.renderModeMenu()}</ul>
+            <ul className="mode-select">
+              <li
+                className={classNames({selected: this.state.selectedMode === "walk"})}
+                onClick={this.selectMode.bind(null, "walk")}>Walk</li>
+              <li
+                className={classNames({selected: this.state.selectedMode === "bike"})}
+                onClick={this.selectMode.bind(null, "bike")}>Bike</li>
+              <li
+                className={classNames({selected: this.state.selectedMode === "transit"})}
+                onClick={this.selectMode.bind(null, "transit")}>Transit</li>
+            </ul>
           </li>
         </ul>
         <div onClick={this.doSearch} className="btn-search btn btn-teal btn-center">Search</div>
