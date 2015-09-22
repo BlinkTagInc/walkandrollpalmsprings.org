@@ -199,7 +199,9 @@ module.exports = React.createClass({
     }
   },
 
-  doSearch: function() {
+  doSearch: function(e) {
+    e.preventDefault();
+
     this.validateSearch(function(e) {
       if (e) {
         return this.handleValidationError(e);
@@ -243,44 +245,46 @@ module.exports = React.createClass({
         <div className="section-content">
           <h1 className="page-title teal">Search</h1>
         </div>
-        <ul className="search-menu">
-          <li>
-            <div className="instructions">Select One or More Destination</div>
-          </li>
-          <li>
-            <ul className="place-select">{this.renderPlaceMenu()}</ul>
-          </li>
-          <li>
-            <div className="instructions">Start Location</div>
-          </li>
-          <li className={classNames('start-address', {selected: !!this.state.startLocation})}>
-            <input
-              ref="startAddress"
-              type="text"
-              defaultValue={this.state.startAddress}
-              placeholder="Enter a Palm Springs address"
-              onBlur={this.validateStart.bind(this, this.handleValidationError)}
-              onChange={this.clearStart} />
-          </li>
-          {this.renderNeighborhoodName()}
-          <li>
-            <div className="instructions">Travel by:</div>
-          </li>
-          <li>
-            <ul className="mode-select">
-              <li
-                className={classNames({selected: this.state.selectedMode === "walk"})}
-                onClick={this.selectMode.bind(null, "walk")}>Walk</li>
-              <li
-                className={classNames({selected: this.state.selectedMode === "bike"})}
-                onClick={this.selectMode.bind(null, "bike")}>Bike</li>
-              <li
-                className={classNames({selected: this.state.selectedMode === "transit"})}
-                onClick={this.selectMode.bind(null, "transit")}>Transit</li>
-            </ul>
-          </li>
-        </ul>
-        <button onClick={this.doSearch} className="btn btn-teal btn-center btn-search">Search</button>
+        <form onSubmit={this.doSearch}>
+          <ul className="search-menu">
+            <li>
+              <div className="instructions">Select One or More Destination</div>
+            </li>
+            <li>
+              <ul className="place-select">{this.renderPlaceMenu()}</ul>
+            </li>
+            <li>
+              <div className="instructions">Start Location</div>
+            </li>
+            <li className={classNames('start-address', {selected: !!this.state.startLocation})}>
+              <input
+                ref="startAddress"
+                type="text"
+                defaultValue={this.state.startAddress}
+                placeholder="Enter a Palm Springs address"
+                onBlur={this.validateStart.bind(this, this.handleValidationError)}
+                onChange={this.clearStart} />
+            </li>
+            {this.renderNeighborhoodName()}
+            <li>
+              <div className="instructions">Travel by:</div>
+            </li>
+            <li>
+              <ul className="mode-select">
+                <li
+                  className={classNames({selected: this.state.selectedMode === "walk"})}
+                  onClick={this.selectMode.bind(null, "walk")}>Walk</li>
+                <li
+                  className={classNames({selected: this.state.selectedMode === "bike"})}
+                  onClick={this.selectMode.bind(null, "bike")}>Bike</li>
+                <li
+                  className={classNames({selected: this.state.selectedMode === "transit"})}
+                  onClick={this.selectMode.bind(null, "transit")}>Transit</li>
+              </ul>
+            </li>
+          </ul>
+          <input type="submit" className="btn btn-teal btn-center btn-search" value="Search" />
+        </form>
 
         <SiteMenu selected="search" color="teal" />
       </div>
