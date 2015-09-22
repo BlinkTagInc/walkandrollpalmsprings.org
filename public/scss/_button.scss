@@ -54,3 +54,13 @@
   margin-top: 2px;
   padding: 2px 0 5px;
 }
+
+.btn-white {
+  background: $white;
+  border: $black 1px solid;
+
+  &.active {
+    background: $black;
+    color: $white;
+  }
+}
