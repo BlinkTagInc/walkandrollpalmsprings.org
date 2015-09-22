@@ -280,7 +280,7 @@ module.exports = React.createClass({
             </ul>
           </li>
         </ul>
-        <div onClick={this.doSearch} className="btn-search btn btn-teal btn-center">Search</div>
+        <button onClick={this.doSearch} className="btn btn-teal btn-center btn-search">Search</button>
 
         <SiteMenu selected="search" color="teal" />
       </div>
