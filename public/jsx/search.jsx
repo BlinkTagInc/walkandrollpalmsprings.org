@@ -91,8 +91,7 @@ module.exports = React.createClass({
           items: [
             'Neighborhoods',
             'Civic Services',
-            'For Kids',
-            'Public Safety'
+            'For Kids'
           ]
         },
         {
