@@ -58,6 +58,7 @@ module.exports = React.createClass({
       </div>
     );
   },
+
   selectNeighborhood: function(neighborhoodLayer) {
     this.setState({
       selectedNeighborhood: {
@@ -66,6 +67,7 @@ module.exports = React.createClass({
       }
     });
   },
+  
   componentDidMount: function() {
     map.drawNeighborhoodsMap(this.selectNeighborhood);
   }

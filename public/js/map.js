@@ -2,6 +2,7 @@ var config = require('./config.js');
 var _ = require('underscore');
 var $ = require('jquery');
 var polyline = require('polyline');
+var leafletPip = require('leaflet-pip');
 require('mapbox.js');
 
 var map;
@@ -179,7 +180,18 @@ exports.updateMap = function(locations) {
 
 
 exports.isNearPalmSprings = function(latlng) {
-  var palmSprings = [33.8303,-116.5453];
+  var palmSprings = [33.8303, -116.5453];
   var maximumDistanceMi = 30;
   return (calculateDistanceMi(latlng[0], latlng[1], palmSprings[0], palmSprings[1]) <= maximumDistanceMi);
+};
+
+
+exports.neighborhoodFromPoint = function(lnglat, cb) {
+  $.getJSON('/data/neighborhoods.geojson', function(data) {
+    var neighborhoods = L.geoJson(data, {pointToLayer: L.mapbox.marker.style});
+
+    var layers = leafletPip.pointInLayer(lnglat, neighborhoods, true);
+
+    cb(null, layers.length ? layers[0] : null);
+  });
 };

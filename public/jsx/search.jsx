@@ -121,6 +121,16 @@ module.exports = React.createClass({
     }.bind(this));
   },
 
+  renderNeighborhoodName: function() {
+    if(this.state.startNeighborhood) {
+      return (
+        <li>
+          <div className="start-neighborhood">Neighborhood: {this.state.startNeighborhood}</div>
+        </li>
+      );
+    }
+  },
+
   toggleSelected: function(item) {
     if(_.contains(this.state.selectedPlaces, item)) {
       this.setState({selectedPlaces: _.without(this.state.selectedPlaces, item)});
@@ -165,6 +175,14 @@ module.exports = React.createClass({
             startLocation: latlng,
             startAddress: startAddress
           });
+
+          map.neighborhoodFromPoint([latlng[1], latlng[0]], function(e, layer) {
+            if(layer) {
+              this.setState({
+                startNeighborhood: layer.feature.properties.NAME
+              });
+            }
+          }.bind(this));
         } else {
           error = 'The address you entered was not in Palm Springs.';
         }
@@ -252,6 +270,7 @@ module.exports = React.createClass({
               onBlur={this.validateStart.bind(this, this.handleValidationError)}
               onChange={this.clearStart} />
           </li>
+          {this.renderNeighborhoodName()}
           <li>
             <div className="instructions">Travel by:</div>
           </li>
