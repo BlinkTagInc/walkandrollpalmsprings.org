@@ -17,6 +17,7 @@ require('typeahead.js');
 ReactDOM.render((
   <Router history={createBrowserHistory()}>
     <Route path="/" component={Welcome} />
+    <Route path="about" component={About}/>
     <Route path="search" component={Search}/>
     <Route path="results" component={Results}/>
     <Route path="neighborhoods" component={Neighborhoods}/>

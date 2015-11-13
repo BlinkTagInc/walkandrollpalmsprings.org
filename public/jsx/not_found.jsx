@@ -11,7 +11,7 @@ module.exports = class NotFound extends React.Component {
         </div>
         <div className="section-content">
           <p>This page could not be found.</p>
-          <Link to="home">Walk and Roll: Palm Springs Home</Link>
+          <Link to="/">Walk and Roll: Palm Springs Home</Link>
         </div>
       </div>
     );
