@@ -54,7 +54,7 @@
     "watchify": "3.6.0"
   },
   "engines": {
-    "node": "0.12.x"
+    "node": "5.0.x"
   },
   "private": true,
   "scripts": {
