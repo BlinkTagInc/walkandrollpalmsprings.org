@@ -1,5 +1,6 @@
 var React = require('react');
 var classNames = require('classnames');
+var _ = require('underscore');
 import { Link } from 'react-router'
 var SiteMenu = require('./site_menu.jsx');
 var ModeMenu = require('./mode_menu.jsx');
@@ -28,8 +29,22 @@ module.exports = class ResultsList extends React.Component {
     super(props);
   }
 
+  filterPlacesByMode() {
+    return _.filter(this.props.places, (place) => {
+      let maxDistance;
+      if(this.props.mode === 'walk') {
+        maxDistance = 1;
+      } else if (this.props.mode === 'bike') {
+        maxDistance = 3;
+      } else if (this.props.mode === 'transit') {
+        maxDistance = 10;
+      }
+      return place.distance <= maxDistance;
+    });
+  }
+
   renderResultList() {
-    return this.props.places.map(function(place, key) {
+    return this.filterPlacesByMode().map(function(place, key) {
       return (
         <Place className="place" key={key} number={key+1} place={place} selectPlace={this.props.selectPlace} />
       );

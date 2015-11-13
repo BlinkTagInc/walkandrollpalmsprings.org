@@ -29,8 +29,9 @@ module.exports = class Results extends React.Component {
   sortByDistance(places) {
     var startLat = this.props.location.query.startLocation[0];
     var startLon = this.props.location.query.startLocation[1];
-    return _.sortBy(places, function(place) {
-      return map.calculateDistanceMi(place.lat, place.lng, startLat, startLon);
+    return _.sortBy(places, (place) => {
+      place.distance = map.calculateDistanceMi(place.lat, place.lng, startLat, startLon);
+      return place.distance;
     });
   }
 
