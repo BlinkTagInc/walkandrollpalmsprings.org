@@ -124,9 +124,10 @@ exports.drawNeighborhoodsMap = function(selectNeighborhood) {
       style: function() {
         return {
           fillColor: _.sample(colors),
-          fillOpacity: 0.9,
+          fillOpacity: 0.5,
           weight: 1,
-          color: '#000000'
+          color: '#000000',
+          stroke: 0
         };
       },
       onEachFeature: function(feature, layer) {
