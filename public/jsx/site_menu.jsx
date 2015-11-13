@@ -6,11 +6,11 @@ module.exports = class SiteMenu extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     return (
       <div className={classNames('site-menu', this.props.color)}>
-        <Link to="home" className={classNames({selected: this.props.selected === 'home'})}>Home</Link>
+        <Link to="/" className={classNames({selected: this.props.selected === 'home'})}>Home</Link>
         <Link to="search" className={classNames({selected: this.props.selected === 'search'})}>Search</Link>
         <Link to="neighborhoods" className={classNames({selected: this.props.selected === 'neighborhoods'})}>Neighborhoods</Link>
         <Link to="leaderboard" className={classNames({selected: this.props.selected === 'leaderboard'})}>Leaderboard</Link>
