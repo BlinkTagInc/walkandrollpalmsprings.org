@@ -3,11 +3,26 @@ var _ = require('underscore');
 var $ = require('jquery');
 var polyline = require('polyline');
 var leafletPip = require('leaflet-pip');
+var omnivore = require('leaflet-omnivore');
 require('mapbox.js');
 
 var map;
 var places = L.featureGroup();
 var bounds;
+
+var startIcon = L.icon({
+  iconSize: [30, 47],
+  iconAnchor: [15, 47],
+  popupAnchor: [0, -47],
+  iconUrl: '/images/icon-start.png'
+});
+
+var endIcon = L.icon({
+  iconSize: [50, 50],
+  iconAnchor: [25, 25],
+  popupAnchor: [0, -25],
+  iconUrl: '/images/icon-end.png'
+});
 
 // Setup mapbox
 L.mapbox.accessToken = config.mapboxToken;
@@ -82,26 +97,49 @@ exports.drawMap = function(startLocation, startAddress, endLocation, endAddress,
 
   getDirections(startLocation, endLocation, mode, cb);
 
-  var startIcon = L.icon({
-    iconSize: [30, 47],
-    iconAnchor: [15, 47],
-    popupAnchor: [0, -47],
-    iconUrl: '/images/icon-start.png'
-  });
-
-  var endIcon = L.icon({
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
-    popupAnchor: [0, -25],
-    iconUrl: '/images/icon-end.png'
-  });
-
   L.marker(startLocation, {title: 'Start Location', icon: startIcon})
     .bindPopup(startAddress)
     .addTo(map);
 
   L.marker(endLocation, {title: 'End Location', icon: endIcon})
     .bindPopup(endAddress)
+    .addTo(map);
+};
+
+
+exports.drawKML = function(filename) {
+  var startFound = false;
+  var customLayer = L.geoJson(null, {
+    pointToLayer: function(feature, latlng) {
+      if(feature.properties.name.indexOf('Mile') === -1) {
+        if(!startFound) {
+          startFound = true;
+          return L.marker(latlng, {title: 'Start Location', icon: startIcon});
+        } else {
+          return L.marker(latlng, {title: 'End Location', icon: endIcon});
+        }
+      } else {
+        return L.circleMarker(latlng, {
+          radius: 0
+        });
+      }
+    },
+    style: (feature) => {
+      if(feature.geometry.type === 'LineString') {
+        return {
+          color: '#18A071',
+          opacity: '0.9',
+          weight: 3
+        };
+      }
+    }
+  });
+  map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {zoom: 14});
+
+  var layer = omnivore.kml(`/data/${filename}`, null, customLayer)
+    .on('ready', function() {
+      map.fitBounds(layer.getBounds());
+    })
     .addTo(map);
 };
 

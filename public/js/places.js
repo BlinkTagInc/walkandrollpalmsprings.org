@@ -56,7 +56,8 @@ exports.getPlaces = function(categories, cb) {
         lng: -116.302392,
         street: '78100 Main Street',
         title: 'La Quinta Farmer\'s Market',
-        websiteUrl: 'http://certifiedfarmersmarket.org'
+        websiteUrl: 'http://certifiedfarmersmarket.org',
+        ignoreDistance: true
       },
       {
         city: 'Palm Desert',
@@ -65,7 +66,8 @@ exports.getPlaces = function(categories, cb) {
         lng: -116.403492,
         street: '72-559 Highway 111',
         title: 'Palm Desert Farmer\'s Market',
-        websiteUrl: 'http://certifiedfarmersmarket.org'
+        websiteUrl: 'http://certifiedfarmersmarket.org',
+        ignoreDistance: true
       },
       {
         city: 'Palm Springs',
@@ -74,7 +76,80 @@ exports.getPlaces = function(categories, cb) {
         lng: -116.521460,
         street: '2300 E. Baristo Road',
         title: 'Palm Springs Farmer\'s Market',
-        websiteUrl: 'http://certifiedfarmersmarket.org'
+        websiteUrl: 'http://certifiedfarmersmarket.org',
+        ignoreDistance: true
+      }
+    );
+  }
+  if(_.contains(categories, 'Running & Walking')) {
+    places.push(
+      {
+        city: 'Palm Springs',
+        content: 'This is a 9.24 mi route in Palm Springs, CA, United States. The route has a total ascent of 2289 ft and has a maximum elevation of 10,687 ft.',
+        lat: 33.812661,
+        lng: -116.640053,
+        street: 'Mt. Jacinto Peak',
+        title: 'Mt. Jacinto Peak via Tramway',
+        websiteUrl: 'http://www.mapmyride.com/routes/view/876625939',
+        kml: 'mtjacinto.kml',
+        routeDistance: 9.24,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: '13 mi hike SJP via Skyline Trail - Lykken Trail - Ramon Rd.',
+        lat: 33.815889155,
+        lng: -116.555993557,
+        title: 'Skyline (Flat rock to Grubbs notch)',
+        websiteUrl: 'http://www.mapmyride.com/routes/view/882509147',
+        kml: 'skyline.kml',
+        routeDistance: 13,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'This is a 10 mi Walk/Run circling Palm Springs. It has a total ascent of 361 ft and has a maximum elevation of 618 ft.',
+        lat: 33.828134,
+        lng: -116.517391,
+        title: 'Palm Springs Circle Tour',
+        websiteUrl: 'http://www.mapmyride.com/us/palm-springs-ca/10-03-mi-run-in-palm-springs-on-oct-21-2-route-147739787',
+        kml: 'circle.kml',
+        routeDistance: 10,
+        ignoreDistance: true
+      }
+    );
+  }
+  if(_.contains(categories, 'Bike Routes')) {
+    places.push(
+      {
+        city: 'Palm Springs',
+        content: 'This is a 28 mi route in Palm Springs, CA, United States. The route has a total ascent of 454 ft and has a maximum elevation of 474 ft.',
+        street: 'Palm Canyon Drive',
+        title: 'Ride To the River',
+        websiteUrl: 'http://www.mapmyride.com/routes/view/673616458',
+        kml: 'totheriver.kml',
+        routeDistance: 28.39,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'This is a 18 mi route in Palm Springs, CA, United States. The route has a total ascent of 415 ft and has a maximum elevation of 600 ft.',
+        street: 'Palm Canyon Drive',
+        title: 'City Loop',
+        websiteUrl: 'http://www.mapmyride.com/routes/view/673616458',
+        kml: 'cityloop.kml',
+        routeDistance: 18.34,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'This is a 19 mi route in Palm Springs, CA, United States. The route has a total ascent of 771 ft and has a maximum elevation of 815 ft.',
+        street: 'Palm Canyon Drive',
+        title: 'City Spin with Belardo Climb',
+        websiteUrl: 'http://www.mapmyride.com/routes/view/627557348',
+        kml: 'cityspinwithbelardoclimb.kml',
+        routeDistance: 19.33,
+        ignoreDistance: true
       }
     );
   }

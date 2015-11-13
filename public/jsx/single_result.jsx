@@ -10,41 +10,44 @@ module.exports = class SingleResult extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      currentMode: this.props.mode
+    };
 
-    this.updateDirections = (result) => {
+    this.calculateTripStatsFromGoogleDirections = (result) => {
       if(!result || !result.routes || !result.routes.length || !result.routes[0].legs || !result.routes[0].legs.length) {
         this.setState({
           distance: null,
           time: null,
           co2: null,
-          health: null
+          calories: null
         });
         return;
       }
 
       var leg = result.routes[0].legs[0];
+      var miles = helpers.metersToMiles(leg.distance.value);
 
       this.setState({
-        distance: helper.metersToMiles(leg.distance.value) + ' miles',
+        distance: miles + ' miles',
         time: helper.secondsToMinutes(leg.duration.value) + ' minutes',
-        co2: helper.calculateCo2Saved(leg.distance.value, this.props.mode) + ' lbs. saved',
-        health: helper.calculateCalories(leg.distance.value, leg.duration.value, this.props.mode) + ' calories burned',
+        co2: helper.calculateCo2Saved(miles, this.props.mode) + ' lbs. saved',
+        calories: helper.calculateCalories(miles, this.props.mode) + ' calories burned',
         directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
       });
     };
 
     this.selectMode = (mode) => {
       this.props.selectMode(mode);
-
-      map.clearMap();
-
-      var startCoords = this.props.query.startLocation;
-      var startAddress = this.props.query.startAddress;
-      var endCoords = [this.props.place.lat, this.props.place.lng];
-      var endAddress = this.props.place.street;
-      map.drawMap(startCoords, startAddress, endCoords, endAddress, mode, this.updateDirections);
     };
+  }
+
+  calculateTripStatsFromDistance(miles) {
+    this.setState({
+      distance: miles.toFixed(1) + ' miles',
+      calories: helper.calculateCalories(miles, this.props.mode) + ' calories burned',
+      directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
+    });
   }
 
   renderThumbnail() {
@@ -55,7 +58,43 @@ module.exports = class SingleResult extends React.Component {
     }
   }
 
+  updateMap() {
+    if(this.props.place.kml) {
+      map.drawKML(this.props.place.kml);
+
+      this.calculateTripStatsFromDistance(this.props.place.routeDistance);
+    } else {
+      var startCoords = this.props.query.startLocation;
+      var startAddress = this.props.query.startAddress;
+      var endCoords = [this.props.place.lat, this.props.place.lng];
+      var endAddress = this.props.place.street;
+      map.drawMap(startCoords, startAddress, endCoords, endAddress, this.props.mode, this.updateDirections);
+    }
+  }
+
   render() {
+    let time;
+    let co2;
+
+    if(this.state.time) {
+      time = (
+        <div className="route-detail">
+          <label>Time:</label>
+          <span>{this.state.time}</span>
+        </div>
+      );
+    }
+
+    if(this.state.co2) {
+      co2 = (
+        <div className="route-detail">
+          <label>CO2:</label>
+          <span>{this.state.co2}</span>
+        </div>
+      );
+    }
+
+
     return (
       <div>
         <div className="section-header section-teal" ref="sectionHeader">
@@ -77,17 +116,11 @@ module.exports = class SingleResult extends React.Component {
             <label>Distance:</label>
             <span>{this.state.distance}</span>
           </div>
-          <div className="route-detail">
-            <label>Time:</label>
-            <span>{this.state.time}</span>
-          </div>
-          <div className="route-detail">
-            <label>CO2:</label>
-            <span>{this.state.co2}</span>
-          </div>
+          {time}
+          {co2}
           <div className="route-detail">
             <label>Health:</label>
-            <span>{this.state.health}</span>
+            <span>{this.state.calories}</span>
           </div>
           <a href={this.state.directionsUrl} className="btn btn-use">I will use<br /> this route!</a>
         </div>
@@ -96,10 +129,14 @@ module.exports = class SingleResult extends React.Component {
   }
 
   componentDidMount() {
-    var startCoords = this.props.query.startLocation;
-    var startAddress = this.props.query.startAddress;
-    var endCoords = [this.props.place.lat, this.props.place.lng];
-    var endAddress = this.props.place.street;
-    map.drawMap(startCoords, startAddress, endCoords, endAddress, this.props.mode, this.updateDirections);
+    this.updateMap();
+  }
+
+  componentDidUpdate() {
+    if(this.state.currentMode !== this.props.mode) {
+      this.setState({currentMode: this.props.mode});
+      map.clearMap();
+      this.updateMap();
+    }
   }
 };

@@ -37,7 +37,7 @@ exports.secondsToMinutes = function(seconds) {
 };
 
 
-exports.calculateCo2Saved = function(meters, mode) {
+exports.calculateCo2Saved = function(miles, mode) {
   // Sources:
   // http://www.epa.gov/cleanenergy/energy-resources/refs.html
   // http://www.co2list.org/files/carbon.htm
@@ -50,8 +50,6 @@ exports.calculateCo2Saved = function(meters, mode) {
   var lbsCo2PerMileBiking = 0.017;
   var lbsCo2PerMileTransit = 0.18;
 
-  var miles = exports.metersToMiles(meters);
-
   if(mode === 'walk') {
     return Math.round(miles * (lbsCodePerMileDriving - lbsCo2PerMileWalking));
   } else if(mode === 'bike') {
@@ -62,7 +60,7 @@ exports.calculateCo2Saved = function(meters, mode) {
 };
 
 
-exports.calculateCalories = function(meters, seconds, mode) {
+exports.calculateCalories = function(miles, mode) {
   // Sources:
   // http://www.runnersworld.com/peak-performance/running-v-walking-how-many-calories-will-you-burn
   // http://www.livestrong.com/article/135430-calories-burned-biking-one-mile/
@@ -71,11 +69,11 @@ exports.calculateCalories = function(meters, seconds, mode) {
   var calsPerMileBiking = 47;
 
   if(mode === 'walk') {
-    return Math.round(exports.metersToMiles(meters) * calsPerMileWalking);
+    return Math.round(miles * calsPerMileWalking);
   } else if(mode === 'bike') {
-    return Math.round(exports.metersToMiles(meters) * calsPerMileBiking);
+    return Math.round(miles * calsPerMileBiking);
   } else if(mode === 'transit') {
-    return Math.round(exports.secondsToMinutes(seconds) * 1);
+    return 0;
   }
 };
 

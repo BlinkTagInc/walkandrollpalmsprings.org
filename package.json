@@ -31,6 +31,7 @@
     "history": "1.13.0",
     "jade": "1.11.0",
     "jquery": "2.1.4",
+    "leaflet-omnivore": "0.3.2",
     "leaflet-pip": "0.1.1",
     "mapbox.js": "2.2.3",
     "moment-timezone": "0.4.1",

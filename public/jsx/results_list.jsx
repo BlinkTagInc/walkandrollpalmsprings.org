@@ -39,7 +39,7 @@ module.exports = class ResultsList extends React.Component {
       } else if (this.props.mode === 'transit') {
         maxDistance = 10;
       }
-      return place.distance <= maxDistance;
+      return place.ignoreDistance || place.distance <= maxDistance;
     });
   }
 
