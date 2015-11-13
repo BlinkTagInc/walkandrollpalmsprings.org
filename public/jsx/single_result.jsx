@@ -1,6 +1,8 @@
 var React = require('react');
+var Linkify = require('react-linkify');
 var classNames = require('classnames');
 var ModeMenu = require('./mode_menu.jsx');
+var SiteMenu = require('./site_menu.jsx');
 var he = require('he');
 var helper = require('../js/helper.js');
 var map = require('../js/map.js');
@@ -106,7 +108,7 @@ module.exports = class SingleResult extends React.Component {
         <div className="place-details">
           {this.renderThumbnail()}
           <div className="place-description">
-            {he.decode(this.props.place.content)}
+            <Linkify>{he.decode(this.props.place.content)}</Linkify>
           </div>
           <div id="map" className="map"></div>
         </div>
@@ -122,8 +124,9 @@ module.exports = class SingleResult extends React.Component {
             <label>Health:</label>
             <span>{this.state.calories}</span>
           </div>
-          <a href={this.state.directionsUrl} className="btn btn-use">I will use<br /> this route!</a>
+          <a href={this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
         </div>
+        <SiteMenu selected="search" color="teal" />
       </div>
     );
   }
