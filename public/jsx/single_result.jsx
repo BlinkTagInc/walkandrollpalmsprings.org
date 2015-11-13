@@ -28,13 +28,15 @@ module.exports = class SingleResult extends React.Component {
       }
 
       var leg = result.routes[0].legs[0];
-      var miles = helpers.metersToMiles(leg.distance.value);
+      var miles = helper.metersToMiles(leg.distance.value);
+      var co2 = helper.calculateCo2Saved(miles, this.props.mode);
+      var calories = helper.calculateCalories(miles, this.props.mode);
 
       this.setState({
         distance: miles + ' miles',
         time: helper.secondsToMinutes(leg.duration.value) + ' minutes',
-        co2: helper.calculateCo2Saved(miles, this.props.mode) + ' lbs. saved',
-        calories: helper.calculateCalories(miles, this.props.mode) + ' calories burned',
+        co2: co2 ? co2 + ' lbs. saved' : null,
+        calories: calories ? calories + ' calories burned' : null,
         directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
       });
     };
@@ -70,13 +72,14 @@ module.exports = class SingleResult extends React.Component {
       var startAddress = this.props.query.startAddress;
       var endCoords = [this.props.place.lat, this.props.place.lng];
       var endAddress = this.props.place.street;
-      map.drawMap(startCoords, startAddress, endCoords, endAddress, this.props.mode, this.updateDirections);
+      map.drawMap(startCoords, startAddress, endCoords, endAddress, this.props.mode, this.calculateTripStatsFromGoogleDirections);
     }
   }
 
   render() {
     let time;
     let co2;
+    let calories;
 
     if(this.state.time) {
       time = (
@@ -92,6 +95,15 @@ module.exports = class SingleResult extends React.Component {
         <div className="route-detail">
           <label>CO2:</label>
           <span>{this.state.co2}</span>
+        </div>
+      );
+    }
+
+    if(this.state.calories) {
+      calories = (
+        <div className="route-detail">
+          <label>Health:</label>
+          <span>{this.state.calories}</span>
         </div>
       );
     }
@@ -120,10 +132,7 @@ module.exports = class SingleResult extends React.Component {
           </div>
           {time}
           {co2}
-          <div className="route-detail">
-            <label>Health:</label>
-            <span>{this.state.calories}</span>
-          </div>
+          {calories}
           <a href={this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
         </div>
         <SiteMenu selected="search" color="teal" />

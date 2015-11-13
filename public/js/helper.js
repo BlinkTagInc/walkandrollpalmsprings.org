@@ -39,23 +39,20 @@ exports.secondsToMinutes = function(seconds) {
 
 exports.calculateCo2Saved = function(miles, mode) {
   // Sources:
-  // http://www.epa.gov/cleanenergy/energy-resources/refs.html
-  // http://www.co2list.org/files/carbon.htm
-  // http://www.buses.org/files/ComparativeEnergy.pdf
+  // http://www.epa.gov/otaq/climate/documents/420f14040a.pdf
+  // http://www.cdc.gov/healthyweight/physical_activity
+  // 411 grams per mile figure from the EPA, and the 29/80 calories per mile for biking/walking from the CDC.
 
-  var mpg = 21.4;
-  var lbsCo2PerGallon = 19.5925;
-  var lbsCodePerMileDriving = lbsCo2PerGallon / mpg;
+  var lbsCodePerMileDriving = 0.9061;
   var lbsCo2PerMileWalking = 0.039;
   var lbsCo2PerMileBiking = 0.017;
-  var lbsCo2PerMileTransit = 0.18;
 
   if(mode === 'walk') {
     return Math.round(miles * (lbsCodePerMileDriving - lbsCo2PerMileWalking));
   } else if(mode === 'bike') {
     return Math.round(miles * (lbsCodePerMileDriving - lbsCo2PerMileBiking));
   } else if(mode === 'transit') {
-    return Math.round(miles * (lbsCodePerMileDriving - lbsCo2PerMileTransit));
+    return null;
   }
 };
 
@@ -65,15 +62,15 @@ exports.calculateCalories = function(miles, mode) {
   // http://www.runnersworld.com/peak-performance/running-v-walking-how-many-calories-will-you-burn
   // http://www.livestrong.com/article/135430-calories-burned-biking-one-mile/
 
-  var calsPerMileWalking = 88.9;
-  var calsPerMileBiking = 47;
+  var calsPerMileWalking = 80;
+  var calsPerMileBiking = 29;
 
   if(mode === 'walk') {
     return Math.round(miles * calsPerMileWalking);
   } else if(mode === 'bike') {
     return Math.round(miles * calsPerMileBiking);
   } else if(mode === 'transit') {
-    return 0;
+    return null;
   }
 };
 
