@@ -12,17 +12,18 @@
 
 .welcome-description {
   background: $teal;
-  border-radius: 150px;
+  border-radius: 140px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   color: $white;
   font-size: 20px;
-  height: 300px;
+  height: 280px;
   line-height: 31px;
-  margin: 10px auto;
-  padding-top: 35px;
+  margin: 20px auto 0;
+  padding-top: 80px;
   position: relative;
   text-align: center;
-  width: 300px;
+  width: 280px;
+  top: -40px;
   z-index: 2;
 }
 
@@ -30,11 +31,21 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   display: block;
   font-family: CocktailShaker;
-  margin: -120px auto 35px;
+  margin: 34px auto 35px;
   position: relative;
   text-align: center;
   width: 200px;
   z-index: 3;
+}
+
+.welcome-logo {
+  background: url("../images/city-of-palm-springs-logo.png") 0 0 no-repeat;
+  background-size: 100px 100px;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  width: 100px;
+  height: 100px;
 }
 
 @media only screen and (min-width: 330px)  {
@@ -47,5 +58,9 @@
   .welcome-title {
     background-image: url("../images/header-trees@2x.png");
     background-size: 320px 200px;
+  }
+
+  .welcome-logo {
+    background-image: url("../images/city-of-palm-springs-logo@2x.png");
   }
 }
