@@ -104,8 +104,7 @@ module.exports = class Search extends React.Component {
           items: [
             'Running & Walking',
             'Bike Routes',
-            'Transit Stops',
-            'Electric Vehicle Stations'
+            'Transit Stops'
           ]
         }
       ]
