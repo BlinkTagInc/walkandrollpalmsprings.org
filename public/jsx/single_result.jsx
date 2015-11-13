@@ -133,7 +133,7 @@ module.exports = class SingleResult extends React.Component {
           {time}
           {co2}
           {calories}
-          <a href={this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
+          <a href={this.props.place.directionsUrl || this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
         </div>
         <SiteMenu selected="search" color="teal" />
       </div>
