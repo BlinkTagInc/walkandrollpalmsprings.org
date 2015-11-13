@@ -1,9 +1,13 @@
 var React = require('react');
-var Link = require('react-router').Link;
+import { Link } from 'react-router'
 var SiteMenu = require('./site_menu.jsx');
 
-module.exports = React.createClass({
-  render: function() {
+module.exports = class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
     return (
       <div className="content background-tan">
         <h1 className="welcome-title">Walk and Roll:<br/> Palm Springs</h1>
@@ -13,4 +17,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

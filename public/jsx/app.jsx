@@ -1,6 +1,7 @@
 var React = require('react');
-var Router = require('react-router');
-var { Route, RouteHandler, Link, DefaultRoute, NotFoundRoute } = Router;
+var ReactDOM = require('react-dom');
+import { Router, Route, Link } from 'react-router'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 var helper = require('../js/helper');
 
 var Search = require('./search.jsx');
@@ -13,33 +14,13 @@ var NotFound = require('./not_found.jsx');
 
 require('typeahead.js');
 
-
-var App = React.createClass({
-
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
-  render: function () {
-    return (
-      <RouteHandler/>
-    );
-  }
-});
-
-var routes = (
-  <Route handler={App}>
-    <DefaultRoute name="home" handler={Welcome} />
-    <Route name="search" handler={Search} />
-    <Route name="results" handler={Results} />
-    <Route name="neighborhoods" handler={Neighborhoods} />
-    <Route name="leaderboard" handler={Leaderboard} />
-    <Route name="about" handler={About} />
-
-    <NotFoundRoute handler={NotFound} />
-  </Route>
-);
-
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('app'));
-});
+ReactDOM.render((
+  <Router history={createBrowserHistory()}>
+    <Route path="/" component={Welcome} />
+    <Route path="search" component={Search}/>
+    <Route path="results" component={Results}/>
+    <Route path="neighborhoods" component={Neighborhoods}/>
+    <Route path="leaderboard" component={Leaderboard}/>
+    <Route path="*" component={NotFound}/>
+  </Router>
+), document.getElementById('app'));

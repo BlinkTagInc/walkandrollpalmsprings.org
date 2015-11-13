@@ -1,9 +1,8 @@
 var React = require('react');
-var Router = require('react-router');
-var { Link } = Router;
+import { Link } from 'react-router'
 
-module.exports = React.createClass({
-  render: function() {
+module.exports = class NotFound extends React.Component {
+  render() {
     return (
       <div>
         <div className="section-header section-red">
@@ -17,4 +16,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

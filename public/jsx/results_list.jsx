@@ -1,33 +1,42 @@
 var React = require('react');
 var classNames = require('classnames');
-var Router = require('react-router');
-var { Link } = Router;
+import { Link } from 'react-router'
 var SiteMenu = require('./site_menu.jsx');
 var ModeMenu = require('./mode_menu.jsx');
 
-var Place = React.createClass({
-  render: function() {
+class Place extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleSelected = () => {
+      this.props.selectPlace(this.props.place);
+    };
+  }
+
+  render() {
     return (
       <div className="place" onClick={this.toggleSelected}>
         <div className="place-title">{this.props.number}. {this.props.place.title}</div>
       </div>
     );
-  },
-
-  toggleSelected: function() {
-    this.props.selectPlace(this.props.place);
   }
-});
+}
 
 
-module.exports = React.createClass({
-  renderResultList: function() {
+module.exports = class ResultsList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  renderResultList() {
     return this.props.places.map(function(place, key) {
-      return <Place className="place" key={key} number={key+1} place={place} selectPlace={this.props.selectPlace} />
+      return (
+        <Place className="place" key={key} number={key+1} place={place} selectPlace={this.props.selectPlace} />
+      );
     }.bind(this));
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <div className="section-header section-teal" ref="sectionHeader">
@@ -47,4 +56,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

@@ -1,15 +1,16 @@
 var React = require('react');
-var Router = require('react-router');
-var { Link } = Router;
+import { Link } from 'react-router'
 var SiteMenu = require('./site_menu.jsx');
 var map = require('../js/map.js');
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-    };
-  },
-  getNeighborhoodDetail: function() {
+module.exports = class Neighborhoods extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  getNeighborhoodDetail() {
     if(this.state.selectedNeighborhood) {
       var neighborhoodWebsite;
       if(this.state.selectedNeighborhood.website) {
@@ -31,8 +32,9 @@ module.exports = React.createClass({
         </div>
       );
     }
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div>
         <div className="section-header section-orange">
@@ -57,18 +59,18 @@ module.exports = React.createClass({
         <SiteMenu selected="neighborhoods" color="orange" />
       </div>
     );
-  },
+  }
 
-  selectNeighborhood: function(neighborhoodLayer) {
+  selectNeighborhood(neighborhoodLayer) {
     this.setState({
       selectedNeighborhood: {
         name: neighborhoodLayer.feature.properties.NAME,
         website: neighborhoodLayer.feature.properties.WEBSITE
       }
     });
-  },
-  
-  componentDidMount: function() {
-    map.drawNeighborhoodsMap(this.selectNeighborhood);
   }
-});
+
+  componentDidMount() {
+    map.drawNeighborhoodsMap(this.selectNeighborhood.bind(this));
+  }
+};

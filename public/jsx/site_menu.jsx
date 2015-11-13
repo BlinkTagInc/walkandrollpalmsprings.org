@@ -1,9 +1,13 @@
 var React = require('react');
-var Link = require('react-router').Link;
+import { Link } from 'react-router'
 var classNames = require('classnames');
 
-module.exports = React.createClass({
-  render: function() {
+module.exports = class SiteMenu extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
     return (
       <div className={classNames('site-menu', this.props.color)}>
         <Link to="home" className={classNames({selected: this.props.selected === 'home'})}>Home</Link>
@@ -14,4 +18,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

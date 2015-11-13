@@ -1,12 +1,15 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
+var babelify = require('babelify');
 var watchify = require('watchify');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var plugins = require('gulp-load-plugins')();
 
 
-var bundler = watchify(browserify('./public/js/index.js', watchify.args).transform(reactify, {stripTypes: true, es6: true}));
+var bundler = watchify(browserify('./public/js/index.js', watchify.args)
+  .transform(babelify, {presets: ['es2015', 'react']})
+  .transform(reactify));
 bundler.on('update', bundle);
 bundler.on('log', plugins.util.log);
 
@@ -70,7 +73,8 @@ gulp.task('js:develop', ['jshint'], function() {
 
 gulp.task('js:compress', function() {
   var bundleStream = browserify('./public/js/index.js')
-    .transform(reactify, {stripTypes: true, es6: true})
+    .transform(babelify, {presets: ['es2015', 'react']})
+    .transform(reactify)
     .bundle();
 
   bundleStream
@@ -117,7 +121,7 @@ gulp.task('develop', function() {
 
   gulp.watch('public/**/*.scss', ['scss:develop']);
 
-  gulp.watch('public/**/*.+(js|jsx)', ['js:develop']);
+  gulp.watch('public/**/!(dest)/**/*.+(jsx|js)', ['js:develop']);
 });
 
 

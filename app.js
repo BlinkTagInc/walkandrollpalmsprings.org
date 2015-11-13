@@ -68,6 +68,9 @@ if(app.get('env') !== 'development') {
 
 app.get('/', routes.index);
 
+// for react router
+app.get('*', routes.index);
+
 // error handlers
 require('./libs/errors')(app);
 

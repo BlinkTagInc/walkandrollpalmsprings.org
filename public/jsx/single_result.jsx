@@ -6,54 +6,56 @@ var helper = require('../js/helper.js');
 var map = require('../js/map.js');
 
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
+module.exports = class SingleResult extends React.Component {
+  constructor(props) {
+    super(props);
 
-  selectMode: function(mode) {
-    this.props.selectMode(mode);
+    this.state = {};
 
-    map.clearMap();
+    this.updateDirections = (result) => {
+      if(!result || !result.routes || !result.routes.length || !result.routes[0].legs || !result.routes[0].legs.length) {
+        this.setState({
+          distance: null,
+          time: null,
+          co2: null,
+          health: null
+        });
+        return;
+      }
 
-    var startCoords = this.props.query.startLocation;
-    var startAddress = this.props.query.startAddress;
-    var endCoords = [this.props.place.lat, this.props.place.lng];
-    var endAddress = this.props.place.street;
-    map.drawMap(startCoords, startAddress, endCoords, endAddress, mode, this.updateDirections);
-  },
+      var leg = result.routes[0].legs[0];
 
-  updateDirections: function(result) {
-    if(!result || !result.routes || !result.routes.length || !result.routes[0].legs || !result.routes[0].legs.length) {
       this.setState({
-        distance: null,
-        time: null,
-        co2: null,
-        health: null
+        distance: helper.metersToMiles(leg.distance.value) + ' miles',
+        time: helper.secondsToMinutes(leg.duration.value) + ' minutes',
+        co2: helper.calculateCo2Saved(leg.distance.value, this.props.mode) + ' lbs. saved',
+        health: helper.calculateCalories(leg.distance.value, leg.duration.value, this.props.mode) + ' calories burned',
+        directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
       });
-      return;
-    }
+    };
 
-    var leg = result.routes[0].legs[0];
+    this.selectMode = (mode) => {
+      this.props.selectMode(mode);
 
-    this.setState({
-      distance: helper.metersToMiles(leg.distance.value) + ' miles',
-      time: helper.secondsToMinutes(leg.duration.value) + ' minutes',
-      co2: helper.calculateCo2Saved(leg.distance.value, this.props.mode) + ' lbs. saved',
-      health: helper.calculateCalories(leg.distance.value, leg.duration.value, this.props.mode) + ' calories burned',
-      directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
-    });
-  },
+      map.clearMap();
 
-  renderThumbnail: function() {
+      var startCoords = this.props.query.startLocation;
+      var startAddress = this.props.query.startAddress;
+      var endCoords = [this.props.place.lat, this.props.place.lng];
+      var endAddress = this.props.place.street;
+      map.drawMap(startCoords, startAddress, endCoords, endAddress, mode, this.updateDirections);
+    };
+  }
+
+  renderThumbnail() {
     if(this.props.place.thumbnail) {
       return (
         <img src={'http://visitpalmsprings.com' + this.props.place.thumbnail} className="place-thumbnail" />
       );
     }
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <div className="section-header section-teal" ref="sectionHeader">
@@ -91,13 +93,13 @@ module.exports = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     var startCoords = this.props.query.startLocation;
     var startAddress = this.props.query.startAddress;
     var endCoords = [this.props.place.lat, this.props.place.lng];
     var endAddress = this.props.place.street;
     map.drawMap(startCoords, startAddress, endCoords, endAddress, this.props.mode, this.updateDirections);
   }
-});
+};

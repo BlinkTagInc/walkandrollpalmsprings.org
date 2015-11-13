@@ -1,7 +1,6 @@
 var React = require('react');
 var classNames = require('classnames');
 var config = require('../js/config.js');
-var Navigation = require('react-router').Navigation;
 var SiteMenu = require('./site_menu.jsx');
 var cache = require('../js/cache.js');
 var map = require('../js/map.js');
@@ -9,31 +8,37 @@ var $ = require('jquery');
 var _ = require('underscore');
 
 
-var MenuItem = React.createClass({
-  render: function() {
+class MenuItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return <li onClick={this.props.toggleSelected.bind(null, this.props.item)} className={classNames({selected: this.props.selected})}>{this.props.item}</li>;
   }
-});
+}
 
 
-var MenuSection = React.createClass({
-  getInitialState: function() {
-    return {
+class MenuSection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       open: _.intersection(this.props.items, this.props.selectedPlaces).length
     };
-  },
 
-  toggleMenu: function() {
-    this.setState({open: !this.state.open});
-  },
+    this.toggleMenu = () => {
+      this.setState({open: !this.state.open});
+    };
+  }
 
-  renderItems: function() {
+  renderItems() {
     return this.props.items.map(function(item, key) {
       return <MenuItem key={key} item={item} selected={_.contains(this.props.selectedPlaces, item)} toggleSelected={this.props.toggleSelected} />;
     }.bind(this));
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <li className={classNames({open: this.state.open}, 'place-menu')}>
         <div className="place-title" onClick={this.toggleMenu}>{this.props.name}</div>
@@ -43,15 +48,15 @@ var MenuSection = React.createClass({
       </li>
     );
   }
-});
+}
 
-module.exports = React.createClass({
-  mixins: [Navigation],
+module.exports = class Search extends React.Component {
+  constructor(props) {
+    super(props);
 
-  getInitialState: function() {
     var query = cache.fetchQuery();
 
-    return {
+    this.state = {
       selectedPlaces: query.places || ['Fresh Groceries'],
       selectedMode: query.mode || 'walk',
       startLocation: query.startLocation,
@@ -105,15 +110,97 @@ module.exports = React.createClass({
         }
       ]
     };
-  },
 
-  renderPlaceMenu: function() {
+    this.toggleSelected = (item) => {
+      if(_.contains(this.state.selectedPlaces, item)) {
+        this.setState({selectedPlaces: _.without(this.state.selectedPlaces, item)});
+      } else {
+        this.setState({selectedPlaces: this.state.selectedPlaces.concat([item])});
+      }
+    };
+
+    this.clearStart = () => {
+      this.setState({
+        startLocation: undefined,
+        startAddress: undefined,
+        skipValidation: false
+      });
+    };
+
+    this.selectMode = (mode) => {
+      this.setState({selectedMode: mode});
+    };
+
+    this.validateStart = (cb) => {
+      var error = null;
+      var startAddress = this.refs.startAddress.value;
+      if (!startAddress) {
+        return cb();
+      }
+
+      if(this.state.skipValidation) {
+        return cb();
+      } else {
+        this.setState({skipValidation: true});
+      }
+
+      $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
+        access_token: config.mapboxToken,
+        proximity: '-116.5453,33.8303'
+      }, function(data) {
+        if (data && data.features && data.features.length) {
+          var latlng = [data.features[0].center[1], data.features[0].center[0]];
+          if (map.isNearPalmSprings(latlng)) {
+            this.setState({
+              startLocation: latlng,
+              startAddress: startAddress
+            });
+
+            map.neighborhoodFromPoint([latlng[1], latlng[0]], function(e, layer) {
+              if(layer) {
+                this.setState({
+                  startNeighborhood: layer.feature.properties.NAME
+                });
+              }
+            }.bind(this));
+          } else {
+            error = 'The address you entered was not in Palm Springs.';
+          }
+        } else {
+          error = 'The address you entered was not found.';
+        }
+        cb(error);
+      }.bind(this));
+    };
+
+    this.doSearch = (e) => {
+      e.preventDefault();
+
+      this.validateSearch(function(e) {
+        if (e) {
+          return this.handleValidationError(e);
+        }
+
+        var query = {
+          places: this.state.selectedPlaces,
+          mode: this.state.selectedMode,
+          startLocation: this.state.startLocation || [33.8303,-116.5453],
+          startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way'
+        };
+
+        cache.saveQuery(query);
+        this.props.history.pushState(null, '/results', query);
+      }.bind(this));
+    };
+  }
+
+  renderPlaceMenu() {
     return this.state.menus.map(function(menu, idx) {
       return <MenuSection name={menu.name} items={menu.items} key={idx} toggleSelected={this.toggleSelected} selectedPlaces={this.state.selectedPlaces} />;
     }.bind(this));
-  },
+  }
 
-  renderNeighborhoodName: function() {
+  renderNeighborhoodName() {
     if(this.state.startNeighborhood) {
       return (
         <li>
@@ -121,106 +208,23 @@ module.exports = React.createClass({
         </li>
       );
     }
-  },
+  }
 
-  toggleSelected: function(item) {
-    if(_.contains(this.state.selectedPlaces, item)) {
-      this.setState({selectedPlaces: _.without(this.state.selectedPlaces, item)});
-    } else {
-      this.setState({selectedPlaces: this.state.selectedPlaces.concat([item])});
+  handleValidationError(e) {
+    if (e) {
+      alert('Error: ' + e);
     }
-  },
+  }
 
-  selectMode: function(mode) {
-    this.setState({selectedMode: mode});
-  },
-
-  clearStart: function() {
-    this.setState({
-      startLocation: undefined,
-      startAddress: undefined,
-      skipValidation: false
-    });
-  },
-
-  validateStart: function(cb) {
-    var error = null;
-    var startAddress = this.refs.startAddress.getDOMNode().value;
-    if (!startAddress) {
-      return cb();
-    }
-
-    if(this.state.skipValidation) {
-      return cb();
-    } else {
-      this.setState({skipValidation: true});
-    }
-
-    $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
-      access_token: config.mapboxToken,
-      proximity: '-116.5453,33.8303'
-    }, function(data) {
-      if (data && data.features && data.features.length) {
-        var latlng = [data.features[0].center[1], data.features[0].center[0]];
-        if (map.isNearPalmSprings(latlng)) {
-          this.setState({
-            startLocation: latlng,
-            startAddress: startAddress
-          });
-
-          map.neighborhoodFromPoint([latlng[1], latlng[0]], function(e, layer) {
-            if(layer) {
-              this.setState({
-                startNeighborhood: layer.feature.properties.NAME
-              });
-            }
-          }.bind(this));
-        } else {
-          error = 'The address you entered was not in Palm Springs.';
-        }
-      } else {
-        error = 'The address you entered was not found.';
-      }
-      cb(error);
-    }.bind(this));
-  },
-
-  validateSearch: function(cb) {
+  validateSearch(cb) {
     if (!this.state.selectedPlaces.length) {
       return cb('Please selct at least one type of destination.');
     }
 
     this.validateStart(cb);
-  },
+  }
 
-  handleValidationError: function(e) {
-    if (e) {
-      alert('Error: ' + e);
-    }
-  },
-
-  doSearch: function(e) {
-    e.preventDefault();
-
-    this.validateSearch(function(e) {
-      if (e) {
-        return this.handleValidationError(e);
-      }
-
-      var query = {
-        places: this.state.selectedPlaces,
-        mode: this.state.selectedMode,
-        startLocation: this.state.startLocation || [33.8303,-116.5453],
-        startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way'
-      };
-
-      cache.saveQuery(query);
-
-      this.transitionTo('results', null, query);
-    }.bind(this));
-  },
-
-  componentDidMount: function() {
+  componentDidMount() {
     if (navigator.geolocation && !this.state.startAddress) {
       navigator.geolocation.getCurrentPosition(function(position) {
         $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
@@ -228,15 +232,15 @@ module.exports = React.createClass({
         }, function(data) {
           if(data && data.features && data.features.length) {
             if(data.features[0].address) {
-              this.refs.startAddress.getDOMNode().value = data.features[0].address + ' ' + data.features[0].text;
+              this.refs.startAddress.value = data.features[0].address + ' ' + data.features[0].text;
             }
           }
         }.bind(this));
       }.bind(this));
     }
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <div className="section-header section-teal">
@@ -290,4 +294,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

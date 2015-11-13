@@ -29,7 +29,7 @@ exports.calculateDistanceMi = function(lat1, lon1, lat2, lon2) {
   var a = Math.pow(sinLat, 2.0) + Math.cos(radianLat1) * Math.cos(radianLat2) * Math.pow(sinLon, 2.0);
   var d = radius * 2 * Math.asin(Math.min(1, Math.sqrt(a)));
   return d;
-}
+};
 
 
 function formatPopup(location) {

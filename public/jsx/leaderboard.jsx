@@ -3,8 +3,8 @@ var classNames = require('classnames');
 var SiteMenu = require('./site_menu.jsx');
 var leaderboard = require('../js/leaderboard');
 
-var Leader = React.createClass({
-  render: function() {
+class Leader extends React.Component {
+  render() {
     return (
       <tr>
         <td>{this.props.rank}</td>
@@ -13,22 +13,24 @@ var Leader = React.createClass({
       </tr>
     );
   }
-});
+}
 
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
+module.exports = class LeaderBoard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       leaders: [],
       metric: 'co2'
     };
-  },
+  }
 
-  toggleMetric: function(metric) {
+  toggleMetric(metric) {
     this.setState({metric: metric});
-  },
+  }
 
-  renderLeaders: function() {
+  renderLeaders() {
     return this.state.leaders.map(function(leader, idx) {
       var metric;
 
@@ -40,9 +42,9 @@ module.exports = React.createClass({
 
       return <Leader rank={idx + 1} name={leader.neighborhood} metric={metric} key={idx} />;
     }.bind(this));
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <div className="section-header section-red">
@@ -87,9 +89,9 @@ module.exports = React.createClass({
         <SiteMenu selected="leaderboard" color="red" />
       </div>
     );
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     leaderboard.getLeaders(function(e, data) {
       if (e) {
         console.error(e);
@@ -97,4 +99,4 @@ module.exports = React.createClass({
       this.setState({leaders: data});
     }.bind(this));
   }
-});
+};

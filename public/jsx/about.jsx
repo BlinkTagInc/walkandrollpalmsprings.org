@@ -1,14 +1,15 @@
 var React = require('react');
-var Router = require('react-router');
-var { Link } = Router;
+import { Link } from 'react-router'
 var SiteMenu = require('./site_menu.jsx');
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-    };
-  },
-  render: function() {
+module.exports = class About extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  render() {
     return (
       <div>
         <div className="section-header section-green">
@@ -26,4 +27,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

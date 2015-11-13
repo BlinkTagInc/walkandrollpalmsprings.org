@@ -2,25 +2,27 @@ var React = require('react');
 var classNames = require('classnames');
 var _ = require('underscore');
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
+module.exports = class ModeMenu extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       menuOpen: false
     };
-  },
-  
-  toggleModeMenu: function() {
-    this.setState({menuOpen: !this.state.menuOpen});
-  },
 
-  selectMode: function(mode) {
-    this.setState({menuOpen: false});
-    this.props.selectMode(mode);
-  },
+    this.toggleModeMenu = () => {
+      this.setState({menuOpen: !this.state.menuOpen});
+    };
 
-  render: function() {
+    this.selectMode = (mode) => {
+      this.setState({menuOpen: false});
+      this.props.selectMode(mode);
+    };
+  }
+
+  render() {
     var menuItems = [
-      <div className={classNames('mode', 'selected', this.props.mode)} onClick={this.toggleModeMenu} ket="selected"></div>
+      <div className={classNames('mode', 'selected', this.props.mode)} onClick={this.toggleModeMenu} key="selected"></div>
     ];
     var modes = ['walk', 'bike', 'transit'];
 
@@ -38,4 +40,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};
