@@ -29,14 +29,12 @@ module.exports = class SingleResult extends React.Component {
 
       var leg = result.routes[0].legs[0];
       var miles = helper.metersToMiles(leg.distance.value);
-      var co2 = helper.calculateCo2Saved(miles, this.props.mode);
-      var calories = helper.calculateCalories(miles, this.props.mode);
 
       this.setState({
-        distance: miles + ' miles',
-        time: helper.secondsToMinutes(leg.duration.value) + ' minutes',
-        co2: co2 ? co2 + ' lbs. saved' : null,
-        calories: calories ? calories + ' calories burned' : null,
+        distance: miles,
+        time: helper.secondsToMinutes(leg.duration.value),
+        co2: helper.calculateCo2Saved(miles, this.props.mode),
+        calories: helper.calculateCalories(miles, this.props.mode),
         directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
       });
     };
@@ -48,8 +46,8 @@ module.exports = class SingleResult extends React.Component {
 
   calculateTripStatsFromDistance(miles) {
     this.setState({
-      distance: miles.toFixed(1) + ' miles',
-      calories: helper.calculateCalories(miles, this.props.mode) + ' calories burned',
+      distance: miles.toFixed(1),
+      calories: helper.calculateCalories(miles, this.props.mode),
       directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
     });
   }
@@ -85,7 +83,7 @@ module.exports = class SingleResult extends React.Component {
       time = (
         <div className="route-detail">
           <label>Time:</label>
-          <span>{this.state.time}</span>
+          <span>{this.state.time} minutes</span>
         </div>
       );
     }
@@ -94,7 +92,7 @@ module.exports = class SingleResult extends React.Component {
       co2 = (
         <div className="route-detail">
           <label>CO2:</label>
-          <span>{this.state.co2}</span>
+          <span>{this.state.co2} lbs. saved</span>
         </div>
       );
     }
@@ -103,7 +101,7 @@ module.exports = class SingleResult extends React.Component {
       calories = (
         <div className="route-detail">
           <label>Health:</label>
-          <span>{this.state.calories}</span>
+          <span>{this.state.calories} calories burned</span>
         </div>
       );
     }
@@ -128,7 +126,7 @@ module.exports = class SingleResult extends React.Component {
         <div className="route-details">
           <div className="route-detail">
             <label>Distance:</label>
-            <span>{this.state.distance}</span>
+            <span>{this.state.distance} miles</span>
           </div>
           {time}
           {co2}
