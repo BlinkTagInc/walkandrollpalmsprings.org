@@ -22,14 +22,14 @@ module.exports = class ModeMenu extends React.Component {
 
   render() {
     var menuItems = [
-      <div className={classNames('mode', 'selected', this.props.mode)} onClick={this.toggleModeMenu} key="selected"></div>
+      <div className={classNames('mode', 'selected', this.props.mode)} onClick={this.toggleModeMenu} key="selected">{this.props.mode}</div>
     ];
     var modes = ['walk', 'bike', 'transit'];
 
     if (this.state.menuOpen) {
       _.without(modes, this.props.mode).forEach(function(mode, idx) {
         menuItems.push(
-          <div className={classNames('mode', mode)} key={idx} onClick={this.selectMode.bind(null, mode)}></div>
+          <div className={classNames('mode', mode)} key={idx} onClick={this.selectMode.bind(null, mode)}>{mode}</div>
         );
       }.bind(this));
     }
