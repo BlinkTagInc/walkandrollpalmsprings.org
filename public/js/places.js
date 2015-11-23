@@ -147,6 +147,52 @@ exports.getPlaces = function(categories, cb) {
       }
     );
   }
+  if(_.contains(categories, 'Transit Stops')) {
+    places.push(
+      {
+        content: 'The BUZZ',
+        title: 'The BUZZ',
+        directionsUrl: 'http://new.buzzps.com/',
+        kml: 'buzz.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Sunline Transit Route 14',
+        title: 'Sunline Transit Route 14',
+        directionsUrl: 'http://www.sunline.org/pub/schedules/2015/sept2015/Line_14.pdf',
+        json: 'sunline14.json',
+        ignoreDistance: true
+      },
+      {
+        content: 'Sunline Transit Route 24',
+        title: 'Sunline Transit Route 24',
+        directionsUrl: 'http://www.sunline.org/pub/schedules/2015/sept2015/Line_24.pdf',
+        json: 'sunline24.json',
+        ignoreDistance: true
+      },
+      {
+        content: 'Sunline Transit Route 30',
+        title: 'Sunline Transit Route 30',
+        directionsUrl: 'http://www.sunline.org/pub/schedules/2015/sept2015/Line_30.pdf',
+        json: 'sunline30.json',
+        ignoreDistance: true
+      },
+      {
+        content: 'Sunline Transit Route 32',
+        title: 'Sunline Transit Route 32',
+        directionsUrl: 'http://www.sunline.org/pub/schedules/2015/sept2015/Line_32.pdf',
+        json: 'sunline32.json',
+        ignoreDistance: true
+      },
+      {
+        content: 'Sunline Transit Route 111',
+        title: 'Sunline Transit Route 111',
+        directionsUrl: 'http://www.sunline.org/pub/schedules/2015/sept2015/Line_111.pdf',
+        json: 'sunline111.json',
+        ignoreDistance: true
+      }
+    );
+  }
 
   $.getJSON('http://www.visitpalmsprings.com/WebServices/QueryService.svc/BusinessSearch?method=?', {
     size: 20,

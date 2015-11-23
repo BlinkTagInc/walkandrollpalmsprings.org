@@ -45,11 +45,13 @@ module.exports = class SingleResult extends React.Component {
   }
 
   calculateTripStatsFromDistance(miles) {
-    this.setState({
-      distance: miles.toFixed(1),
-      calories: helper.calculateCalories(miles, this.props.mode),
-      directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
-    });
+    if(miles) {
+      this.setState({
+        distance: miles.toFixed(1),
+        calories: helper.calculateCalories(miles, this.props.mode),
+        directionsUrl: helper.formatDirectionsUrl(this.props.query.startAddress, this.props.place.street, this.props.mode)
+      });
+    }
   }
 
   renderThumbnail() {
@@ -63,7 +65,9 @@ module.exports = class SingleResult extends React.Component {
   updateMap() {
     if(this.props.place.kml) {
       map.drawKML(this.props.place.kml);
-
+      this.calculateTripStatsFromDistance(this.props.place.routeDistance);
+    } else if(this.props.place.json) {
+      map.drawJSON(this.props.place.json);
       this.calculateTripStatsFromDistance(this.props.place.routeDistance);
     } else {
       var startCoords = this.props.query.startLocation;
@@ -75,9 +79,20 @@ module.exports = class SingleResult extends React.Component {
   }
 
   render() {
+    let distance;
     let time;
     let co2;
     let calories;
+    let directionsButton;
+
+    if(this.state.distance) {
+      distance = (
+        <div className="route-detail">
+          <label>Distance:</label>
+          <span>{this.state.distance} miles</span>
+        </div>
+      );
+    }
 
     if(this.state.time) {
       time = (
@@ -106,6 +121,16 @@ module.exports = class SingleResult extends React.Component {
       );
     }
 
+    if(this.props.place.directionsUrl) {
+      directionsButton = (
+        <a href={this.props.place.directionsUrl} className="btn btn-use">See Route Details</a>
+      );
+    } else {
+      directionsButton = (
+        <a href={this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
+      );
+    }
+
 
     return (
       <div>
@@ -124,14 +149,11 @@ module.exports = class SingleResult extends React.Component {
         </div>
 
         <div className="route-details">
-          <div className="route-detail">
-            <label>Distance:</label>
-            <span>{this.state.distance} miles</span>
-          </div>
+          {distance}
           {time}
           {co2}
           {calories}
-          <a href={this.props.place.directionsUrl || this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
+          {directionsButton}
         </div>
         <SiteMenu selected="search" color="teal" />
       </div>

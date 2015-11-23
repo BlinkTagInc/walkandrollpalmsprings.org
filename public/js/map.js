@@ -143,6 +143,17 @@ exports.drawKML = function(filename) {
     .addTo(map);
 };
 
+exports.drawJSON = function(filename) {
+  map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {zoom: 14});
+  $.getJSON(`/data/${filename}`, function(data) {
+    var polyline = L.polyline(data, {
+      color: '#18A071'
+    }).addTo(map);
+
+    map.fitBounds(polyline.getBounds());
+  });
+}
+
 
 exports.clearMap = function() {
   map.remove();

@@ -67,5 +67,8 @@
     "gulp-livereload": "3.8.1",
     "gulp-scss-lint": "0.3.8",
     "nodemon": "1.8.1"
+  },
+  "jshintConfig": {
+    "esnext": true
   }
 }
