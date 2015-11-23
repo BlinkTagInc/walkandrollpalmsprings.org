@@ -153,7 +153,7 @@ exports.drawNeighborhoodsMap = function(selectNeighborhood) {
   map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6')
     .setView([33.8163, -116.5453], 11);
 
-  var colors = ['#F19079', '#FBC280', '#C6BEDA', '#FCE59E'];
+  var colors = ['#F19079', '#FBC280', '#C6BEDA', '#FCE59E', '#F82C5F'];
   var labels = L.mapbox.featureLayer();
 
   $.getJSON('/data/neighborhoods.geojson', function(data) {
