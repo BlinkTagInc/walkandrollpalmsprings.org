@@ -90,20 +90,27 @@ function getDirections(startLocation, endLocation, mode, cb) {
 
 
 exports.drawMap = function(startLocation, startAddress, endLocation, endAddress, mode, cb) {
-  bounds = L.latLngBounds(startLocation, endLocation);
+  if(endLocation) {
+    bounds = L.latLngBounds(startLocation, endLocation);
+  } else {
+    bounds = L.latLngBounds(startLocation, startLocation);
+  }
+
   map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6', {center: bounds.getCenter(), zoom: 14});
 
   map.fitBounds(bounds, {padding: [20, 20]});
-
-  getDirections(startLocation, endLocation, mode, cb);
 
   L.marker(startLocation, {title: 'Start Location', icon: startIcon})
     .bindPopup(startAddress)
     .addTo(map);
 
-  L.marker(endLocation, {title: 'End Location', icon: endIcon})
-    .bindPopup(endAddress)
-    .addTo(map);
+  if(endLocation) {
+    getDirections(startLocation, endLocation, mode, cb);
+
+    L.marker(endLocation, {title: 'End Location', icon: endIcon})
+      .bindPopup(endAddress)
+      .addTo(map);
+  }
 };
 
 
@@ -156,7 +163,9 @@ exports.drawJSON = function(filename) {
 
 
 exports.clearMap = function() {
-  map.remove();
+  if(map) {
+    map.remove();
+  }
 };
 
 

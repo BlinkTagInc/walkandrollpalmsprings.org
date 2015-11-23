@@ -24,7 +24,7 @@ class MenuSection extends React.Component {
     super(props);
 
     this.state = {
-      open: _.intersection(this.props.items, this.props.selectedPlaces).length
+      open: _.intersection(this.props.items, this.props.selectedCategories).length
     };
 
     this.toggleMenu = () => {
@@ -34,7 +34,7 @@ class MenuSection extends React.Component {
 
   renderItems() {
     return this.props.items.map(function(item, key) {
-      return <MenuItem key={key} item={item} selected={_.contains(this.props.selectedPlaces, item)} toggleSelected={this.props.toggleSelected} />;
+      return <MenuItem key={key} item={item} selected={_.contains(this.props.selectedCategories, item)} toggleSelected={this.props.toggleSelected} />;
     }.bind(this));
   }
 
@@ -57,7 +57,7 @@ module.exports = class Search extends React.Component {
     var query = cache.fetchQuery();
 
     this.state = {
-      selectedPlaces: query.places || ['Fresh Groceries'],
+      selectedCategories: query.categories || ['Fresh Groceries'],
       selectedMode: query.mode || 'walk',
       startLocation: query.startLocation,
       startAddress: query.startAddress,
@@ -103,10 +103,10 @@ module.exports = class Search extends React.Component {
     };
 
     this.toggleSelected = (item) => {
-      if(_.contains(this.state.selectedPlaces, item)) {
-        this.setState({selectedPlaces: _.without(this.state.selectedPlaces, item)});
+      if(_.contains(this.state.selectedCategories, item)) {
+        this.setState({selectedCategories: _.without(this.state.selectedCategories, item)});
       } else {
-        this.setState({selectedPlaces: this.state.selectedPlaces.concat([item])});
+        this.setState({selectedCategories: this.state.selectedCategories.concat([item])});
       }
     };
 
@@ -173,7 +173,7 @@ module.exports = class Search extends React.Component {
         }
 
         var query = {
-          places: this.state.selectedPlaces,
+          categories: this.state.selectedCategories,
           mode: this.state.selectedMode,
           startLocation: this.state.startLocation || [33.8303,-116.5453],
           startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way'
@@ -187,7 +187,7 @@ module.exports = class Search extends React.Component {
 
   renderPlaceMenu() {
     return this.state.menus.map(function(menu, idx) {
-      return <MenuSection name={menu.name} items={menu.items} key={idx} toggleSelected={this.toggleSelected} selectedPlaces={this.state.selectedPlaces} />;
+      return <MenuSection name={menu.name} items={menu.items} key={idx} toggleSelected={this.toggleSelected} selectedCategories={this.state.selectedCategories} />;
     }.bind(this));
   }
 
@@ -208,7 +208,7 @@ module.exports = class Search extends React.Component {
   }
 
   validateSearch(cb) {
-    if (!this.state.selectedPlaces.length) {
+    if (!this.state.selectedCategories.length) {
       return cb('Please selct at least one type of destination.');
     }
 

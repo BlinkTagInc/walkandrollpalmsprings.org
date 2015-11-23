@@ -63,18 +63,16 @@ module.exports = class SingleResult extends React.Component {
   }
 
   updateMap() {
-    if(this.props.place.kml) {
+    if(!this.props.place) {
+      map.drawMap(this.props.query.startLocation, this.props.query.startAddress, null, null, this.props.mode, this.calculateTripStatsFromGoogleDirections);
+    } if(this.props.place.kml) {
       map.drawKML(this.props.place.kml);
       this.calculateTripStatsFromDistance(this.props.place.routeDistance);
     } else if(this.props.place.json) {
       map.drawJSON(this.props.place.json);
       this.calculateTripStatsFromDistance(this.props.place.routeDistance);
     } else {
-      var startCoords = this.props.query.startLocation;
-      var startAddress = this.props.query.startAddress;
-      var endCoords = [this.props.place.lat, this.props.place.lng];
-      var endAddress = this.props.place.street;
-      map.drawMap(startCoords, startAddress, endCoords, endAddress, this.props.mode, this.calculateTripStatsFromGoogleDirections);
+      map.drawMap(this.props.query.startLocation, this.props.query.startAddress, [this.props.place.lat, this.props.place.lng], this.props.place.street, this.props.mode, this.calculateTripStatsFromGoogleDirections);
     }
   }
 
@@ -137,7 +135,7 @@ module.exports = class SingleResult extends React.Component {
         <div className="section-header section-teal" ref="sectionHeader">
           <ModeMenu mode={this.props.mode} selectMode={this.selectMode} />
           <h3 className="results-title">{this.props.place.title}</h3>
-          <div className="selected-places">{this.props.place.street}</div>
+          <div className="selected-categories">{this.props.place.street}</div>
         </div>
 
         <div className="place-details">

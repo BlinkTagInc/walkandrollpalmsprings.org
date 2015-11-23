@@ -21,6 +21,7 @@ ReactDOM.render((
     <Route path="about" component={About}/>
     <Route path="search" component={Search}/>
     <Route path="results" component={Results}/>
+    <Route path="results/:category/:place" component={Results}/>
     <Route path="neighborhoods" component={Neighborhoods}/>
     <Route path="leaderboard" component={Leaderboard}/>
     <Route path="safety" component={Safety}/>

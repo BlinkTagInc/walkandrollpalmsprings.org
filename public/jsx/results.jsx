@@ -12,13 +12,8 @@ module.exports = class Results extends React.Component {
     super(props);
 
     this.state = {
-      mode: this.props.location.query.mode,
-      places: [],
-      selectedPlace: null
-    };
-
-    this.selectPlace = (place) => {
-      this.setState({selectedPlace: place});
+      mode: this.props.location.query.mode || 'walk',
+      places: []
     };
 
     this.selectMode = (mode) => {
@@ -27,6 +22,10 @@ module.exports = class Results extends React.Component {
   }
 
   sortByDistance(places) {
+    if(!this.props.location || !this.props.location.query || !this.props.location.query.startLocation) {
+      return places;
+    }
+
     var startLat = this.props.location.query.startLocation[0];
     var startLon = this.props.location.query.startLocation[1];
     return _.sortBy(places, (place) => {
@@ -36,20 +35,28 @@ module.exports = class Results extends React.Component {
   }
 
   render() {
-    if(this.state.selectedPlace) {
-      return (
-        <SingleResult
-          query={this.props.location.query}
-          place={this.state.selectedPlace}
-          mode={this.state.mode}
-          selectMode={this.selectMode} />
-      );
+    if(this.props.params && this.props.params.place) {
+      var place = _.findWhere(places.getSavedPlaces(), {title: this.props.params.place});
+
+      if(place) {
+        return (
+          <SingleResult
+            query={this.props.location.query}
+            place={place}
+            mode={this.state.mode}
+            selectMode={this.selectMode} />
+        );
+      } else {
+        return (
+          <div className="loading">Loading</div>
+        );
+      }
+
     } else {
       return (
         <ResultsList
           query={this.props.location.query}
           places={this.state.places}
-          selectPlace={this.selectPlace}
           mode={this.state.mode}
           selectMode={this.selectMode} />
       );
@@ -57,7 +64,15 @@ module.exports = class Results extends React.Component {
   }
 
   componentDidMount() {
-    places.getPlaces(this.props.location.query.places, function(e, data) {
+    let categories;
+
+    if(this.props.params.category) {
+      categories = this.props.params.category.split(',');
+    } else {
+      categories = this.props.location.query.categories;
+    }
+
+    places.getPlaces(categories, function(e, data) {
       if (e) {
         console.error(e);
       }

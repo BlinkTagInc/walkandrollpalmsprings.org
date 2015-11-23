@@ -1,9 +1,12 @@
 var _ = require('underscore');
 var $ = require('jquery');
+var places = [];
 
 exports.getPlaces = function(categories, cb) {
   var categoryIds = [];
-  var places = [];
+
+  //reset searched places
+  places = [];
 
   if (_.contains(categories, 'Fresh Groceries')) {
     categoryIds.push(5073, 5084);
@@ -199,9 +202,9 @@ exports.getPlaces = function(categories, cb) {
     features: '(' + categoryIds.join(',') + ')'
   }).done(function(data) {
     if (data && data.d && data.d.items && data.d.items.length) {
-      var results = data.d.items.concat(places);
+      places = data.d.items.concat(places);
 
-      cb(null, results);
+      cb(null, places);
     } else if(places) {
       cb(null, places);
     } else {
@@ -211,3 +214,5 @@ exports.getPlaces = function(categories, cb) {
     cb(e);
   });
 };
+
+exports.getSavedPlaces = () => places;
