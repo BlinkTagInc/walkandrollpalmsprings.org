@@ -19,7 +19,7 @@
   }
 
   &.green-dark {
-    background-color: $green-dark;
+    background-color: $green-medium;
     background-image: url("../images/footer-tree-green-dark.png");
   }
 
@@ -55,6 +55,10 @@
 
     &.green {
       background-image: url("../images/footer-tree-green@2x.png");
+    }
+
+    &.green-dark {
+      background-image: url("../images/footer-tree-green-dark@2x.png");
     }
 
     &.teal {
