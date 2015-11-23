@@ -81,7 +81,6 @@ exports.getPlaces = function(categories, cb) {
   if(_.contains(categories, 'Running & Walking')) {
     places.push(
       {
-        city: 'Palm Springs',
         content: 'This is a 9.24 mi route in Palm Springs, CA, United States. The route has a total ascent of 2289 ft and has a maximum elevation of 10,687 ft.',
         lat: 33.812661,
         lng: -116.640053,
@@ -93,7 +92,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: '13 mi hike SJP via Skyline Trail - Lykken Trail - Ramon Rd.',
         lat: 33.815889155,
         lng: -116.555993557,
@@ -104,7 +102,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'This is a 10 mi Walk/Run circling Palm Springs. It has a total ascent of 361 ft and has a maximum elevation of 618 ft.',
         lat: 33.828134,
         lng: -116.517391,
@@ -115,7 +112,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'A Taquitz River stroll.',
         lat: 33.801265,
         lng: -116.539412,
@@ -126,7 +122,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'Walk or run through old Las Palmas',
         lat: 33.8339556015,
         lng: -116.542410851,
@@ -137,7 +132,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'Short Tram Way Climb',
         lat: 33.856714,
         lng: -116.56001,
@@ -149,7 +143,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'Palm Springs Art Museum walk',
         lat: 33.82462,
         lng: -116.550573,
@@ -161,7 +154,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'Demuth Park',
         lat: 33.815585,
         lng: -116.501833,
@@ -173,7 +165,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'Old Cielo Road',
         lat: 33.8103534809,
         lng: -116.504387855,
@@ -188,7 +179,6 @@ exports.getPlaces = function(categories, cb) {
   if(_.contains(categories, 'Bike Routes')) {
     places.push(
       {
-        city: 'Palm Springs',
         content: 'This is a 28 mi route in Palm Springs, CA, United States. The route has a total ascent of 454 ft and has a maximum elevation of 474 ft.',
         street: 'Palm Canyon Drive',
         title: 'Ride To the River',
@@ -198,7 +188,6 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'This is a 18 mi route in Palm Springs, CA, United States. The route has a total ascent of 415 ft and has a maximum elevation of 600 ft.',
         street: 'Palm Canyon Drive',
         title: 'City Loop',
@@ -208,13 +197,54 @@ exports.getPlaces = function(categories, cb) {
         ignoreDistance: true
       },
       {
-        city: 'Palm Springs',
         content: 'This is a 19 mi route in Palm Springs, CA, United States. The route has a total ascent of 771 ft and has a maximum elevation of 815 ft.',
         street: 'Palm Canyon Drive',
         title: 'City Spin with Belardo Climb',
         directionsUrl: 'http://www.mapmyride.com/routes/view/627557348',
         kml: 'cityspinwithbelardoclimb.kml',
         routeDistance: 19.33,
+        ignoreDistance: true
+      },
+      {
+        content: 'Taquitz Creek Loop',
+        title: 'Taquitz Creek Loop',
+        kml: 'taquitz_creek_loop.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Las Palmas Loop',
+        title: 'Las Palmas Loop',
+        kml: 'las_palmas_loop.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Gene Autry Bikeway',
+        title: 'Gene Autry Bikeway',
+        kml: 'gene_autry_bikeway.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Downtown Loop',
+        title: 'Downtown Loop',
+        kml: 'downtown_loop.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Deepwell Loop',
+        title: 'Deepwell Loop',
+        kml: 'deepwell_loop.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Citywide Loop',
+        title: 'Citywide Loop',
+        kml: 'citywide_loop.kml',
+        ignoreDistance: true
+      },
+      {
+        content: 'Canyon Country Club Loop',
+        title: 'Canyon Country Club Loop',
+        kml: 'canyon_country_club_loop.kml',
         ignoreDistance: true
       }
     );

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="downtown_loop" id="downtown_loop">
+	<SimpleField name="id" type="int"></SimpleField>
+	<SimpleField name="BikeRoute" type="string"></SimpleField>
+</Schema>
+<Folder><name>downtown_loop</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#downtown_loop">
+		<SimpleData name="id">20</SimpleData>
+		<SimpleData name="BikeRoute">Downtown Loop</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><LineString><altitudeMode>relativeToGround</altitudeMode><coordinates>-116.541927755392265,33.830360811603498 -116.547958741286891,33.830360811603498 -116.547931696507092,33.825627975139106 -116.548229189084864,33.825276393001751 -116.549365069836313,33.825276393001751 -116.549446204175709,33.823085765838236 -116.547958741286891,33.823112810618028 -116.547877606947495,33.819461765345501 -116.545578800664799,33.819515854905092 -116.545551755885,33.818352929373845 -116.542576830107379,33.818379974153636 -116.542062979291245,33.818298839814247 -116.541873665832668,33.818217705474858 -116.541873665832668,33.830360811603498</coordinates></LineString></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>

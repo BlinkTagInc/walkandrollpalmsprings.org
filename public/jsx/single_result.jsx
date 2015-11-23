@@ -123,7 +123,7 @@ module.exports = class SingleResult extends React.Component {
       directionsButton = (
         <a href={this.props.place.directionsUrl} className="btn btn-use">See Route Details</a>
       );
-    } else {
+    } else if(this.state.directionsUrl) {
       directionsButton = (
         <a href={this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
       );
