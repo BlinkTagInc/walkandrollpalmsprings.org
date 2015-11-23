@@ -1,0 +1,159 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ <Document>
+  <Style id="kmlLineStyle">
+   <LineStyle>
+    <color>
+     7f0000ff
+    </color>
+    <width>
+     4
+    </width>
+   </LineStyle>
+  </Style>
+  <Placemark>
+   <name>
+<![CDATA[Palm Springs - Nr. Airport]]>   </name>
+   <styleUrl>
+    #kmlLineStyle
+   </styleUrl>
+   <LineString>
+    <altitudeMode>
+     clampToGround
+    </altitudeMode>
+    <tessellate>
+     1
+    </tessellate>
+    <coordinates>
+     -116.504387855,33.8103534809,0 -116.504779458,33.8106075414,0 -116.505380273,33.8106164558,0 -116.505573392,33.8103089088,0 -116.506206393,33.8105228546,0 -116.506549716,33.8100459329,0 -116.507273912,33.810442625,0 -116.507863998,33.8107992006,0 -116.508733034,33.8108794299,0 -116.510567665,33.8108526868,0 -116.510589123,33.8122611449,0 -116.51494503,33.8122789734,0 -116.514987946,33.8158802412,0 -116.517949104,33.8159693795,0 -116.517970562,33.811387547,0 -116.517970562,33.8086597248,0 -116.523764133,33.8086597248,0 -116.523764133,33.8050224931,0 -116.515438557,33.8050046632,0 -116.515395641,33.8026689079,0 -116.515159607,33.8026154166,0 -116.512777805,33.8026154166,0 -116.512756348,33.8014029376,0 -116.510589123,33.8013494455,0 -116.510589123,33.810692228,0 -116.510396004,33.8108526868,0 -116.508250237,33.810906173,0 -116.506662369,33.8101930212,0 -116.506662369,33.8099612456,0 -116.506168842,33.8104247962,0 -116.505868435,33.8104069673,0 -116.505739689,33.8103534809,0 -116.505482197,33.8101930212,0 -116.505439282,33.810531769,0 -116.505181789,33.8106030842,0 -116.504387855,33.8103534809,0 
+    </coordinates>
+   </LineString>
+  </Placemark>
+  <Style id="Mile_1">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=1]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_1
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.514987946,33.8158802412,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 1
+   </name>
+  </Placemark>
+  <Style id="Mile_2">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=2]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_2
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.523764133,33.8086597248,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 2
+   </name>
+  </Placemark>
+  <Style id="Mile_3">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=3]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_3
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.512777805,33.8026154166,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 3
+   </name>
+  </Placemark>
+  <Style id="Mile_4">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=4]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_4
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.506662369,33.8101930212,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 4
+   </name>
+  </Placemark>
+  <Style id="start_marker">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[https://mmf.cachefly.net/d/mapping_api/stable/img/markers/start.png]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #start_marker
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.504387855,33.8103534809,0
+    </coordinates>
+   </Point>
+   <name>
+    Palm Springs - Nr. Airport
+   </name>
+  </Placemark>
+  <Style id="finish_marker">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[https://mmf.cachefly.net/d/mapping_api/stable/img/markers/stop.png]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #finish_marker
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.504387855,33.8103534809,0
+    </coordinates>
+   </Point>
+   <name>
+    Palm Springs - Nr. Airport
+   </name>
+  </Placemark>
+ </Document>
+</kml>

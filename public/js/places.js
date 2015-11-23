@@ -113,6 +113,75 @@ exports.getPlaces = function(categories, cb) {
         kml: 'circle.kml',
         routeDistance: 10,
         ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'A Taquitz River stroll.',
+        lat: 33.801265,
+        lng: -116.539412,
+        title: 'Taquitz River',
+        directionsUrl: 'http://www.mapmyrun.com/us/palm-springs-ca/2-04mi-run-on-7-24-13-route-252665347',
+        kml: 'taquitz_river.kml',
+        routeDistance: 2,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'Walk or run through old Las Palmas',
+        lat: 33.8339556015,
+        lng: -116.542410851,
+        title: 'Old Las Palmas',
+        directionsUrl: 'http://www.mapmyrun.com/us/palm-springs-ca/palm-springs-run-route-1748299',
+        kml: 'old_las_palmas.kml',
+        routeDistance: 5.25,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'Short Tram Way Climb',
+        lat: 33.856714,
+        lng: -116.56001,
+        title: 'Short Tram Way Climb',
+        directionsUrl: 'http://www.mapmyrun.com/us/palm-springs-ca/3-78mi-run-on-10-26-13-route-315451419',
+        kml: 'short_tram_way_climb.kml',
+        routeDistance: 3.78,
+        elevation: 1897,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'Palm Springs Art Museum walk',
+        lat: 33.82462,
+        lng: -116.550573,
+        title: 'Palm Springs Art Museum',
+        directionsUrl: 'http://www.mapmyrun.com/us/palm-springs-ca/3-58mi-run-on-1-14-13-route-165904718',
+        kml: 'art_museum.kml',
+        routeDistance: 3.6,
+        elevation: 1044,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'Demuth Park',
+        lat: 33.815585,
+        lng: -116.501833,
+        title: 'Demuth Park',
+        directionsUrl: 'http://www.mapmyrun.com/us/palm-springs-ca/4-00mi-run-on-11-2-12-route-150784875',
+        kml: 'demuth_park.kml',
+        routeDistance: 4,
+        elevation: 62,
+        ignoreDistance: true
+      },
+      {
+        city: 'Palm Springs',
+        content: 'Old Cielo Road',
+        lat: 33.8103534809,
+        lng: -116.504387855,
+        title: 'Old Cielo Road',
+        directionsUrl: 'http://www.mapmyrun.com/us/palm-springs-ca/palm-springs-nr-airport-route-1638890',
+        kml: 'old_cielo_road.kml',
+        routeDistance: 12,
+        ignoreDistance: true
       }
     );
   }

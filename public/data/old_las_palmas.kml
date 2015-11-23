@@ -1,0 +1,159 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ <Document>
+  <Style id="kmlLineStyle">
+   <LineStyle>
+    <color>
+     7f0000ff
+    </color>
+    <width>
+     4
+    </width>
+   </LineStyle>
+  </Style>
+  <Placemark>
+   <name>
+<![CDATA[Palm Springs Run]]>   </name>
+   <styleUrl>
+    #kmlLineStyle
+   </styleUrl>
+   <LineString>
+    <altitudeMode>
+     clampToGround
+    </altitudeMode>
+    <tessellate>
+     1
+    </tessellate>
+    <coordinates>
+     -116.542410851,33.8339556015,0 -116.546702385,33.8339912493,0 -116.546788216,33.8403006797,0 -116.54665947,33.8449344279,0 -116.554169655,33.8448274981,0 -116.554341316,33.8321731914,0 -116.55292511,33.8318880024,0 -116.55292511,33.8310324295,0 -116.551852226,33.8302837962,0 -116.548032761,33.8302837962,0 -116.54794693,33.8256136023,0 -116.549406052,33.8251857855,0 -116.549448967,33.8230823219,0 -116.536874771,33.8232249313,0 -116.536831856,33.8307828858,0 -116.536917687,33.8338843058,0 -116.542196274,33.8339199537,0 
+    </coordinates>
+   </LineString>
+  </Placemark>
+  <Style id="Mile_1">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=1]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_1
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.54665947,33.8449344279,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 1
+   </name>
+  </Placemark>
+  <Style id="Mile_2">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=2]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_2
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.554341316,33.8321731914,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 2
+   </name>
+  </Placemark>
+  <Style id="Mile_3">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=3]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_3
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.549448967,33.8230823219,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 3
+   </name>
+  </Placemark>
+  <Style id="Mile_5">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=5]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Mile_5
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.536831856,33.8307828858,0
+    </coordinates>
+   </Point>
+   <name>
+    Mile 5
+   </name>
+  </Placemark>
+  <Style id="start_marker">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[https://mmf.cachefly.net/d/mapping_api/stable/img/markers/start.png]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #start_marker
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.542410851,33.8339556015,0
+    </coordinates>
+   </Point>
+   <name>
+    Palm Springs Run
+   </name>
+  </Placemark>
+  <Style id="finish_marker">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[https://mmf.cachefly.net/d/mapping_api/stable/img/markers/stop.png]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #finish_marker
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -116.542196274,33.8339199537,0
+    </coordinates>
+   </Point>
+   <name>
+    Palm Springs Run
+   </name>
+  </Placemark>
+ </Document>
+</kml>
