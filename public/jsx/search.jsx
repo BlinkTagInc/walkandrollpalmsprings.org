@@ -92,14 +92,6 @@ module.exports = class Search extends React.Component {
           ]
         },
         {
-          name: 'Connect',
-          items: [
-            'Neighborhoods',
-            'Civic Services',
-            'For Kids'
-          ]
-        },
-        {
           name: 'Move',
           items: [
             'Running & Walking',

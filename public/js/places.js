@@ -41,12 +41,6 @@ exports.getPlaces = function(categories, cb) {
   if(_.contains(categories, 'Home')) {
     categoryIds.push(11816, 5057, 5059, 12379, 13013, 5064, 5065, 5066, 5074, 5075, 198387, 5076, 12675, 12853, 5071, 5079, 5080, 5083, 5087);
   }
-  if(_.contains(categories, 'Services')) {
-    categoryIds.push(5035, 190678, 190680, 190681, 5044, 190682, 5011, 185453, 96115, 13019, 5065, 5069, 12699, 5068, 12853, 12594, 5081, 5086);
-  }
-  if(_.contains(categories, 'For Kids')) {
-    categoryIds.push(5033, 5046, 5048);
-  }
   if(_.contains(categories, 'Outdoor Markets')) {
     places.push(
       {
