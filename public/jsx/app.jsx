@@ -10,6 +10,7 @@ var Welcome = require('./welcome.jsx');
 var Neighborhoods = require('./neighborhoods.jsx');
 var Leaderboard = require('./leaderboard.jsx');
 var About = require('./about.jsx');
+var Safety = require('./safety.jsx');
 var NotFound = require('./not_found.jsx');
 
 require('typeahead.js');
@@ -22,6 +23,7 @@ ReactDOM.render((
     <Route path="results" component={Results}/>
     <Route path="neighborhoods" component={Neighborhoods}/>
     <Route path="leaderboard" component={Leaderboard}/>
+    <Route path="safety" component={Safety}/>
     <Route path="*" component={NotFound}/>
   </Router>
 ), document.getElementById('app'));

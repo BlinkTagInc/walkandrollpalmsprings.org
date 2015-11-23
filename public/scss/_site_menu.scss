@@ -18,6 +18,11 @@
     background-image: url("../images/footer-tree-green.png");
   }
 
+  &.green-dark {
+    background-color: $green-dark;
+    background-image: url("../images/footer-tree-green-dark.png");
+  }
+
   &.teal {
     background-color: $teal-light;
     background-image: url("../images/footer-tree-teal.png");
