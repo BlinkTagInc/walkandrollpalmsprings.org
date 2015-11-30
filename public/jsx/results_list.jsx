@@ -25,8 +25,23 @@ module.exports = class ResultsList extends React.Component {
     });
   }
 
-  renderResultList() {
-    return this.filterPlacesByMode().map(function(place, key) {
+  renderResultList(results) {
+    if(this.props.loading) {
+      return (
+        <div className="loading">
+          <h3>Loading...</h3>
+        </div>
+      );
+    }
+    if(!results || !results.length) {
+      return (
+        <div className="no-results">
+          <p>No matching results</p>
+          <Link to="search">Revise your search</Link>
+        </div>
+      );
+    }
+    return results.map(function(place, key) {
       return (
         <Link
           to={'results/' + this.props.query.categories + '/' + place.title}
@@ -55,7 +70,7 @@ module.exports = class ResultsList extends React.Component {
         </div>
 
         <div className="place-list">
-          {this.renderResultList()}
+          {this.renderResultList(this.filterPlacesByMode())}
         </div>
 
         <div className="section-footer section-teal">

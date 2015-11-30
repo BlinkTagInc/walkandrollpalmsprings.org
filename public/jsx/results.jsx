@@ -13,7 +13,8 @@ module.exports = class Results extends React.Component {
 
     this.state = {
       mode: this.props.location.query.mode || 'walk',
-      places: []
+      places: [],
+      loading: true
     };
 
     this.selectMode = (mode) => {
@@ -51,14 +52,14 @@ module.exports = class Results extends React.Component {
           <div className="loading">Loading</div>
         );
       }
-
     } else {
       return (
         <ResultsList
           query={this.props.location.query}
           places={this.state.places}
           mode={this.state.mode}
-          selectMode={this.selectMode} />
+          selectMode={this.selectMode}
+          loading={this.state.loading} />
       );
     }
   }
@@ -76,7 +77,10 @@ module.exports = class Results extends React.Component {
       if (e) {
         console.error(e);
       }
-      this.setState({places: this.sortByDistance(data)});
+      this.setState({
+        places: this.sortByDistance(data),
+        loading: false
+      });
     }.bind(this));
   }
 };
