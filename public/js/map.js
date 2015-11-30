@@ -173,15 +173,21 @@ exports.drawNeighborhoodsMap = function(selectNeighborhood) {
   map = L.mapbox.map('map', 'walkandrollpalmsprings.659284f6')
     .setView([33.8163, -116.5453], 11);
 
-  var colors = ['#F19079', '#FBC280', '#C6BEDA', '#FCE59E', '#F82C5F'];
+  var colors = {
+    pink: '#F19079',
+    orange: '#FBC280',
+    purple: '#C6BEDA',
+    yellow: '#FCE59E',
+    fuschia: '#F82C5F'
+  };
   var labels = L.mapbox.featureLayer();
 
   $.getJSON('/data/neighborhoods.geojson', function(data) {
     var neighborhoods = L.geoJson(data, {
       pointToLayer: L.mapbox.marker.style,
-      style: function() {
+      style: function(feature) {
         return {
-          fillColor: _.sample(colors),
+          fillColor: colors[feature.properties.COLOR],
           fillOpacity: 0.5,
           weight: 1,
           color: '#000000',
@@ -189,11 +195,14 @@ exports.drawNeighborhoodsMap = function(selectNeighborhood) {
         };
       },
       onEachFeature: function(feature, layer) {
-        var label = L.marker(layer.getBounds().getCenter(), {
+        var points = layer.getLatLngs()[0].map(function(point) {
+          return [point.lat, point.lng];
+        });
+        var label = L.marker(getCentroid(points), {
           icon: L.divIcon({
             className: 'map-label',
-            html: feature.properties.NAME,
-            iconSize: [100, 40]
+            html: '<div class="map-label-container">' + feature.properties.NAME + '</div>',
+            iconSize: [100, 60]
           })
         }).addTo(labels);
 
@@ -254,3 +263,24 @@ exports.neighborhoodFromPoint = function(lnglat, cb) {
     cb(null, layers.length ? layers[0] : null);
   });
 };
+
+
+function getCentroid(arr) {
+  var twoTimesSignedArea = 0;
+  var cxTimes6SignedArea = 0;
+  var cyTimes6SignedArea = 0;
+
+  var length = arr.length
+
+  var x = function (i) { return arr[i % length][0] };
+  var y = function (i) { return arr[i % length][1] };
+
+  for ( var i = 0; i < arr.length; i++) {
+    var twoSA = x(i)*y(i+1) - x(i+1)*y(i);
+    twoTimesSignedArea += twoSA;
+    cxTimes6SignedArea += (x(i) + x(i+1)) * twoSA;
+    cyTimes6SignedArea += (y(i) + y(i+1)) * twoSA;
+  }
+  var sixSignedArea = 3 * twoTimesSignedArea;
+  return [cxTimes6SignedArea / sixSignedArea, cyTimes6SignedArea / sixSignedArea];
+}

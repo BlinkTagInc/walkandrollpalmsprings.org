@@ -9,5 +9,11 @@
   .map-label {
     color: $black;
     text-align: center;
+    display: table;
+
+    .map-label-container {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
 }
