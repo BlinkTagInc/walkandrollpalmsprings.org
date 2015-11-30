@@ -208,42 +208,49 @@ exports.getPlaces = function(categories, cb) {
       {
         content: 'Taquitz Creek Loop',
         title: 'Taquitz Creek Loop',
+        directionsUrl: 'https://www.google.com/maps/d/edit?mid=zDH0TLBKql5g.kTn4ULbApVwM',
         kml: 'taquitz_creek_loop.kml',
         ignoreDistance: true
       },
       {
         content: 'Las Palmas Loop',
         title: 'Las Palmas Loop',
+        directionsUrl: 'https://www.google.com/maps/d/u/0/edit?mid=zDH0TLBKql5g.k02LcTPC1mcQ',
         kml: 'las_palmas_loop.kml',
         ignoreDistance: true
       },
       {
         content: 'Gene Autry Bikeway',
         title: 'Gene Autry Bikeway',
+        directionsUrl: 'https://www.google.com/maps/d/edit?mid=zDH0TLBKql5g.kgDSDCVdGrRE',
         kml: 'gene_autry_bikeway.kml',
         ignoreDistance: true
       },
       {
         content: 'Downtown Loop',
         title: 'Downtown Loop',
+        directionsUrl: 'https://www.google.com/maps/d/edit?mid=zDH0TLBKql5g.kzQ4F3G3JbJA',
         kml: 'downtown_loop.kml',
         ignoreDistance: true
       },
       {
         content: 'Deepwell Loop',
         title: 'Deepwell Loop',
+        directionsUrl: 'https://www.google.com/maps/d/edit?mid=zDH0TLBKql5g.kM0cWVkM-XsY',
         kml: 'deepwell_loop.kml',
         ignoreDistance: true
       },
       {
         content: 'Citywide Loop',
         title: 'Citywide Loop',
+        directionsUrl: 'https://www.google.com/maps/d/edit?mid=zDH0TLBKql5g.keiVDyjiMmCE',
         kml: 'citywide_loop.kml',
         ignoreDistance: true
       },
       {
         content: 'Canyon Country Club Loop',
         title: 'Canyon Country Club Loop',
+        directionsUrl: 'https://www.google.com/maps/d/edit?mid=zDH0TLBKql5g.kjiwCo6p1xqw',
         kml: 'canyon_country_club_loop.kml',
         ignoreDistance: true
       }
