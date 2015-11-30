@@ -95,6 +95,7 @@ module.exports = class Search extends React.Component {
           name: 'Connect',
           items: [
             'Places of Worship',
+            'Civic Resources'
           ]
         },
         {

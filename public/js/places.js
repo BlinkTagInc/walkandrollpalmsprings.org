@@ -118,6 +118,73 @@ exports.getPlaces = function(categories, cb) {
       }
     );
   }
+  if(_.contains(categories, 'Civic Resources')) {
+    places.push(
+      {
+        lat: 33.801309315663,
+        lng: -116.538020849268,
+        street: '333 E Amado Rd',
+        title: 'US Post Office',
+        websiteUrl: 'http://www.yelp.com/biz/us-post-office-palm-springs'
+      },
+      {
+        lat: 33.8263300555556,
+        lng: -116.51071915588,
+        street: '255 N El Cielo Rd',
+        title: 'Airport Park Post Office',
+        websiteUrl: 'http://www.yelp.com/biz/airport-park-post-office-palm-springs'
+      },
+      {
+        lat: 33.801309315663,
+        lng: -116.538020849268,
+        street: '300 S Sunrise Way',
+        title: 'Palm Springs Public Library',
+        websiteUrl: 'http://www.yelp.com/biz/palm-springs-public-library-palm-springs-2'
+      },
+      {
+        lat: 33.8232718470509,
+        lng: -116.511797145136,
+        street: '3200 E Tahquitz Canyon Way',
+        title: 'City of Palm Springs',
+        websiteUrl: 'http://www.yelp.com/biz/city-of-palm-springs-palm-springs'
+      },
+      {
+        lat: 33.8268036356222,
+        lng: -116.546933857827,
+        street: '190 W Amado Rd',
+        title: 'Palm Springs Chamber of Commerce',
+        websiteUrl: 'http://www.yelp.com/biz/palm-springs-chamber-of-commerce-palm-springs'
+      },
+      {
+        lat: 33.8273832,
+        lng: -116.51053884412,
+        street: '300 N El Cielo Rd',
+        title: 'Palm Springs Fire Station',
+        websiteUrl: 'http://www.yelp.com/biz/palm-springs-fire-station-palm-springs'
+      },
+      {
+        lat: 33.8217173913633,
+        lng: -116.512734047381,
+        street: '200 S Civic Dr',
+        title: 'Palm Springs Police Department',
+        websiteUrl: 'http://www.yelp.com/biz/palm-springs-police-department-palm-springs'
+      },
+      {
+        lat: 33.801335194649,
+        lng: -116.527547058199,
+        street: '1775 E Palm Canyon Dr',
+        title: 'US Post Office',
+        websiteUrl: 'http://www.yelp.com/biz/us-post-office-palm-springs-2'
+      },
+      {
+        lat: 33.8377799535719,
+        lng: -116.506211242227,
+        street: '3700 E Tachevah Dr',
+        title: 'Bureau Of Indian Affairs',
+        websiteUrl: 'http://www.yelp.com/biz/bureau-of-indian-affairs-palm-springs'
+      }
+    );
+  }
   if(_.contains(categories, 'Outdoor Markets')) {
     places.push(
       {
