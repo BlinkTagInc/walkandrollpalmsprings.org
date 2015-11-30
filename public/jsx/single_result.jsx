@@ -141,7 +141,7 @@ module.exports = class SingleResult extends React.Component {
         <div className="place-details">
           {this.renderThumbnail()}
           <div className="place-description">
-            <Linkify>{he.decode(this.props.place.content)}</Linkify>
+            <Linkify>{he.decode(this.props.place.content || '')}</Linkify>
           </div>
           <div id="map" className="map"></div>
         </div>
