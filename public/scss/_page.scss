@@ -21,7 +21,7 @@
   }
 
   &.section-teal {
-    background-color: $teal;
+    background-color: $teal-light;
   }
 
   h1, h2 {
@@ -69,10 +69,10 @@
 
   &.section-teal {
     background-color: $teal;
-    color: $white;
+    color: $black;
 
     a {
-      color: $white;
+      color: $black;
 
       &:hover {
         color: $black;
@@ -102,5 +102,9 @@
 
   &.green {
     color: $green;
+  }
+
+  &.green-dark {
+    color: $green-dark;
   }
 }

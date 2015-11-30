@@ -10,7 +10,7 @@
 }
 
 .mode-menu {
-  background-color: $teal;
+  background-color: $teal-light;
   color: $black;
   font-size: 20px;
   line-height: 60px;
@@ -29,7 +29,7 @@
     height: 63px;
 
     &.selected {
-      background: $white url("../images/down-chevron-black.png") right 10px center no-repeat;
+      background: $teal url("../images/down-chevron-black.png") right 10px center no-repeat;
     }
   }
 }
@@ -44,9 +44,14 @@
 
     .place-title {
       background: url('../images/right-chevron.png') right 12px center no-repeat;
+      color: $black;
       cursor: pointer;
       font-size: 17px;
       padding: 12px 8px;
+
+      a {
+        color: $black;
+      }
     }
 
     &.selected {
