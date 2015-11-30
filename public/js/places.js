@@ -44,6 +44,80 @@ exports.getPlaces = function(categories, cb) {
   if(_.contains(categories, 'Home')) {
     categoryIds.push(11816, 5057, 5059, 12379, 13013, 5064, 5065, 5066, 5074, 5075, 198387, 5076, 12675, 12853, 5071, 5079, 5080, 5083, 5087);
   }
+  if(_.contains(categories, 'Places of Worship')) {
+    places.push(
+      {
+        lat: 33.8128511,
+        lng: -116.5276045,
+        street: '630 S Sunrise Way',
+        title: 'Desert Chapel',
+        websiteUrl: 'http://www.yelp.com/biz/desert-chapel-palm-springs'
+      },
+      {
+        lat: 33.8163539,
+        lng: -116.515946,
+        street: '2800 E Ramon Rd',
+        title: 'St Theresa Catholic Church',
+        websiteUrl: 'http://www.yelp.com/biz/st-theresa-catholic-church-palm-springs'
+      },
+      {
+        lat: 33.839939,
+        lng: -116.506785,
+        street: '1281 N Gene Autry Trl',
+        title: 'The Fathers House',
+        websiteUrl: 'http://www.yelp.com/biz/the-fathers-house-palm-springs'
+      },
+      {
+        lat: 33.821039,
+        lng: -116.541445,
+        street: '204 S Calle El Segundo',
+        title: 'Our Lady of Guadalupe',
+        websiteUrl: 'http://www.yelp.com/biz/our-lady-of-guadalupe-palm-springs'
+      },
+      {
+        lat: 33.8298978,
+        lng: -116.547909,
+        street: '151 W Alejo Rd',
+        title: 'Our Lady of Solitude Catholic Church',
+        websiteUrl: 'http://www.yelp.com/biz/our-lady-of-solitude-catholic-church-palm-springs'
+      },
+      {
+        lat: 33.8308318,
+        lng: -116.5504874,
+        street: '332 W Alejo Rd',
+        title: 'Temple Isaiah-Louis & Florence Kitsis Jcc',
+        websiteUrl: 'http://www.yelp.com/biz/temple-isaiah-louis-and-florence-kitsis-jcc-palm-springs'
+      },
+      {
+        lat: 33.8388402,
+        lng: -116.5069725,
+        street: '1243 N Gene Autry Trl Ste 115',
+        title: 'Rebirth Temple Of Faith',
+        websiteUrl: 'http://www.yelp.com/biz/rebirth-temple-of-faith-palm-springs'
+      },
+      {
+        lat: 33.8522865299706,
+        lng: -116.523741397943,
+        street: '2100 E Racquet Club Rd',
+        title: 'Palm Springs Spiritual Enrichment Center',
+        websiteUrl: 'http://www.yelp.com/biz/palm-springs-spiritual-enrichment-center-palm-springs'
+      },
+      {
+        lat: 33.8302588444047,
+        lng: -116.529515024591,
+        street: '1555 E Alejo Rd',
+        title: 'United Methodist Church of Palm Springs',
+        websiteUrl: 'http://www.yelp.com/biz/united-methodist-church-of-palm-springs-palm-springs'
+      },
+      {
+        lat: 33.813633155201,
+        lng: -116.528153252231,
+        street: '620 S Sunrise Way',
+        title: 'Seventh-Day Adventist Church',
+        websiteUrl: 'http://www.yelp.com/biz/seventh-day-adventist-church-palm-springs'
+      }
+    );
+  }
   if(_.contains(categories, 'Outdoor Markets')) {
     places.push(
       {
