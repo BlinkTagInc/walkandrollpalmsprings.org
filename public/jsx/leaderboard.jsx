@@ -84,7 +84,9 @@ module.exports = class LeaderBoard extends React.Component {
           <h3>What does this data mean?</h3>
         </div>
         <div className="section-content">
-          <p>When a user clicks “I Will Use This Route”, the Walk and Roll: Palm Springs site records the trip’s starting neighborhood, calculated CO2 savings, and calories. No other user information is collected. CO2 savings and caloric expenditures are based on [data sources].</p>
+          <p>When a user clicks “I Will Use This Route”, the Walk and Roll: Palm Springs site records the trip’s starting neighborhood, calculated CO2 savings, and calories. No other user information is collected.</p>
+
+          <p>CO2 savings and caloric expenditures are based on figures provided by the <a href="http://www.epa.gov/otaq/climate/documents/420f14040a.pdf">US Environmental Protection Agency</a> and the <a href="http://www.cdc.gov/healthyweight/physical_activity">Centers for Disease Control and Prevention</a>. These calculations assume industry averages and typical operating conditions (CO2), as well as average body types (calories).</p>
         </div>
         <SiteMenu selected="leaderboard" color="red" />
       </div>
