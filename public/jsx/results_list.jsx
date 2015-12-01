@@ -37,14 +37,14 @@ module.exports = class ResultsList extends React.Component {
       return (
         <div className="no-results">
           <p>No matching results</p>
-          <Link to="search">Revise your search</Link>
+          <Link to="/search">Revise your search</Link>
         </div>
       );
     }
     return results.map(function(place, key) {
       return (
         <Link
-          to={'results/' + this.props.query.categories + '/' + place.title}
+          to={'/results/' + this.props.query.categories + '/' + place.title}
           className="place"
           key={key}
           query={{
@@ -74,7 +74,7 @@ module.exports = class ResultsList extends React.Component {
         </div>
 
         <div className="section-footer section-teal">
-          <Link to="search">Return to Search</Link>
+          <Link to="/search">Return to Search</Link>
         </div>
         <SiteMenu selected="search" color="teal" />
       </div>

@@ -14,7 +14,7 @@ module.exports = class Welcome extends React.Component {
         <div className="welcome-description">
           <div className="welcome-logo"></div>
           Eat, Play, <br/>Shop, and Move.<br />By Foot, Bike, and Transit.<br />Save Carbon. Count Calories.
-          <Link to="search" className="btn btn-green btn-get-started">Get Started</Link>
+          <Link to="/search" className="btn btn-green btn-get-started">Get Started</Link>
         </div>
         <SiteMenu selected="home" color="red" />
       </div>
