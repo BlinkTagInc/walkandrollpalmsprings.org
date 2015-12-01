@@ -1,7 +1,8 @@
 var React = require('react');
+var _ = require('underscore');
 var classNames = require('classnames');
 var SiteMenu = require('./site_menu.jsx');
-var leaderboard = require('../js/leaderboard');
+var logging = require('../js/logging');
 
 class Leader extends React.Component {
   render() {
@@ -9,7 +10,7 @@ class Leader extends React.Component {
       <tr>
         <td>{this.props.rank}</td>
         <td>{this.props.name}</td>
-        <td>{this.props.metric.toLocaleString()}</td>
+        <td>{this.props.result}</td>
       </tr>
     );
   }
@@ -21,7 +22,8 @@ module.exports = class LeaderBoard extends React.Component {
     super(props);
 
     this.state = {
-      leaders: [],
+      co2: [],
+      calories: [],
       metric: 'co2'
     };
   }
@@ -30,21 +32,29 @@ module.exports = class LeaderBoard extends React.Component {
     this.setState({metric: metric});
   }
 
-  renderLeaders() {
-    return this.state.leaders.map(function(leader, idx) {
-      var metric;
-
-      if(this.state.metric === 'co2') {
-        metric = leader.co2;
-      } else if(this.state.metric === 'calories') {
-        metric = leader.calories;
+  fetchData() {
+    logging.getLeaderboard('co2', (e, data) => {
+      if(e) {
+        console.error(e);
+        return alert('Unable to fetch leaderboard. Please try again later.')
       }
-
-      return <Leader rank={idx + 1} name={leader.neighborhood} metric={metric} key={idx} />;
-    }.bind(this));
+      this.setState({co2: _.sortBy(data.result, neighborhood => -neighborhood.result)});
+    });
+    logging.getLeaderboard('calories', (e, data) => {
+      if(e) {
+        console.error(e);
+      }
+      this.setState({calories: _.sortBy(data.result, neighborhood => -neighborhood.result)});
+    });
   }
 
   render() {
+    let leaderboard = this.state[this.state.metric].map((neighborhood, idx) => {
+      return <Leader rank={idx + 1} name={neighborhood.startNeighborhood} result={neighborhood.result} key={idx} />;
+    });
+
+    let metricColumnTitle = (this.state.metric === 'co2') ? 'CO2 (lbs.)' : 'Calories';
+
     return (
       <div>
         <div className="section-header section-red">
@@ -59,14 +69,13 @@ module.exports = class LeaderBoard extends React.Component {
               <tr>
                 <th>Rank</th>
                 <th>Neighborhood</th>
-                <th>CO2 (lbs.)</th>
+                <th>{metricColumnTitle}</th>
               </tr>
             </thead>
             <tbody>
-              {this.renderLeaders()}
+              {leaderboard}
             </tbody>
           </table>
-          <div className="leaderboard-time">From 5:00 AM PDT 8/1/15 through 5:16 PM 9/1/15</div>
           <div className="leaderboard-metric">
             <div className="btn-group" role="group">
               <button
@@ -94,11 +103,6 @@ module.exports = class LeaderBoard extends React.Component {
   }
 
   componentDidMount() {
-    leaderboard.getLeaders(function(e, data) {
-      if (e) {
-        console.error(e);
-      }
-      this.setState({leaders: data});
-    }.bind(this));
+    this.fetchData();
   }
 };
