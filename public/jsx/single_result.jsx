@@ -76,6 +76,20 @@ module.exports = class SingleResult extends React.Component {
     }
   }
 
+  buildTwitterShareUrl(text) {
+    let shareUrl = 'https://twitter.com/intent/tweet';
+    shareUrl += `?&text=${encodeURIComponent(text)}`;
+    shareUrl += `&tw_p=tweetbutton`;
+
+    return shareUrl;
+  }
+
+  buildFacebookShareUrl(url) {
+    let shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+
+    return shareUrl;
+  }
+
   render() {
     let distance;
     let time;
@@ -129,6 +143,15 @@ module.exports = class SingleResult extends React.Component {
       );
     }
 
+    var gerunds = {
+      walk: 'walking',
+      bike: 'biking',
+      transit: 'taking transit'
+    };
+
+    var email = `mailto:&subject=My Route on Walk and Roll: Palm Springs&content=I'm ${gerunds[this.props.mode]} to ${this.props.place.title}. See my route on WalkandRollPalmSprings.org.`;
+    var twitter = this.buildTwitterShareUrl(`I'm ${gerunds[this.props.mode]} to ${this.props.place.title.replace(/^(.{40}[^\s]*).*/, "$1")}. See my route on http://walkandRollPalmSprings.org.`);
+    var facebook = this.buildFacebookShareUrl('http://walkandrollpalmsprings.org');
 
     return (
       <div>
@@ -152,6 +175,20 @@ module.exports = class SingleResult extends React.Component {
           {co2}
           {calories}
           {directionsButton}
+        </div>
+        <div className="share-section">
+          <h3>Tell your friends about your route</h3>
+          <div className="share-links">
+            <a className="email-link" href={email} target="_blank">
+              <i className="fa fa-envelope-o"></i><span>Email</span>
+            </a>
+            <a className="twitter-link" href={twitter} target="_blank">
+              <i className="fa fa-twitter"></i><span>Tweet</span>
+            </a>
+            <a className="facebook-link" href={facebook} target="_blank">
+              <i className="fa fa-facebook"></i><span>Facebook</span>
+            </a>
+          </div>
         </div>
         <SiteMenu selected="search" color="teal" />
       </div>

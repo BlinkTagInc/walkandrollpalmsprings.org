@@ -93,6 +93,7 @@ gulp.task('scss:develop', ['scss:lint', 'scss:compileDev']);
 gulp.task('fonts:copy', function() {
   gulp.src([
     './node_modules/bootstrap-sass/assets/fonts/bootstrap/*',
+    './node_modules/font-awesome/fonts/*',
     './public/fonts/*'
   ]).pipe(gulp.dest('./public/dest/fonts'));
 });

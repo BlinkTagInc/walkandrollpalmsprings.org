@@ -66,7 +66,9 @@ module.exports = class ResultsList extends React.Component {
         <div className="section-header section-teal" ref="sectionHeader">
           <ModeMenu mode={this.props.mode} selectMode={this.props.selectMode} />
           <h3 className="results-title">Showing:</h3>
-          <div className="selected-categories">{this.props.query.categories.join(', ')}</div>
+          <div className="selected-categories">
+            {this.props.query.categories ? this.props.query.categories.join(', ') : ''}
+          </div>
         </div>
 
         <div className="place-list">
