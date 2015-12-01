@@ -402,7 +402,7 @@ exports.getPlaces = function(categories, cb) {
       {
         content: 'The BUZZ',
         title: 'The BUZZ',
-        directionsUrl: 'http://new.buzzps.com/',
+        directionsUrl: 'http://new.buzzps.com/route.html',
         kml: 'buzz.kml',
         ignoreDistance: true
       },
