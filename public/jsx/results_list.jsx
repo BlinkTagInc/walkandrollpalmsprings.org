@@ -41,7 +41,7 @@ module.exports = class ResultsList extends React.Component {
         </div>
       );
     }
-    return results.map(function(place, key) {
+    return results.map((place, key) => {
       return (
         <Link
           to={'/results/' + this.props.query.categories + '/' + place.title}
@@ -49,6 +49,7 @@ module.exports = class ResultsList extends React.Component {
           key={key}
           query={{
             startLocation: this.props.query.startLocation,
+            startNeighborhood: this.props.query.startNeighborhood,
             startAddress: this.props.query.startAddress,
             mode: this.props.query.mode
           }}>
@@ -57,7 +58,7 @@ module.exports = class ResultsList extends React.Component {
           </div>
         </Link>
       );
-    }.bind(this));
+    });
   }
 
   render() {

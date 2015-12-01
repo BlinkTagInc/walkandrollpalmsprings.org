@@ -33,9 +33,9 @@ class MenuSection extends React.Component {
   }
 
   renderItems() {
-    return this.props.items.map(function(item, key) {
+    return this.props.items.map((item, key) => {
       return <MenuItem key={key} item={item} selected={_.contains(this.props.selectedCategories, item)} toggleSelected={this.props.toggleSelected} />;
-    }.bind(this));
+    });
   }
 
   render() {
@@ -145,7 +145,7 @@ module.exports = class Search extends React.Component {
       $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
         access_token: config.mapboxToken,
         proximity: '-116.5453,33.8303'
-      }, function(data) {
+      }, (data) => {
         if (data && data.features && data.features.length) {
           var latlng = [data.features[0].center[1], data.features[0].center[0]];
           if (map.isNearPalmSprings(latlng)) {
@@ -154,13 +154,13 @@ module.exports = class Search extends React.Component {
               startAddress: startAddress
             });
 
-            map.neighborhoodFromPoint([latlng[1], latlng[0]], function(e, layer) {
+            map.neighborhoodFromPoint([latlng[1], latlng[0]], (e, layer) => {
               if(layer) {
                 this.setState({
                   startNeighborhood: layer.feature.properties.NAME
                 });
               }
-            }.bind(this));
+            });
           } else {
             error = 'The address you entered was not in Palm Springs.';
           }
@@ -168,13 +168,13 @@ module.exports = class Search extends React.Component {
           error = 'The address you entered was not found.';
         }
         cb(error);
-      }.bind(this));
+      });
     };
 
     this.doSearch = (e) => {
       e.preventDefault();
 
-      this.validateSearch(function(e) {
+      this.validateSearch((e) => {
         if (e) {
           return this.handleValidationError(e);
         }
@@ -183,29 +183,20 @@ module.exports = class Search extends React.Component {
           categories: this.state.selectedCategories,
           mode: this.state.selectedMode,
           startLocation: this.state.startLocation || [33.8303,-116.5453],
-          startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way'
+          startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way',
+          startNeighborhood: this.state.startNeighborhood
         };
 
         cache.saveQuery(query);
         this.props.history.pushState(null, '/results', query);
-      }.bind(this));
+      });
     };
   }
 
   renderPlaceMenu() {
-    return this.state.menus.map(function(menu, idx) {
+    return this.state.menus.map((menu, idx) => {
       return <MenuSection name={menu.name} items={menu.items} key={idx} toggleSelected={this.toggleSelected} selectedCategories={this.state.selectedCategories} />;
-    }.bind(this));
-  }
-
-  renderNeighborhoodName() {
-    if(this.state.startNeighborhood) {
-      return (
-        <li>
-          <div className="start-neighborhood">Neighborhood: {this.state.startNeighborhood}</div>
-        </li>
-      );
-    }
+    });
   }
 
   handleValidationError(e) {
@@ -224,21 +215,30 @@ module.exports = class Search extends React.Component {
 
   componentDidMount() {
     if (navigator.geolocation && !this.state.startAddress) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+      navigator.geolocation.getCurrentPosition((position) => {
         $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
           access_token: config.mapboxToken
-        }, function(data) {
+        }, (data) => {
           if(data && data.features && data.features.length) {
             if(data.features[0].address) {
               this.refs.startAddress.value = data.features[0].address + ' ' + data.features[0].text;
             }
           }
-        }.bind(this));
-      }.bind(this));
+        });
+      });
     }
   }
 
   render() {
+    let neighborhoodName;
+    if(this.state.startNeighborhood) {
+      neighborhoodName = (
+        <li>
+          <div className="start-neighborhood">Neighborhood: {this.state.startNeighborhood}</div>
+        </li>
+      );
+    }
+
     return (
       <div>
         <div className="section-header section-teal">
@@ -267,7 +267,7 @@ module.exports = class Search extends React.Component {
                 onBlur={this.validateStart.bind(this, this.handleValidationError)}
                 onChange={this.clearStart} />
             </li>
-            {this.renderNeighborhoodName()}
+            {neighborhoodName}
             <li>
               <div className="instructions">Travel by:</div>
             </li>
@@ -291,5 +291,9 @@ module.exports = class Search extends React.Component {
         <SiteMenu selected="search" color="teal" />
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.validateStart(() => {});
   }
 };

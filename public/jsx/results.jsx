@@ -73,7 +73,7 @@ module.exports = class Results extends React.Component {
       categories = this.props.location.query.categories;
     }
 
-    places.getPlaces(categories, function(e, data) {
+    places.getPlaces(categories, (e, data) => {
       if (e) {
         console.error(e);
       }
@@ -81,6 +81,6 @@ module.exports = class Results extends React.Component {
         places: this.sortByDistance(data),
         loading: false
       });
-    }.bind(this));
+    });
   }
 };

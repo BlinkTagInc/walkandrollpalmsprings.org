@@ -5,6 +5,7 @@ var ModeMenu = require('./mode_menu.jsx');
 var SiteMenu = require('./site_menu.jsx');
 var he = require('he');
 var helper = require('../js/helper.js');
+var logging = require('../js/logging.js');
 var map = require('../js/map.js');
 
 
@@ -41,6 +42,25 @@ module.exports = class SingleResult extends React.Component {
 
     this.selectMode = (mode) => {
       this.props.selectMode(mode);
+    };
+
+    this.logTrip = (e) => {
+      e.preventDefault();
+      logging.logTrip({
+        place: this.props.place.title,
+        distance: this.state.distance,
+        time: this.state.time,
+        mode: this.props.mode,
+        co2: this.state.co2,
+        calories: this.state.calories,
+        startNeighborhood: this.props.query.startNeighborhood
+      }, (e, res) => {
+        if(e) {
+          console.log(e);
+        }
+        window.location = this.state.directionsUrl;
+      });
+
     };
   }
 
@@ -139,7 +159,7 @@ module.exports = class SingleResult extends React.Component {
       );
     } else if(this.state.directionsUrl) {
       directionsButton = (
-        <a href={this.state.directionsUrl} className="btn btn-use">Get Full Directions</a>
+        <a href={this.state.directionsUrl} onClick={this.logTrip} className="btn btn-use">Get Full Directions</a>
       );
     }
 
