@@ -142,7 +142,7 @@ module.exports = class Search extends React.Component {
         this.setState({skipValidation: true});
       }
 
-      $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json', {
+      $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json?types=neighborhood,address,poi', {
         access_token: config.mapboxToken,
         proximity: '-116.5453,33.8303'
       }, (data) => {
