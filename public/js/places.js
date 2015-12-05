@@ -20,9 +20,9 @@ exports.getPlaces = function(categories, cb) {
   if (_.contains(categories, 'Arts & Culture')) {
     categoryIds.push(5033, 5045, 5046, 5055, 5070, 5074);
   }
-  if (_.contains(categories, 'Casinos & Resorts')) {
-    categoryIds.push(5037);
-  }
+  // if (_.contains(categories, 'Casinos & Resorts')) {
+  //   categoryIds.push(5037);
+  // }
   if (_.contains(categories, 'Nightlife')) {
     categoryIds.push(5045, 13466, 5055, 5025);
   }

@@ -75,7 +75,7 @@ module.exports = class Search extends React.Component {
           name: 'Play',
           items: [
             'Arts & Culture',
-            'Casinos & Resorts',
+            // 'Casinos & Resorts',
             'Nightlife',
             'Parks & Attractions',
             'Spas & Salons'
