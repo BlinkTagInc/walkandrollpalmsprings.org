@@ -462,4 +462,6 @@ exports.getPlaces = function(categories, cb) {
   });
 };
 
-exports.getSavedPlaces = () => places;
+exports.getSavedPlaces = function() {
+  return places;
+};

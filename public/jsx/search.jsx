@@ -182,8 +182,8 @@ module.exports = class Search extends React.Component {
         var query = {
           categories: this.state.selectedCategories,
           mode: this.state.selectedMode,
-          startLocation: this.state.startLocation || [33.8303,-116.5453],
-          startAddress: this.state.startAddress || '3200 E Tahquitz Canyon Way',
+          startLocation: this.state.startLocation,
+          startAddress: this.state.startAddress,
           startNeighborhood: this.state.startNeighborhood
         };
 
@@ -209,24 +209,11 @@ module.exports = class Search extends React.Component {
     if (!this.state.selectedCategories.length) {
       return cb('Please selct at least one type of destination.');
     }
+    if(!this.state.startLocation || !this.state.startAddress) {
+      return cb('Plase enter a start location.');
+    }
 
     this.validateStart(cb);
-  }
-
-  componentDidMount() {
-    if (navigator.geolocation && !this.state.startAddress) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
-          access_token: config.mapboxToken
-        }, (data) => {
-          if(data && data.features && data.features.length) {
-            if(data.features[0].address) {
-              this.refs.startAddress.value = data.features[0].address + ' ' + data.features[0].text;
-            }
-          }
-        });
-      });
-    }
   }
 
   render() {
@@ -294,6 +281,21 @@ module.exports = class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.validateStart(() => {});
+    if(this.refs.startAddress.value) {
+      this.validateStart(this.handleValidationError);
+    } else if(navigator.geolocation && !this.state.startAddress) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
+          access_token: config.mapboxToken
+        }, (data) => {
+          if(data && data.features && data.features.length) {
+            if(data.features[0].address) {
+              this.refs.startAddress.value = data.features[0].address + ' ' + data.features[0].text;
+              this.validateStart(this.handleValidationError);
+            }
+          }
+        });
+      });
+    }
   }
 };
