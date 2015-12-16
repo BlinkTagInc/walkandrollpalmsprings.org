@@ -169,7 +169,7 @@ module.exports = class SingleResult extends React.Component {
       transit: 'taking transit'
     };
 
-    var email = `mailto:&subject=My Route on Walk and Roll: Palm Springs&content=I'm ${gerunds[this.props.mode]} to ${this.props.place.title}. See my route on WalkandRollPalmSprings.org.`;
+    var email = `mailto:?subject=My Route on Walk and Roll: Palm Springs&body=I'm ${gerunds[this.props.mode]} to ${this.props.place.title}. See my route on WalkandRollPalmSprings.org.`;
     var twitter = this.buildTwitterShareUrl(`I'm ${gerunds[this.props.mode]} to ${this.props.place.title.replace(/^(.{40}[^\s]*).*/, "$1")}. See my route on http://walkandRollPalmSprings.org.`);
     var facebook = this.buildFacebookShareUrl('http://walkandrollpalmsprings.org');
 
