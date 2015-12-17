@@ -36,15 +36,15 @@ module.exports = class LeaderBoard extends React.Component {
     logging.getLeaderboard('co2', (e, data) => {
       if(e) {
         console.error(e);
-        return alert('Unable to fetch leaderboard. Please try again later.')
+        return alert('Unable to fetch leaderboard. Please try again later.');
       }
-      this.setState({co2: _.sortBy(data.result, neighborhood => -neighborhood.result)});
+      this.setState({co2: _.reject(_.sortBy(data.result, neighborhood => -neighborhood.result), neighborhood => !neighborhood.startNeighborhood)});
     });
     logging.getLeaderboard('calories', (e, data) => {
       if(e) {
         console.error(e);
       }
-      this.setState({calories: _.sortBy(data.result, neighborhood => -neighborhood.result)});
+      this.setState({calories: _.reject(_.sortBy(data.result, neighborhood => -neighborhood.result), neighborhood => !neighborhood.startNeighborhood)});
     });
   }
 
