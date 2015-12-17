@@ -1,10 +1,11 @@
 var React = require('react');
+var Geocoder = require('./geocoder.jsx');
 var classNames = require('classnames');
 var config = require('../js/config.js');
 var SiteMenu = require('./site_menu.jsx');
-var cache = require('../js/cache.js');
-var map = require('../js/map.js');
-var $ = require('jquery');
+var config = require('../js/config');
+var cache = require('../js/cache');
+var map = require('../js/map');
 var _ = require('underscore');
 
 
@@ -129,45 +130,24 @@ module.exports = class Search extends React.Component {
       this.setState({selectedMode: mode});
     };
 
-    this.validateStart = (cb) => {
-      var error = null;
-      var startAddress = this.refs.startAddress.value;
-      if (!startAddress) {
-        return cb();
+    this.setStart = (place) => {
+      if(!map.isNearPalmSprings([place.geometry.coordinates[1], place.geometry.coordinates[0]])) {
+        this.setState({startLocationIsValid: false});
+        return alert('Please enter an address in Palm Springs');
       }
 
-      if(this.state.skipValidation) {
-        return cb();
-      } else {
-        this.setState({skipValidation: true});
-      }
+      this.setState({
+        startLocationIsValid: true,
+        startAddress: place.properties.address || place.place_name,
+        startLocation: [place.geometry.coordinates[1], place.geometry.coordinates[0]]
+      });
 
-      $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + startAddress + '.json?types=neighborhood,address,poi', {
-        access_token: config.mapboxToken,
-        proximity: '-116.5453,33.8303'
-      }, (data) => {
-        if (data && data.features && data.features.length) {
-          var latlng = [data.features[0].center[1], data.features[0].center[0]];
-          if (map.isNearPalmSprings(latlng)) {
-            this.setState({
-              startLocation: latlng,
-              startAddress: startAddress
-            });
-
-            map.neighborhoodFromPoint([latlng[1], latlng[0]], (e, layer) => {
-              if(layer) {
-                this.setState({
-                  startNeighborhood: layer.feature.properties.NAME
-                });
-              }
-            });
-          } else {
-            error = 'The address you entered was not in Palm Springs.';
-          }
-        } else {
-          error = 'The address you entered was not found.';
+      map.neighborhoodFromPoint(place.geometry.coordinates, (e, layer) => {
+        if(layer) {
+          this.setState({
+            startNeighborhood: layer.feature.properties.NAME
+          });
         }
-        cb(error);
       });
     };
 
@@ -206,14 +186,16 @@ module.exports = class Search extends React.Component {
   }
 
   validateSearch(cb) {
+    if(!this.state.startLocationIsValid) {
+      return cb('Please choose a start location within Palm Springs.');
+    }
     if (!this.state.selectedCategories.length) {
       return cb('Please selct at least one type of destination.');
     }
     if(!this.state.startLocation || !this.state.startAddress) {
       return cb('Plase enter a start location.');
     }
-
-    this.validateStart(cb);
+    cb();
   }
 
   render() {
@@ -245,14 +227,14 @@ module.exports = class Search extends React.Component {
             <li>
               <div className="instructions">Start Location</div>
             </li>
-            <li className={classNames('start-address', {selected: !!this.state.startLocation})}>
-              <input
-                ref="startAddress"
-                type="text"
-                defaultValue={this.state.startAddress}
-                placeholder="Enter a Palm Springs address"
-                onBlur={this.validateStart.bind(this, this.handleValidationError)}
-                onChange={this.clearStart} />
+            <li className={classNames('start-address', {selected: this.state.startLocationIsValid === true, invalid: this.state.startLocationIsValid === false})}>
+              <Geocoder
+                accessToken={config.mapboxToken}
+                onSelect={this.setStart}
+                inputPlaceholder="Enter a Palm Springs address"
+                proximity="-116.5453,33.8303"
+                resultsClass="start-address-results"
+                />
             </li>
             {neighborhoodName}
             <li>
@@ -278,24 +260,5 @@ module.exports = class Search extends React.Component {
         <SiteMenu selected="search" color="teal" />
       </div>
     );
-  }
-
-  componentDidMount() {
-    if(this.refs.startAddress.value) {
-      this.validateStart(this.handleValidationError);
-    } else if(navigator.geolocation && !this.state.startAddress) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        $.getJSON('https://api.mapbox.com/v4/geocode/mapbox.places/' + position.coords.longitude + ',' + position.coords.latitude + '.json', {
-          access_token: config.mapboxToken
-        }, (data) => {
-          if(data && data.features && data.features.length) {
-            if(data.features[0].address) {
-              this.refs.startAddress.value = data.features[0].address + ' ' + data.features[0].text;
-              this.validateStart(this.handleValidationError);
-            }
-          }
-        });
-      });
-    }
   }
 };

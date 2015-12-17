@@ -25,6 +25,10 @@
       background: $teal-light url('../images/check.png') right 60px center no-repeat;
     }
 
+    &.invalid {
+      background: $red-light url('../images/x.png') right 60px center no-repeat;
+    }
+
     &.section-header {
       padding: 8px;
     }
@@ -87,6 +91,8 @@
     }
 
     &.start-address {
+      position: relative;
+
       input {
         background: none;
         color: $black;
@@ -108,6 +114,17 @@
           border-top: none;
         }
       }
+    }
+  }
+
+  .start-address-results {
+    background: $white;
+    padding: 0;
+    position: absolute;
+    border: 1px #C8C7CC solid;
+
+    li {
+      padding: 0 10px;
     }
   }
 }
@@ -135,6 +152,11 @@
 
     &.selected {
       background-image: url('../images/check@2x.png');
+      background-size: 15px 12px;
+    }
+
+    &.invalid {
+      background-image: url('../images/x@2x.png');
       background-size: 15px 12px;
     }
   }
