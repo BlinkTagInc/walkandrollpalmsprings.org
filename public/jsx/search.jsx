@@ -24,9 +24,7 @@ class MenuSection extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      open: _.intersection(this.props.items, this.props.selectedCategories).length
-    };
+    this.state = {};
 
     this.toggleMenu = () => {
       this.setState({open: !this.state.open});
@@ -40,8 +38,9 @@ class MenuSection extends React.Component {
   }
 
   render() {
+    let open = _.intersection(this.props.items, this.props.selectedCategories).length || this.state.open;
     return (
-      <li className={classNames({open: this.state.open}, 'place-menu')}>
+      <li className={classNames({open: open}, 'place-menu')}>
         <div className="place-title" onClick={this.toggleMenu}>{this.props.name}</div>
         <ul>
           {this.renderItems()}
