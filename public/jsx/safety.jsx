@@ -55,6 +55,39 @@ module.exports = class Safety extends React.Component {
           </div>
         </div>
         <div className="section-header section-green">
+          <h3>Hiking Safety</h3>
+        </div>
+        <div className="section-content">
+          <div className="safety-section">
+            <img src="/images/ped_safety/1_crosswalk.png" className="safety-image" />
+            <div className="safety-text">Hike with a friend</div>
+          </div>
+          <div className="safety-section">
+            <div className="safety-text">Bring one liter of water per hour hiking</div>
+            <img src="/images/ped_safety/2_signal.png" className="safety-image" />
+          </div>
+          <div className="safety-section">
+            <img src="/images/ped_safety/3_look.png" className="safety-image" />
+            <div className="safety-text">Protect yourself from the sun</div>
+          </div>
+          <div className="safety-section">
+            <div className="safety-text">Carry a map, know the terrain</div>
+            <img src="/images/ped_safety/7_eyecontact.png" className="safety-image" />
+          </div>
+          <div className="safety-section">
+            <img src="/images/ped_safety/4_obstacles.png" className="safety-image" />
+            <div className="safety-text">Beware of rattlesnakes</div>
+          </div>
+          <div className="safety-section">
+            <div className="safety-text">Keep children near you</div>
+            <img src="/images/ped_safety/5_headphones.png" className="safety-image" />
+          </div>
+          <div className="safety-section">
+            <img src="/images/ped_safety/6_flashlight.png" className="safety-image" />
+            <div className="safety-text">Stay on the trail</div>
+          </div>
+        </div>
+        <div className="section-header section-green">
           <h3>Bicyling Safety</h3>
         </div>
         <div className="section-content">
