@@ -171,6 +171,14 @@ module.exports = class SingleResult extends React.Component {
     var twitter = this.buildTwitterShareUrl(`I'm ${gerunds[this.props.mode]} to ${this.props.place.title.replace(/^(.{40}[^\s]*).*/, "$1")}. See my route on http://walkandRollPalmSprings.org.`);
     var facebook = this.buildFacebookShareUrl('http://walkandrollpalmsprings.org');
 
+    var description;
+    if(typeof Symbol !== 'undefined') {
+      // Linkify doesn't support IE
+      description = <Linkify>{he.decode(this.props.place.content || '')}</Linkify>;
+    } else {
+      description = he.decode(this.props.place.content || '');
+    }
+
     return (
       <div>
         <div className="section-header section-teal" ref="sectionHeader">
@@ -182,7 +190,7 @@ module.exports = class SingleResult extends React.Component {
         <div className="place-details">
           {this.renderThumbnail()}
           <div className="place-description">
-            <Linkify>{he.decode(this.props.place.content || '')}</Linkify>
+            {description}
           </div>
           <div id="map" className="map"></div>
         </div>
