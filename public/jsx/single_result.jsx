@@ -13,9 +13,7 @@ module.exports = class SingleResult extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      currentMode: this.props.mode
-    };
+    this.state = {};
 
     this.calculateTripStatsFromGoogleDirections = (result) => {
       if(!result || !result.routes || !result.routes.length || !result.routes[0].legs || !result.routes[0].legs.length) {
@@ -217,6 +215,8 @@ module.exports = class SingleResult extends React.Component {
 
   componentDidMount() {
     this.updateMap();
+
+    this.setState({currentMode: this.props.mode});
   }
 
   componentDidUpdate() {
