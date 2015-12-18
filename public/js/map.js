@@ -195,7 +195,7 @@ exports.drawNeighborhoodsMap = function(selectNeighborhood) {
         };
       },
       onEachFeature: function(feature, layer) {
-        var points = layer.getLatLngs()[0].map(function(point) {
+        var points = layer.getLatLngs().map(function(point) {
           return [point.lat, point.lng];
         });
         var label = L.marker(getCentroid(points), {
