@@ -12,7 +12,6 @@ module.exports = class Results extends React.Component {
     super(props);
 
     this.state = {
-      mode: this.props.location.query.mode || 'walk',
       places: [],
       loading: true
     };
@@ -36,6 +35,7 @@ module.exports = class Results extends React.Component {
   }
 
   render() {
+    var mode = this.state.mode || this.props.location.query.mode || 'walk';
     if(this.props.params && this.props.params.place) {
       var place = _.findWhere(places.getSavedPlaces(), {title: this.props.params.place});
 
@@ -44,7 +44,7 @@ module.exports = class Results extends React.Component {
           <SingleResult
             query={this.props.location.query}
             place={place}
-            mode={this.state.mode}
+            mode={mode}
             selectMode={this.selectMode} />
         );
       } else {
@@ -57,7 +57,7 @@ module.exports = class Results extends React.Component {
         <ResultsList
           query={this.props.location.query}
           places={this.state.places}
-          mode={this.state.mode}
+          mode={mode}
           selectMode={this.selectMode}
           loading={this.state.loading} />
       );
