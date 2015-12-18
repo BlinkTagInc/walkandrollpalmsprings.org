@@ -5,6 +5,7 @@ var config = require('../js/config.js');
 var SiteMenu = require('./site_menu.jsx');
 var config = require('../js/config');
 var cache = require('../js/cache');
+var helper = require('../js/helper');
 var map = require('../js/map');
 var _ = require('underscore');
 
@@ -198,6 +199,24 @@ module.exports = class Search extends React.Component {
   }
 
   render() {
+    if(helper.isIE() && helper.isIE() < 10) {
+      return (
+        <div>
+          <div className="section-header section-teal">
+            <h2>Walk and Roll:<br />Palm Springs</h2>
+          </div>
+          <div className="section-content">
+            <h1 className="page-title teal">Search</h1>
+          </div>
+          <div className="section-content">
+            The search functionality of this site does not support your browser. Please use Internet Explorer 10 or above, Chrome, Firefox or Safari.
+          </div>
+          <div className="section-content"><a href="https://browser-update.org">Update your browser</a></div>
+          <SiteMenu selected="search" color="teal" />
+        </div>
+      );
+    }
+
     let neighborhoodName;
     if(this.state.startNeighborhood) {
       neighborhoodName = (
