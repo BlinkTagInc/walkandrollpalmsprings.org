@@ -22,7 +22,7 @@ module.exports = class ResultsList extends React.Component {
         maxDistance = 10;
       }
       return place.ignoreDistance || place.distance <= maxDistance;
-    });
+    }).slice(0, 50);
   }
 
   renderResultList(results) {
