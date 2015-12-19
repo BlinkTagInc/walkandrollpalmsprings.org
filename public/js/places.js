@@ -445,7 +445,7 @@ exports.getPlaces = function(categories, cb) {
   }
 
   $.getJSON('http://www.visitpalmsprings.com/WebServices/QueryService.svc/BusinessSearch?method=?', {
-    size: 20,
+    size: 1000,
     features: '(' + categoryIds.join(',') + ')'
   }).done(function(data) {
     if (data && data.d && data.d.items && data.d.items.length) {
