@@ -5,7 +5,6 @@ var ModeMenu = require('./mode_menu.jsx');
 var SiteMenu = require('./site_menu.jsx');
 var he = require('he');
 var helper = require('../js/helper.js');
-var logging = require('../js/logging.js');
 var map = require('../js/map.js');
 
 
@@ -44,21 +43,8 @@ module.exports = class SingleResult extends React.Component {
 
     this.logTrip = (e) => {
       e.preventDefault();
-      logging.logTrip({
-        place: this.props.place.title,
-        distance: this.state.distance,
-        time: this.state.time,
-        mode: this.props.mode,
-        co2: this.state.co2,
-        calories: this.state.calories,
-        startNeighborhood: this.props.query.startNeighborhood
-      }, (e, res) => {
-        if(e) {
-          console.log(e);
-        }
-        window.location = this.state.directionsUrl;
-      });
 
+      window.location = this.state.directionsUrl;
     };
   }
 

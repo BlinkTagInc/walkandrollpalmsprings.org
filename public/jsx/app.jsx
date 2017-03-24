@@ -8,7 +8,6 @@ var Search = require('./search.jsx');
 var Results = require('./results.jsx');
 var Welcome = require('./welcome.jsx');
 var Neighborhoods = require('./neighborhoods.jsx');
-var Leaderboard = require('./leaderboard.jsx');
 var About = require('./about.jsx');
 var Safety = require('./safety.jsx');
 var NotFound = require('./not_found.jsx');
@@ -23,7 +22,6 @@ ReactDOM.render((
     <Route path="results" component={Results}/>
     <Route path="results/:category/:place" component={Results}/>
     <Route path="neighborhoods" component={Neighborhoods}/>
-    <Route path="leaderboard" component={Leaderboard}/>
     <Route path="safety" component={Safety}/>
     <Route path="*" component={NotFound}/>
   </Router>
