@@ -54,7 +54,7 @@
     "xhr": "^2.2.0"
   },
   "engines": {
-    "node": "5.0.x"
+    "node": "8.1.4"
   },
   "private": true,
   "scripts": {
